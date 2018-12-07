@@ -30,7 +30,7 @@ public class CarteiraDAO {
         stmt = con.prepareStatement("INSERT INTO Cliente VALUES (?, ?, ?, ?);");
         stmt.setLong(1, c.getClienteModExterno().getCpf());
         stmt.setInt(2, c.getPacienteModExterno().getId());
-        stmt.setInt(3, c.getQtd_carteiras());
+        stmt.setInt(3, c.getQtdCarteiras());
         stmt.setString(4, c.getVetorVacina());
         
         } catch (SQLException ex) {
@@ -55,8 +55,8 @@ public class CarteiraDAO {
             if(rs.next()){
                 c.setClienteModExterno(cdao.readCliente(rs.getLong("cpf_cliente")));
                 c.setPacienteModExterno(pdao.readPacienteId(rs.getInt("id_paciente")));
-                c.setQtd_carteiras(rs.getInt("qtd"));
-                c.setVetorVacinas(rs.getString("vacinas"));
+                c.setQtdCarteiras(rs.getInt("qtd"));
+                c.setVetorVacina(rs.getString("vacinas"));
             }else{
                 JOptionPane.showMessageDialog(null, "Carteira não existe");
             }

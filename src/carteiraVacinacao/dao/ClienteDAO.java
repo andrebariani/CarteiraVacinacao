@@ -73,9 +73,9 @@ public class ClienteDAO {
         return c;
     }
     
-     public List<Cliente> read(){
+     public ArrayList<Cliente> read(){
         Cliente c = new Cliente();
-        List<Cliente> clientes = new ArrayList<>();
+        ArrayList<Cliente> clientes = new ArrayList<>();
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;

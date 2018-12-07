@@ -7,21 +7,64 @@ package carteiraVacinacao.bean;
 
 /**
  *
- * @author lucca
+ * @author André
  */
 public class Carteira {
-    int qtd_carteiras;
+    int qtdCarteiras;
     Cliente clienteModExterno;
     Paciente pacienteModExterno;
-    CtrVacina carteira_vacina;
+    CtrVacina carteiraVacina;
     
+    public void cadastrarCart() {
+        
+    }
     
-    public int getQtd_carteiras() {
-        return qtd_carteiras;
+    public void excluirCart() {
+        
+    }
+    
+    public void imprimir() {
+        
+    }
+    
+    public void getVetorVacina(){
+    
+    }
+    
+    public void setVetorVacina(){
+    
+    }
+    
+    public void aplicarVacina() {
+        
     }
 
-    public void setQtd_carteiras(int qtd_carteiras) {
-        this.qtd_carteiras = qtd_carteiras;
+    public void agendarVacina(String vacina) {
+        
+    }
+     
+    public void delVacina(String vacina) {
+        
+    }
+    
+    public void buscarCart(int id_pet) {
+        
+    }
+    
+    public void setCliente(Cliente c) {
+        
+    }
+    
+    public void setPaciente(Paciente c) {
+        
+    }
+    
+    public int getQtdCarteiras() {
+        return qtdCarteiras;
+    }
+
+    public void setQtdCarteiras(int qtdCarteiras) {
+        this.qtdCarteiras = qtdCarteiras;
     }
 
     public Cliente getClienteModExterno() {
@@ -40,12 +83,12 @@ public class Carteira {
         this.pacienteModExterno = pacienteModExterno;
     }
 
-    public CtrVacina getCarteira_vacina() {
-        return carteira_vacina;
+    public CtrVacina getCarteiraVacina() {
+        return carteiraVacina;
     }
 
-    public void setCarteira_vacina(CtrVacina carteira_vacina) {
-        this.carteira_vacina = carteira_vacina;
+    public void setCarteiraVacina(CtrVacina carteiraVacina) {
+        this.carteiraVacina = carteiraVacina;
     }
            
 }

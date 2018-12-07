@@ -31,8 +31,9 @@ public class Carteira {
     
     }
     
-    public void setVetorVacina(){
-    
+    public String setVetorVacina(){
+        String test = "FUCK";
+        return test;
     }
     
     public void aplicarVacina() {

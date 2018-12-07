@@ -77,7 +77,7 @@ public class Modelo {
     
     //busca todos os modelos para a especie indicada
     //<OBS> troca de retorno
-    public String[] buscarMod(String e)
+    public ArrayList<Modelo> buscarMod(String e)
     {
         ModeloDAO mBD = new ModeloDAO();
         ArrayList<Modelo> m = mBD.readEspecie(e);
@@ -115,8 +115,12 @@ public class Modelo {
     //Carrega o modelo 
     public void importarMod(String e, String r)
     {
-        this = readModelo(e, r);
+        Modelo m = readModelo(e, r);
         
+        this.setEspecie(m.getEspecie());
+        this.setRaca(m.getRaca());
+        this.setQtdVacinas(m.getQtdVacinas());
+        this.setVetorVacina(m.getVetorVacina());
         /*
         
         Modelo m = this.modeloDAO.buscaModelo(e, r);
@@ -132,23 +136,6 @@ public class Modelo {
         */
     }
 
-    public void addVacina(String vacina)
-    {
-        //Buscando o elemento, se n encontrar, add
-        int search = this.vacinas.indexOf(vacina);
-        if(search == -1)
-        {
-            this.vacinas.add(vacina);
-        }
-        else
-        {
-            //Mensagem que a vacina ja foi adicionada
-            JOptionPane.showMessageDialog(null, "Vacina ja adicionada",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
     //criar funcao para transforma em string o vetor
     
     public String getVetorVacina()
@@ -162,12 +149,37 @@ public class Modelo {
         return v;
     }
     
+    //Adiciona toda a string no array
     public void setVetorVacina(String v)
     {
-        
-        this.vacinas = v.split(";");
+        //Apaga todos os valores do ArrayList
+        this.vacinas.clear();
+        //Separa a string
+        String m[] = v.split(";");
+        //Adiciona todas as novas vacinas
+        for(int i = 0; i < m.length; i++)
+        {
+            this.vacinas.add(m[i]);
+        }
     }
     
+    public void addVacina(String vacina)
+    {
+        //Buscando o elemento, se n encontrar, add
+        int search = this.vacinas.indexOf(vacina);
+        if(search == -1)
+        {
+            this.vacinas.add(vacina);
+            this.qtdVacinas++;
+        }
+        else
+        {
+            //Mensagem que a vacina ja foi adicionada
+            JOptionPane.showMessageDialog(null, "Vacina ja adicionada",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
     
     public void delVacina(String vacina)
     {
@@ -176,6 +188,7 @@ public class Modelo {
         if(search != -1)
         {
             this.vacinas.remove(search);
+            this.qtdVacinas--;
         }
         else
         {

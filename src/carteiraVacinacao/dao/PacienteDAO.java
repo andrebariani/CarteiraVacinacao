@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  * @author lucca
  */
 public class PacienteDAO {
-    public List<Paciente> readPaciente(long cpfDono){
+    public ArrayList<Paciente> readPaciente(long cpfDono){
         Paciente p = new Paciente();
-        List<Paciente> pacientes = new ArrayList<>() ;
+        ArrayList<Paciente> pacientes = new ArrayList<>() ;
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;

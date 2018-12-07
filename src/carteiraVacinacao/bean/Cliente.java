@@ -7,7 +7,7 @@ package carteiraVacinacao.bean;
 
 /**
  *
- * @author andre
+ * @author lucca
  */
 public class Cliente {
     

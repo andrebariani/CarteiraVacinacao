@@ -21,6 +21,14 @@ public class Modelo {
 
     private ModeloDAO modeloDAO;//trocar
     
+    public Modelo()
+    {
+        this.especie = "";
+        this.raca = "";
+        this.vacinas = new ArrayList();
+        this.qtdVacinas = 0;
+    }
+    
     public Modelo(String especie, String raca) {
         this.especie = especie;
         this.raca = raca;
@@ -71,9 +79,10 @@ public class Modelo {
     //<OBS> troca de retorno
     public String[] buscarMod(String e)
     {
-        Modelo m[] = this.modeloDAO.readEspecie(e);
+        ModeloDAO mBD = new ModeloDAO();
+        ArrayList<Modelo> m = mBD.readEspecie(e);
         
-        return modelos;    
+        return m;    
         
     }
 
@@ -81,7 +90,7 @@ public class Modelo {
     //<OBS> Troca de parametros
     public void cadastrarMod()
     {
-        ModeloDAO mBD = ModeloDAO();
+        ModeloDAO mBD = new ModeloDAO();
         Modelo m = mBD.readModelo(this.especie, this.raca);
         
         if(m == null)
@@ -89,7 +98,10 @@ public class Modelo {
             //Pegando todos os modelo
             this.modeloDAO.create(this);
         }
-        
+        else
+        {
+            mBD.update(this);
+        }
        
     }
     
@@ -114,8 +126,8 @@ public class Modelo {
             //Prenchendo a array com os dados no banco
             
             for(int i = 0; i < vacinas.size(); i++) {
-                this.vacinas.add(vacinas.get(i));
-            }
+            this.vacinas.add(vacinas.get(i));
+        //    }
         }
         */
     }
@@ -139,9 +151,21 @@ public class Modelo {
 
     //criar funcao para transforma em string o vetor
     
-    public void getVetorVacina()
+    public String getVetorVacina()
     {
-        //ctrl c ctrl v bariani
+        String v = "";
+        for(int i = 0; i < this.qtdVacinas; i++)
+        {
+            v += this.vacinas.get(i) + ";";
+        }
+        
+        return v;
+    }
+    
+    public void setVetorVacina(String v)
+    {
+        
+        this.vacinas = v.split(";");
     }
     
     
@@ -158,7 +182,7 @@ public class Modelo {
             //Mensagem que a vacina ja foi adicionada
             JOptionPane.showMessageDialog(null, "Vacina não encontrada",
                         "Erro", JOptionPane.ERROR_MESSAGE);
-	 }
+	}
     }
     
 }

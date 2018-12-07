@@ -7,6 +7,7 @@ package carteiraVacinacao.bean;
 
 import carteiraVacinacao.dao.ModeloDAO;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +18,7 @@ public class Modelo {
     private String especie;
     private String raca;
     private int qtdVacinas;
-    private ArrayList<String> vacinas;
+    private final ArrayList<String> vacinas;
 
     private ModeloDAO modeloDAO;//trocar
     
@@ -115,7 +116,8 @@ public class Modelo {
     //Carrega o modelo 
     public void importarMod(String e, String r)
     {
-        Modelo m = readModelo(e, r);
+        ModeloDAO mBD = new ModeloDAO();
+        Modelo m = mBD.readModelo(e, r);
         
         this.setEspecie(m.getEspecie());
         this.setRaca(m.getRaca());
@@ -157,10 +159,7 @@ public class Modelo {
         //Separa a string
         String m[] = v.split(";");
         //Adiciona todas as novas vacinas
-        for(int i = 0; i < m.length; i++)
-        {
-            this.vacinas.add(m[i]);
-        }
+        this.vacinas.addAll(Arrays.asList(m));
     }
     
     public void addVacina(String vacina)

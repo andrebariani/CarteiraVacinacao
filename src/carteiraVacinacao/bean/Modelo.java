@@ -19,7 +19,7 @@ public class Modelo {
     private int qtdVacinas;
     private ArrayList<String> vacinas;
 
-    private ModeloDAO modeloDAO;
+    private ModeloDAO modeloDAO;//trocar
     
     public Modelo(String especie, String raca) {
         this.especie = especie;
@@ -71,7 +71,7 @@ public class Modelo {
     //<OBS> troca de retorno
     public String[] buscarMod(String e)
     {
-        String modelos[] = this.modeloDAO.buscaModelo(e);
+        Modelo m[] = this.modeloDAO.readEspecie(e);
         
         return modelos;    
         
@@ -81,43 +81,43 @@ public class Modelo {
     //<OBS> Troca de parametros
     public void cadastrarMod()
     {
-        String modelos[] = this.modeloDAO.buscaModelo(this.especie, this.raca);
+        ModeloDAO mBD = ModeloDAO();
+        Modelo m = mBD.readModelo(this.especie, this.raca);
         
-        if(modelos != null)
+        if(m == null)
         {
-            this.modeloDAO.salvar(this.especie, this.raca, this.vacinas, 
-                    this.qtdVacinas);
+            //Pegando todos os modelo
+            this.modeloDAO.create(this);
         }
-
+        
+       
     }
     
     // Exclui o modelo especificado
     //<OBS> Troca de parametros
     public void excluirMod(String e, String r)
     {
-        String modelos[] = this.modeloDAO.buscaModelo(e, r);
-        
-        if(modelos != null)
-        {
-            this.modeloDAO.excluir(e, r);
-        }
-
+        this.modeloDAO.remove(e, r);
     }
 
     //Carrega o modelo 
     public void importarMod(String e, String r)
     {
-        String modelos[] = this.modeloDAO.buscaModelo(e, r);
-        if(modelos != null)
+        this = readModelo(e, r);
+        
+        /*
+        
+        Modelo m = this.modeloDAO.buscaModelo(e, r);
+        if(m != null)
         {
             String vacinas[] = buscarVacinas(e, r);
             //Prenchendo a array com os dados no banco
-            // *************************************//
+            
             for(int i = 0; i < vacinas.size(); i++) {
                 this.vacinas.add(vacinas.get(i));
             }
         }
-
+        */
     }
 
     public void addVacina(String vacina)
@@ -137,6 +137,14 @@ public class Modelo {
 
     }
 
+    //criar funcao para transforma em string o vetor
+    
+    public void getVetorVacina()
+    {
+        //ctrl c ctrl v bariani
+    }
+    
+    
     public void delVacina(String vacina)
     {
         //Buscando o elemento, se encontrar, del

@@ -44,7 +44,7 @@ public class ClienteDAO {
         }
     }
     
-    public Cliente readCliente(int cpf){
+    public Cliente readCliente(long cpf){
         Cliente c = new Cliente();
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -57,7 +57,7 @@ public class ClienteDAO {
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                c.setCpf(rs.getInt("cpf"));
+                c.setCpf(rs.getLong("cpf"));
                 c.setNome(rs.getString("nome_cliente"));
             }else{
                 JOptionPane.showMessageDialog(null, "CPF não cadastrado");
@@ -81,8 +81,7 @@ public class ClienteDAO {
         ResultSet rs = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE cpf = ?");
-            stmt.setLong(1, cpf);
+            stmt = con.prepareStatement("SELECT * FROM cliente");
             
             rs = stmt.executeQuery();
             

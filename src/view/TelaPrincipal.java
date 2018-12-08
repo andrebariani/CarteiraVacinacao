@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package view;
+import carteiraVacinacao.bean.CtrVacina;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,8 +40,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         tela1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        cpfCliente = new javax.swing.JLabel();
+        textCpf = new javax.swing.JTextField();
+        racaPet = new javax.swing.JLabel();
+        textRaca = new javax.swing.JTextField();
+        especiePet = new javax.swing.JLabel();
+        textEspecie = new javax.swing.JTextField();
+        nomePet = new javax.swing.JLabel();
+        textNome = new javax.swing.JTextField();
+        buscar = new javax.swing.JButton();
+        limpar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableVacina = new javax.swing.JTable();
+        z = new javax.swing.JLabel();
         tela2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         carteiraVacinacao = new javax.swing.JMenu();
@@ -44,41 +61,146 @@ public class TelaPrincipal extends javax.swing.JFrame {
         sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Clínica Veterinária");
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
         tela1.setLayout(null);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cpfCliente.setText("CPF do Cliente:");
+
+        textCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                textCpfActionPerformed(evt);
             }
         });
+
+        racaPet.setText("Raça do Pet:");
+
+        especiePet.setText("Espécie do Pet:");
+
+        nomePet.setText("Nome do Pet:");
+
+        buscar.setText("Buscar");
+        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarMouseClicked(evt);
+            }
+        });
+
+        limpar.setText("Limpar");
+        limpar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                limparMouseClicked(evt);
+            }
+        });
+
+        TableVacina.setBackground(new java.awt.Color(204, 204, 255));
+        TableVacina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TableVacina.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numeração", "Aplicação", "Data", "Nome da Vacina"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableVacina.setGridColor(new java.awt.Color(0, 0, 0));
+        TableVacina.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        TableVacina.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(TableVacina);
+        if (TableVacina.getColumnModel().getColumnCount() > 0) {
+            TableVacina.getColumnModel().getColumn(0).setMinWidth(80);
+            TableVacina.getColumnModel().getColumn(0).setPreferredWidth(80);
+            TableVacina.getColumnModel().getColumn(0).setMaxWidth(80);
+            TableVacina.getColumnModel().getColumn(1).setMinWidth(150);
+            TableVacina.getColumnModel().getColumn(1).setPreferredWidth(150);
+            TableVacina.getColumnModel().getColumn(1).setMaxWidth(150);
+            TableVacina.getColumnModel().getColumn(2).setMinWidth(200);
+            TableVacina.getColumnModel().getColumn(2).setPreferredWidth(200);
+            TableVacina.getColumnModel().getColumn(2).setMaxWidth(200);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(1083, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(88, 88, 88))
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(racaPet, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(187, 187, 187))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(textRaca)
+                                .addGap(112, 112, 112)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(especiePet, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(112, 112, 112)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(limpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buscar))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nomePet, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(jButton1)
-                .addContainerGap(420, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cpfCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(racaPet)
+                    .addComponent(especiePet)
+                    .addComponent(nomePet))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limpar)
+                    .addComponent(buscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         tela1.add(jPanel2);
-        jPanel2.setBounds(40, 40, 1250, 570);
+        jPanel2.setBounds(30, 30, 1260, 730);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
-        tela1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1330, 800);
+        z.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
+        tela1.add(z);
+        z.setBounds(0, 0, 1330, 800);
 
         jPanel1.add(tela1, "tela1");
 
@@ -143,11 +265,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void carteiraVacinacaoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carteiraVacinacaoClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
         cl.show(jPanel1, "tela1");
+        clearFields();
+        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);
+        }
     }//GEN-LAST:event_carteiraVacinacaoClicked
 
     private void modeloCarteiraClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeloCarteiraClicked
         CardLayout cl = (CardLayout) jPanel1.getLayout();
         cl.show(jPanel1, "tela2");
+        clearFields();
+        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);   
+        }
     }//GEN-LAST:event_modeloCarteiraClicked
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
@@ -159,10 +291,93 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cl.show(jPanel1, "tela1");
     }//GEN-LAST:event_sairMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    @SuppressWarnings("empty-statement")
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
+      
+        if(textCpf.getText().length() == 0){
+            // CPF invalido
+            JOptionPane.showMessageDialog(this,"Há campos vazios");
+            return;
+        }
+        
+        if(textCpf.getText().length() != 11){
+            // CPF invalido
+            JOptionPane.showMessageDialog(this,"CPF inválido");
+            return;
+        }
+       
+        if(textRaca.getText().length() == 0){
+            // Campo raca do pet vazio
+            JOptionPane.showMessageDialog(this,"Há campos vazios");
+            return;
+        }
+        
+        if(textEspecie.getText().length() == 0){
+            // Campo especie do pet vazio
+            JOptionPane.showMessageDialog(this,"Há campos vazios"); 
+            return;
+        }
+        
+        if(textNome.getText().length() == 0){
+            // Campo nome do pet vazio
+            JOptionPane.showMessageDialog(this,"Há campos vazios");
+            return;
+        }
+        
+        if(textCpf.getText().equals("40510036805")){
+            // Carteira encontrada
+            String Demo = "NomeVacina;12/02/2018;T;Nome2;25/12/2018;F;";
+            String Deli = ";";
 
+            StringTokenizer Tok = new StringTokenizer(Demo);
+            int n=1;
+            String vacina,data,aplicada;
+
+            while (Tok.hasMoreElements()){
+                vacina = Tok.nextToken(Deli);
+                data = Tok.nextToken(Deli);
+                aplicada = Tok.nextToken(Deli);
+                if(aplicada.equals("T")){
+                    Object[] dados = {n,"Aplicada",data,vacina};
+                    dtm.addRow(dados);
+                }
+                else{
+                    Object[] dados = {n,"Nao aplicada",data,vacina};
+                    dtm.addRow(dados);
+                }
+                n++;
+            }
+            clearFields();
+        } 
+        else {
+            // Carteira nao encontrada
+            int resposta = JOptionPane.showConfirmDialog(this,"Carteira desse pet não foi encontrada, deseja cadastrar uma nova carteira para esse pet?", "Carteira não encontrada!", JOptionPane.YES_NO_OPTION);
+    
+            if (resposta == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Cadastro");
+            }
+            clearFields();
+        }
+        
+        
+    }//GEN-LAST:event_buscarMouseClicked
+
+    private void textCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCpfActionPerformed
+
+    private void limparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limparMouseClicked
+        clearFields();
+    }//GEN-LAST:event_limparMouseClicked
+
+    private void clearFields(){
+        textCpf.setText("");
+        textRaca.setText("");
+        textEspecie.setText("");
+        textNome.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -199,16 +414,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableVacina;
+    private javax.swing.JButton buscar;
     private javax.swing.JMenu carteiraVacinacao;
+    private javax.swing.JLabel cpfCliente;
+    private javax.swing.JLabel especiePet;
     private javax.swing.JMenu imprimir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton limpar;
     private javax.swing.JMenu modeloCarteira;
+    private javax.swing.JLabel nomePet;
+    private javax.swing.JLabel racaPet;
     private javax.swing.JMenu sair;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;
+    private javax.swing.JTextField textCpf;
+    private javax.swing.JTextField textEspecie;
+    private javax.swing.JTextField textNome;
+    private javax.swing.JTextField textRaca;
+    private javax.swing.JLabel z;
     // End of variables declaration//GEN-END:variables
 }

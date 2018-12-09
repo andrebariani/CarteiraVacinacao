@@ -72,9 +72,9 @@ public class Carteira {
             
             aux.setVacina(vVacina[i]);
             
-            Calendar calaux = new Calendar;
+            Calendar calaux = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-            calaux.setTime(sdf.parse(vVacina[i+1]));
+            calaux.setTime(sdf.parse(vVacina[1+i]));
             
             aux.setData(calaux);
             
@@ -127,8 +127,8 @@ public class Carteira {
         }
     }
     
-    public void buscarCart(int id_cli, int id_pet) {
-        this.carteiraBD.read( id_cli, id_pet);
+    public void buscarCart(int id_cli) {
+        this.carteiraBD.read( id_cli );
     }
     
     public int getQtdCarteiras() {

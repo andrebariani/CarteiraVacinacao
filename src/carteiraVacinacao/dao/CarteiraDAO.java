@@ -40,7 +40,7 @@ public class CarteiraDAO {
         }
     }
     
-    public void read(long cpf, int id){
+    public void read(long cpf){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -48,13 +48,11 @@ public class CarteiraDAO {
         
         
         try {
-            stmt = con.prepareStatement("Select * FROM carteira WHERE cpf_cliente = ? AND id_paciente = ?");
+            stmt = con.prepareStatement("Select * FROM carteira WHERE cpf_cliente = ?");
             stmt.setLong(1, cpf);
-            stmt.setInt(2, id);
             
             if(rs.next()){
                 c.setClienteModExterno(cdao.readCliente(rs.getLong("cpf_cliente")));
-                c.setPacienteModExterno(pdao.readPacienteId(rs.getInt("id_paciente")));
                 c.setQtdCarteiras(rs.getInt("qtd"));
                 c.setVetorVacina(rs.getString("vacinas"));
             }else{

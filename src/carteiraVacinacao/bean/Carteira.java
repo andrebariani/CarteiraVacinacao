@@ -127,7 +127,7 @@ public class Carteira {
         }
     }
     
-    public void buscarCart(int id_cli) {
+    public void buscarCart(int id_cli, String nome) {
         this.carteiraBD.read( id_cli );
     }
     

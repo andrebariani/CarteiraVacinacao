@@ -41,21 +41,47 @@ public class Modelo {
         return especie;
     }
     public void setEspecie(String especie) {
-        this.especie = especie;
+        if(especie.matches("[\\Da-zA-Z -]"))
+        {
+            this.especie = especie;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Insira apenas letras e espaços",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public String getRaca() {
         return raca;
     }
     public void setRaca(String raca) {
-        this.raca = raca;
+        if(raca.matches("[\\Da-zA-Z -]"))
+        {
+            this.raca = raca;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Insira apenas letras e espaços",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public int getQtdVacinas() {
         return qtdVacinas;
     }
+    
     public void setQtdVacinas(int qtdVacinas) {
-        this.qtdVacinas = qtdVacinas;
+        if(qtdVacinas >= 0)
+        {
+            this.qtdVacinas = qtdVacinas;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Quantidade de vacinas inválida",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     
     
@@ -94,13 +120,15 @@ public class Modelo {
         ModeloDAO mBD = new ModeloDAO();
         Modelo m = mBD.readModelo(this.especie, this.raca);
         
+        //Verifica se ja existe um modelo para a especie e raca especificada
         if(m == null)
         {
-            //Pegando todos os modelo
+            //Cadastrando o modelo no banco de dados
             mBD.create(this);
         }
         else
         {
+            //Se ja existir, atualiza o modelo no BD com os dados atuais
             mBD.update(this);
         }
        
@@ -114,33 +142,32 @@ public class Modelo {
         mBD.remove(e, r);
     }
 
-    //Carrega o modelo 
-    public void importarMod(String e, String r)
+    //Carrega o modelo
+    //<OBS> trocou o retorno (void -> int)
+    public int importarMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
         Modelo m = mBD.readModelo(e, r);
-        
-        this.setEspecie(m.getEspecie());
-        this.setRaca(m.getRaca());
-        this.setQtdVacinas(m.getQtdVacinas());
-        this.setVetorVacina(m.getVetorVacina());
-        /*
-        
-        Modelo m = this.modeloDAO.buscaModelo(e, r);
+        //Verifica se foi encontrado algum modelo
         if(m != null)
         {
-            String vacinas[] = buscarVacinas(e, r);
-            //Prenchendo a array com os dados no banco
-            
-            for(int i = 0; i < vacinas.size(); i++) {
-            this.vacinas.add(vacinas.get(i));
-        //    }
+            //Atualiza o objeto atual com os dados obtidos
+            this.setEspecie(m.getEspecie());
+            this.setRaca(m.getRaca());
+            this.setQtdVacinas(m.getQtdVacinas());
+            this.setVetorVacina(m.getVetorVacina());
+            return 1;
         }
-        */
+        else
+        {
+            //Mensagem avisando que o modelo n foi encontrado
+            JOptionPane.showMessageDialog(null, "Modelo não encontrada",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            return 0;
+        }
     }
 
-    //criar funcao para transforma em string o vetor
-    
+    //Retorna todas as vacinas separadas por ";"    
     public String getVetorVacina()
     {
         String v = "";
@@ -167,6 +194,7 @@ public class Modelo {
     {
         //Buscando o elemento, se n encontrar, add
         int search = this.vacinas.indexOf(vacina);
+        //Se nao encontrou nenhuma vacina, adiciona
         if(search == -1)
         {
             this.vacinas.add(vacina);
@@ -174,7 +202,7 @@ public class Modelo {
         }
         else
         {
-            //Mensagem que a vacina ja foi adicionada
+            //Mensagem avisando que a vacina ja foi adicionada
             JOptionPane.showMessageDialog(null, "Vacina ja adicionada",
                         "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -185,6 +213,7 @@ public class Modelo {
     {
         //Buscando o elemento, se encontrar, del
         int search = this.vacinas.indexOf(vacina);
+        //Se encontrou a vacina, remove
         if(search != -1)
         {
             this.vacinas.remove(search);
@@ -192,7 +221,7 @@ public class Modelo {
         }
         else
         {
-            //Mensagem que a vacina ja foi adicionada
+            //Mensagem avisando que a vacina nao foi encontrada 
             JOptionPane.showMessageDialog(null, "Vacina não encontrada",
                         "Erro", JOptionPane.ERROR_MESSAGE);
 	}

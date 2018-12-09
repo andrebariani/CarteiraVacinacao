@@ -20,7 +20,7 @@ public class Modelo {
     private int qtdVacinas;
     private final ArrayList<String> vacinas;
 
-    private ModeloDAO modeloDAO;//trocar
+    
     
     public Modelo()
     {
@@ -97,7 +97,7 @@ public class Modelo {
         if(m == null)
         {
             //Pegando todos os modelo
-            this.modeloDAO.create(this);
+            mBD.create(this);
         }
         else
         {
@@ -110,7 +110,8 @@ public class Modelo {
     //<OBS> Troca de parametros
     public void excluirMod(String e, String r)
     {
-        this.modeloDAO.remove(e, r);
+        ModeloDAO mBD = new ModeloDAO();
+        mBD.remove(e, r);
     }
 
     //Carrega o modelo 

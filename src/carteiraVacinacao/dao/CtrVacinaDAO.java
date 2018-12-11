@@ -8,6 +8,7 @@ package carteiraVacinacao.dao;
 import carteiraVacinacao.bean.CtrVacina;
 import conexao.Conexao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public class CtrVacinaDAO {
         try {
             stmt = con.prepareStatement("INSERT INTO ctrVacina VALUES (?, ?, ?, ?, ?, ?);");
             stmt.setString(1, ctr.getVacina());
-            stmt.setDate(2, ctr.getData());
+            stmt.setDate(2, (Date) ctr.getData());
             stmt.setBoolean(3, ctr.isAplicada());
             stmt.setLong(4, cpfDono);
             stmt.setString(5, nomePaciente);
@@ -36,9 +37,10 @@ public class CtrVacinaDAO {
             stmt.executeUpdate();
             
             JOptionPane.showMessageDialog(null, "Vacina inserida com sucesso: " + ctr.getVacina());
-
+            return true;
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao inserir vacina");
+             return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }

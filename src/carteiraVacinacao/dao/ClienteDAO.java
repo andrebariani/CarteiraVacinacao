@@ -51,7 +51,7 @@ public class ClienteDAO {
         ResultSet rs = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE cpf = ?");
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE cpf = ?");
             stmt.setLong(1, cpf);
             
             rs = stmt.executeQuery();

@@ -22,7 +22,7 @@ public class CarteiraDAO {
     private PacienteDAO pdao;
     
     
-    public void create(Carteira c){
+    public boolean create(Carteira c){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         
@@ -32,32 +32,35 @@ public class CarteiraDAO {
         stmt.setInt(2, c.getPacienteModExterno().getId());
         stmt.setInt(3, c.getQtdCarteiras());
         stmt.setString(4, c.getVetorVacina());
+        return true;
         
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao inserir carteira");
+             return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
     }
     
-    public void read(long cpf){
+    public boolean read(long cpf, String nome, Carteira c){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Carteira c = new Carteira();
-        
         
         try {
-            stmt = con.prepareStatement("Select * FROM carteira WHERE cpf_cliente = ?");
+            stmt = con.prepareStatement("Select * FROM carteira WHERE cpf_cliente = ? AND nome_paciente = ?");
             stmt.setLong(1, cpf);
+            stmt.setString(2, nome);
             
             if(rs.next()){
                 c.setClienteModExterno(cdao.readCliente(rs.getLong("cpf_cliente")));
+                c.setPacienteModExterno(pdao.readPaciente(rs.getLong("cpf_cliente, nome_paciente")));
                 c.setQtdCarteiras(rs.getInt("qtd"));
                 c.setVetorVacina(rs.getString("vacinas"));
             }else{
                 JOptionPane.showMessageDialog(null, "Carteira não existe");
             }
+            
             
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao buscar carteira");

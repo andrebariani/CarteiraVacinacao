@@ -51,15 +51,16 @@ public class PacienteDAO {
         return  pacientes;
     }
     
-    public Paciente readPacienteId(int id){
+    public Paciente readPaciente(long cpf, String nome){
         Paciente p = new Paciente();
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM paciente WHERE id = ?");
-            stmt.setLong(1, id);
+            stmt = con.prepareStatement("SELECT * FROM paciente WHERE cpf_dono = ? AND nome_paciente = ?");
+            stmt.setLong(1, cpf);
+            stmt.setString(1, nome);
             
             rs = stmt.executeQuery();
             

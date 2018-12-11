@@ -99,11 +99,10 @@ public class ModeloDAO {
         }
     }
     
-    public Modelo readModelo(String especie, String raca){
+    public void readModelo(String especie, String raca , Modelo m){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Modelo m = new Modelo();
 
         
         try {
@@ -117,12 +116,9 @@ public class ModeloDAO {
                 m.setQtdVacinas(rs.getInt("qtd"));
                 m.setVetorVacina(rs.getString("vacinas"));
             }
-            
-            return m;
            
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
-             return null;
+             JOptionPane.showMessageDialog(null, "Falha ao ler Modelo");
         }finally{
             Conexao.closeConnection(con, stmt);
         }

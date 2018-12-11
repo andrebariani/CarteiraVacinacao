@@ -71,4 +71,21 @@ public class CarteiraDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+    
+    public void remove(Long cpfDono, String nomePaciente){
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+        stmt = con.prepareStatement("DELETE FROM carteira WHERE cpf_cliente = ? AND nome_paciente = ?;");
+        stmt.setLong(1, cpfDono);
+        stmt.setString(2, nomePaciente);
+        
+        
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+        }finally{
+            Conexao.closeConnection(con, stmt);
+        }
+    }
 }

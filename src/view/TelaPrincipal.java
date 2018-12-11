@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package view;
-import carteiraVacinacao.bean.CtrVacina;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -26,6 +25,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tlm.setVisible(true);
         
         initComponents();
+        
+        botaoInferiorCarteira(false);
+        botaoInferiorModeloInicial(false);
+        botaoInferiorModeloFinal(false);
     }
 
     /**
@@ -37,23 +40,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        painelPrincipal = new javax.swing.JPanel();
         tela1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        cpfCliente = new javax.swing.JLabel();
-        textCpf = new javax.swing.JTextField();
-        racaPet = new javax.swing.JLabel();
-        textRaca = new javax.swing.JTextField();
-        especiePet = new javax.swing.JLabel();
-        textEspecie = new javax.swing.JTextField();
-        nomePet = new javax.swing.JLabel();
-        textNome = new javax.swing.JTextField();
-        buscar = new javax.swing.JButton();
-        limpar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TableVacina = new javax.swing.JTable();
-        z = new javax.swing.JLabel();
+        painelCarteira = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableVacina = new javax.swing.JTable();
+        botaoRemoverVacinaCarteira = new javax.swing.JButton();
+        botaoAlterarVacinaCarteira = new javax.swing.JButton();
+        botaoInserirVacinaCarteira = new javax.swing.JButton();
+        botaoAplicarVacinaCarteira = new javax.swing.JButton();
+        painelBorda1 = new javax.swing.JPanel();
+        cpfClienteCarteira = new javax.swing.JLabel();
+        textCpfCarteira = new javax.swing.JTextField();
+        especiePetCarteira = new javax.swing.JLabel();
+        textEspecieCarteira = new javax.swing.JTextField();
+        racaPetCarteira = new javax.swing.JLabel();
+        textRacaCarteira = new javax.swing.JTextField();
+        nomePetCarteira = new javax.swing.JLabel();
+        textNomeCarteira = new javax.swing.JTextField();
+        botaoBuscarCarteira = new javax.swing.JButton();
+        botaoLimparCarteira = new javax.swing.JButton();
+        fundoCarteira = new javax.swing.JLabel();
         tela2 = new javax.swing.JPanel();
+        painelModelo = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableModelo1 = new javax.swing.JTable();
+        botaoAlterarModelo = new javax.swing.JButton();
+        botaoCadastrarModelo = new javax.swing.JButton();
+        botaoExcluirModelo = new javax.swing.JButton();
+        painelBorda2 = new javax.swing.JPanel();
+        especiePetModelo = new javax.swing.JLabel();
+        textEspecieModelo = new javax.swing.JTextField();
+        racaPetModelo = new javax.swing.JLabel();
+        textRacaModelo = new javax.swing.JTextField();
+        botaoBuscarModelo = new javax.swing.JButton();
+        botaoLimparModelo = new javax.swing.JButton();
+        fundoModelo = new javax.swing.JLabel();
+        tela3 = new javax.swing.JPanel();
+        painelModelo1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableModelo2 = new javax.swing.JTable();
+        botaoRemoverVacinaModelo = new javax.swing.JButton();
+        botaoAlterarVacinaModelo = new javax.swing.JButton();
+        botaoInserirVacinaModelo = new javax.swing.JButton();
+        painelBorda3 = new javax.swing.JPanel();
+        labelRaca = new javax.swing.JLabel();
+        labelEspecie = new javax.swing.JLabel();
+        fundoModelo1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         carteiraVacinacao = new javax.swing.JMenu();
         modeloCarteira = new javax.swing.JMenu();
@@ -64,41 +97,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setTitle("Clínica Veterinária");
         setResizable(false);
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        painelPrincipal.setLayout(new java.awt.CardLayout());
 
         tela1.setLayout(null);
 
-        cpfCliente.setText("CPF do Cliente:");
+        painelCarteira.setBackground(new java.awt.Color(255, 255, 255));
+        painelCarteira.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        textCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCpfActionPerformed(evt);
-            }
-        });
-
-        racaPet.setText("Raça do Pet:");
-
-        especiePet.setText("Espécie do Pet:");
-
-        nomePet.setText("Nome do Pet:");
-
-        buscar.setText("Buscar");
-        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscarMouseClicked(evt);
-            }
-        });
-
-        limpar.setText("Limpar");
-        limpar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                limparMouseClicked(evt);
-            }
-        });
-
-        TableVacina.setBackground(new java.awt.Color(204, 204, 255));
-        TableVacina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        TableVacina.setModel(new javax.swing.table.DefaultTableModel(
+        tableVacina.setBackground(new java.awt.Color(204, 204, 255));
+        tableVacina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableVacina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -121,92 +129,461 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TableVacina.setGridColor(new java.awt.Color(0, 0, 0));
-        TableVacina.setSelectionBackground(new java.awt.Color(0, 0, 153));
-        TableVacina.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(TableVacina);
-        if (TableVacina.getColumnModel().getColumnCount() > 0) {
-            TableVacina.getColumnModel().getColumn(0).setMinWidth(80);
-            TableVacina.getColumnModel().getColumn(0).setPreferredWidth(80);
-            TableVacina.getColumnModel().getColumn(0).setMaxWidth(80);
-            TableVacina.getColumnModel().getColumn(1).setMinWidth(150);
-            TableVacina.getColumnModel().getColumn(1).setPreferredWidth(150);
-            TableVacina.getColumnModel().getColumn(1).setMaxWidth(150);
-            TableVacina.getColumnModel().getColumn(2).setMinWidth(200);
-            TableVacina.getColumnModel().getColumn(2).setPreferredWidth(200);
-            TableVacina.getColumnModel().getColumn(2).setMaxWidth(200);
+        tableVacina.setGridColor(new java.awt.Color(0, 0, 0));
+        tableVacina.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        tableVacina.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tableVacina);
+        if (tableVacina.getColumnModel().getColumnCount() > 0) {
+            tableVacina.getColumnModel().getColumn(0).setMinWidth(100);
+            tableVacina.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tableVacina.getColumnModel().getColumn(0).setMaxWidth(100);
+            tableVacina.getColumnModel().getColumn(1).setMinWidth(150);
+            tableVacina.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tableVacina.getColumnModel().getColumn(1).setMaxWidth(150);
+            tableVacina.getColumnModel().getColumn(2).setMinWidth(200);
+            tableVacina.getColumnModel().getColumn(2).setPreferredWidth(200);
+            tableVacina.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cpfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(racaPet, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(187, 187, 187))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(textRaca)
-                                .addGap(112, 112, 112)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(especiePet, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(112, 112, 112)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(limpar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buscar))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nomePet, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        botaoRemoverVacinaCarteira.setText("Remover vacina");
+
+        botaoAlterarVacinaCarteira.setText("Alterar vacina");
+
+        botaoInserirVacinaCarteira.setText("Inserir vacina");
+
+        botaoAplicarVacinaCarteira.setText("Aplicar vacina");
+
+        painelBorda1.setBackground(new java.awt.Color(255, 255, 255));
+        painelBorda1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createTitledBorder("Buscar carteira de vacinação")));
+
+        cpfClienteCarteira.setText("CPF do Cliente:");
+
+        especiePetCarteira.setText("Espécie do Pet:");
+
+        racaPetCarteira.setText("Raça do Pet:");
+
+        nomePetCarteira.setText("Nome do Pet:");
+
+        botaoBuscarCarteira.setText("Buscar");
+        botaoBuscarCarteira.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoBuscarCarteiraMouseClicked(evt);
+            }
+        });
+
+        botaoLimparCarteira.setText("Limpar");
+        botaoLimparCarteira.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoLimparCarteiraMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelBorda1Layout = new javax.swing.GroupLayout(painelBorda1);
+        painelBorda1.setLayout(painelBorda1Layout);
+        painelBorda1Layout.setHorizontalGroup(
+            painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cpfCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(racaPet)
-                    .addComponent(especiePet)
-                    .addComponent(nomePet))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textRaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(limpar)
-                    .addComponent(buscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cpfClienteCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textEspecieCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCpfCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(especiePetCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelBorda1Layout.createSequentialGroup()
+                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textRacaCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(racaPetCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(123, 123, 123)
+                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelBorda1Layout.createSequentialGroup()
+                                .addComponent(nomePetCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(painelBorda1Layout.createSequentialGroup()
+                                .addComponent(textNomeCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botaoBuscarCarteira)))
+                        .addContainerGap())
+                    .addGroup(painelBorda1Layout.createSequentialGroup()
+                        .addComponent(botaoLimparCarteira)
+                        .addGap(128, 128, 128))))
+        );
+        painelBorda1Layout.setVerticalGroup(
+            painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelBorda1Layout.createSequentialGroup()
+                        .addComponent(cpfClienteCarteira)
+                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelBorda1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textCpfCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelBorda1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(botaoLimparCarteira)))
+                        .addGap(10, 10, 10)
+                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(racaPetCarteira)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBorda1Layout.createSequentialGroup()
+                                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(especiePetCarteira)
+                                    .addComponent(nomePetCarteira))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(textEspecieCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textRacaCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textNomeCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE))))
+                    .addComponent(botaoBuscarCarteira, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tela1.add(jPanel2);
-        jPanel2.setBounds(30, 30, 1260, 730);
+        javax.swing.GroupLayout painelCarteiraLayout = new javax.swing.GroupLayout(painelCarteira);
+        painelCarteira.setLayout(painelCarteiraLayout);
+        painelCarteiraLayout.setHorizontalGroup(
+            painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCarteiraLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCarteiraLayout.createSequentialGroup()
+                        .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(painelBorda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(painelCarteiraLayout.createSequentialGroup()
+                                .addGap(0, 330, Short.MAX_VALUE)
+                                .addComponent(botaoAplicarVacinaCarteira)
+                                .addGap(100, 100, 100)
+                                .addComponent(botaoRemoverVacinaCarteira)
+                                .addGap(100, 100, 100)
+                                .addComponent(botaoAlterarVacinaCarteira)
+                                .addGap(100, 100, 100)
+                                .addComponent(botaoInserirVacinaCarteira)))
+                        .addGap(8, 8, 8)))
+                .addGap(78, 78, 78))
+        );
+        painelCarteiraLayout.setVerticalGroup(
+            painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCarteiraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoInserirVacinaCarteira)
+                    .addComponent(botaoAlterarVacinaCarteira)
+                    .addComponent(botaoRemoverVacinaCarteira)
+                    .addComponent(botaoAplicarVacinaCarteira))
+                .addGap(58, 58, 58))
+        );
 
-        z.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
-        tela1.add(z);
-        z.setBounds(0, 0, 1330, 800);
+        tela1.add(painelCarteira);
+        painelCarteira.setBounds(30, 30, 1260, 730);
 
-        jPanel1.add(tela1, "tela1");
+        fundoCarteira.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
+        tela1.add(fundoCarteira);
+        fundoCarteira.setBounds(0, 0, 1330, 800);
+
+        painelPrincipal.add(tela1, "tela1");
 
         tela2.setBackground(new java.awt.Color(0, 0, 153));
         tela2.setLayout(null);
-        jPanel1.add(tela2, "tela2");
+
+        painelModelo.setBackground(new java.awt.Color(255, 255, 255));
+        painelModelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        tableModelo1.setBackground(new java.awt.Color(204, 204, 255));
+        tableModelo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableModelo1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numeração", "Espécie", "Raça"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableModelo1.setGridColor(new java.awt.Color(0, 0, 0));
+        tableModelo1.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        tableModelo1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tableModelo1);
+        if (tableModelo1.getColumnModel().getColumnCount() > 0) {
+            tableModelo1.getColumnModel().getColumn(0).setMinWidth(80);
+            tableModelo1.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tableModelo1.getColumnModel().getColumn(0).setMaxWidth(80);
+            tableModelo1.getColumnModel().getColumn(1).setMinWidth(400);
+            tableModelo1.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tableModelo1.getColumnModel().getColumn(1).setMaxWidth(400);
+        }
+
+        botaoAlterarModelo.setText("Alterar modelo");
+        botaoAlterarModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoAlterarModeloMouseClicked(evt);
+            }
+        });
+
+        botaoCadastrarModelo.setText("Cadastrar modelo");
+        botaoCadastrarModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCadastrarModeloActionPerformed(evt);
+            }
+        });
+
+        botaoExcluirModelo.setText("Excluir modelo");
+        botaoExcluirModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoExcluirModeloMouseClicked(evt);
+            }
+        });
+
+        painelBorda2.setBackground(new java.awt.Color(255, 255, 255));
+        painelBorda2.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createTitledBorder("Busca por modelo")));
+
+        especiePetModelo.setText("Espécie do Pet:");
+
+        textEspecieModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textEspecieModeloActionPerformed(evt);
+            }
+        });
+
+        racaPetModelo.setText("Raça do Pet:");
+
+        botaoBuscarModelo.setText("Buscar");
+        botaoBuscarModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoBuscarModeloMouseClicked(evt);
+            }
+        });
+
+        botaoLimparModelo.setText("Limpar");
+        botaoLimparModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoLimparModeloMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelBorda2Layout = new javax.swing.GroupLayout(painelBorda2);
+        painelBorda2.setLayout(painelBorda2Layout);
+        painelBorda2Layout.setHorizontalGroup(
+            painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelBorda2Layout.createSequentialGroup()
+                        .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(especiePetModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textEspecieModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(109, 109, 109)
+                        .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(racaPetModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textRacaModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painelBorda2Layout.createSequentialGroup()
+                        .addGap(547, 547, 547)
+                        .addComponent(botaoLimparModelo)
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoBuscarModelo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelBorda2Layout.setVerticalGroup(
+            painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda2Layout.createSequentialGroup()
+                .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(especiePetModelo)
+                    .addComponent(racaPetModelo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textEspecieModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textRacaModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(painelBorda2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(painelBorda2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoLimparModelo)
+                    .addComponent(botaoBuscarModelo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout painelModeloLayout = new javax.swing.GroupLayout(painelModelo);
+        painelModelo.setLayout(painelModeloLayout);
+        painelModeloLayout.setHorizontalGroup(
+            painelModeloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelModeloLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(painelModeloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelBorda2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
+                    .addGroup(painelModeloLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoExcluirModelo)
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoAlterarModelo)
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoCadastrarModelo)))
+                .addGap(86, 86, 86))
+        );
+        painelModeloLayout.setVerticalGroup(
+            painelModeloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelModeloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelBorda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addGroup(painelModeloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCadastrarModelo)
+                    .addComponent(botaoAlterarModelo)
+                    .addComponent(botaoExcluirModelo))
+                .addGap(58, 58, 58))
+        );
+
+        tela2.add(painelModelo);
+        painelModelo.setBounds(30, 30, 1260, 730);
+
+        fundoModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
+        fundoModelo.setText("jLabel1");
+        tela2.add(fundoModelo);
+        fundoModelo.setBounds(0, 0, 1330, 800);
+
+        painelPrincipal.add(tela2, "tela2");
+
+        tela3.setBackground(new java.awt.Color(0, 0, 153));
+        tela3.setLayout(null);
+
+        painelModelo1.setBackground(new java.awt.Color(255, 255, 255));
+        painelModelo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        tableModelo2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableModelo2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numeração", "Aplicação", "Data", "Nome da Vacina"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableModelo2.setGridColor(new java.awt.Color(0, 0, 0));
+        tableModelo2.setSelectionBackground(new java.awt.Color(0, 0, 153));
+        tableModelo2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tableModelo2);
+        if (tableModelo2.getColumnModel().getColumnCount() > 0) {
+            tableModelo2.getColumnModel().getColumn(0).setMinWidth(80);
+            tableModelo2.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tableModelo2.getColumnModel().getColumn(0).setMaxWidth(80);
+            tableModelo2.getColumnModel().getColumn(1).setMinWidth(400);
+            tableModelo2.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tableModelo2.getColumnModel().getColumn(1).setMaxWidth(400);
+            tableModelo2.getColumnModel().getColumn(3).setHeaderValue("Nome da Vacina");
+        }
+
+        botaoRemoverVacinaModelo.setText("Remover vacina");
+
+        botaoAlterarVacinaModelo.setText("Alterar vacina");
+
+        botaoInserirVacinaModelo.setText("Inserir vacina");
+
+        painelBorda3.setBackground(new java.awt.Color(255, 255, 255));
+        painelBorda3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do modelo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+
+        labelRaca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        labelEspecie.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        javax.swing.GroupLayout painelBorda3Layout = new javax.swing.GroupLayout(painelBorda3);
+        painelBorda3.setLayout(painelBorda3Layout);
+        painelBorda3Layout.setHorizontalGroup(
+            painelBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(124, 124, 124)
+                .addComponent(labelRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelBorda3Layout.setVerticalGroup(
+            painelBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelBorda3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(painelBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout painelModelo1Layout = new javax.swing.GroupLayout(painelModelo1);
+        painelModelo1.setLayout(painelModelo1Layout);
+        painelModelo1Layout.setHorizontalGroup(
+            painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelModelo1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelBorda3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelModelo1Layout.createSequentialGroup()
+                        .addGap(289, 553, Short.MAX_VALUE)
+                        .addComponent(botaoRemoverVacinaModelo)
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoAlterarVacinaModelo)
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoInserirVacinaModelo)))
+                .addGap(86, 86, 86))
+        );
+        painelModelo1Layout.setVerticalGroup(
+            painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelModelo1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(painelBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoInserirVacinaModelo)
+                    .addComponent(botaoAlterarVacinaModelo)
+                    .addComponent(botaoRemoverVacinaModelo))
+                .addGap(58, 58, 58))
+        );
+
+        tela3.add(painelModelo1);
+        painelModelo1.setBounds(30, 30, 1260, 730);
+
+        fundoModelo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
+        fundoModelo1.setText("jLabel1");
+        tela3.add(fundoModelo1);
+        fundoModelo1.setBounds(0, 0, 1330, 800);
+
+        painelPrincipal.add(tela3, "tela3");
 
         carteiraVacinacao.setText("  Carteira de vacinação  ");
         carteiraVacinacao.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +622,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1329, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -254,7 +631,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 797, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -263,73 +640,116 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void carteiraVacinacaoClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carteiraVacinacaoClicked
-        CardLayout cl = (CardLayout) jPanel1.getLayout();
-        cl.show(jPanel1, "tela1");
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "tela1");
+        
         clearFields();
-        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
-        while(dtm.getRowCount() != 0){
-            dtm.removeRow(0);
-        }
+        clearTable();
+        
+        botaoInferiorCarteira(false);
+        botaoInferiorModeloInicial(false);
+        botaoInferiorModeloFinal(false);
     }//GEN-LAST:event_carteiraVacinacaoClicked
 
     private void modeloCarteiraClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeloCarteiraClicked
-        CardLayout cl = (CardLayout) jPanel1.getLayout();
-        cl.show(jPanel1, "tela2");
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "tela2");
+                
         clearFields();
-        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
-        while(dtm.getRowCount() != 0){
-            dtm.removeRow(0);   
-        }
+        clearTable();
+        
+        botaoInferiorCarteira(false);
+        botaoInferiorModeloInicial(false);
+        botaoInferiorModeloFinal(false);
     }//GEN-LAST:event_modeloCarteiraClicked
 
     private void sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairMouseClicked
+        // Deixa a tela principal invisivel
         this.setVisible(false);
+        
+        // Deixa a tela de login visivel 
         TelaLoginModal tlm = new TelaLoginModal(this,true);
         tlm.setVisible(true);
+        
+        // Depois de realizar o login, deixa a tela principal visivel novamente
         this.setVisible(true);
-        CardLayout cl = (CardLayout) jPanel1.getLayout();
-        cl.show(jPanel1, "tela1");
+        
+        // Carrega a primeira tela como inicio
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "tela1");
+        
+        // Limpa todas as tabelas
+        clearTable();
+        
+        // Deixa todos os botoes inferiores invisiveis
+        botaoInferiorCarteira(false);
+        botaoInferiorModeloInicial(false);
+        botaoInferiorModeloFinal(false);
     }//GEN-LAST:event_sairMouseClicked
 
     @SuppressWarnings("empty-statement")
-    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
-        DefaultTableModel dtm = (DefaultTableModel) TableVacina.getModel();
+    private void botaoBuscarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarCarteiraMouseClicked
+        // Limpa todas as tabelas
+        clearTable();
+        
+        // DEixa os botoes inferiores invisiveis
+        botaoInferiorCarteira(false);
+     
+        
       
-        if(textCpf.getText().length() == 0){
+        if(textCpfCarteira.getText().length() == 0){
             // CPF invalido
             JOptionPane.showMessageDialog(this,"Há campos vazios");
             return;
         }
         
-        if(textCpf.getText().length() != 11){
+        if(textCpfCarteira.getText().length() != 11){
             // CPF invalido
             JOptionPane.showMessageDialog(this,"CPF inválido");
             return;
         }
+        else{
+            String verificador = textCpfCarteira.getText();
+           
+            boolean valido = true;
+
+            for (int i = 0; i < verificador.length(); i++) {
+                Character caractere = verificador.charAt(i);
+                if (!Character.isDigit(caractere)) {
+                    //É String
+                    valido = false;
+                }
+            }
+            if(valido == false){
+                JOptionPane.showMessageDialog(this,"CPF inválido");
+                return;
+            }
+        }
        
-        if(textRaca.getText().length() == 0){
+        if(textRacaCarteira.getText().length() == 0){
             // Campo raca do pet vazio
             JOptionPane.showMessageDialog(this,"Há campos vazios");
             return;
         }
         
-        if(textEspecie.getText().length() == 0){
+        if(textEspecieCarteira.getText().length() == 0){
             // Campo especie do pet vazio
             JOptionPane.showMessageDialog(this,"Há campos vazios"); 
             return;
         }
         
-        if(textNome.getText().length() == 0){
+        if(textNomeCarteira.getText().length() == 0){
             // Campo nome do pet vazio
             JOptionPane.showMessageDialog(this,"Há campos vazios");
             return;
         }
         
-        if(textCpf.getText().equals("40510036805")){
+        if(textCpfCarteira.getText().equals("40510036805")){
             // Carteira encontrada
             String Demo = "NomeVacina;12/02/2018;T;Nome2;25/12/2018;F;";
             String Deli = ";";
 
+            DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
             StringTokenizer Tok = new StringTokenizer(Demo);
             int n=1;
             String vacina,data,aplicada;
@@ -349,6 +769,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 n++;
             }
             clearFields();
+            botaoInferiorCarteira(true);
         } 
         else {
             // Carteira nao encontrada
@@ -361,23 +782,145 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_buscarMouseClicked
+    }//GEN-LAST:event_botaoBuscarCarteiraMouseClicked
 
-    private void textCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCpfActionPerformed
-
-    private void limparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limparMouseClicked
+    private void botaoLimparCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLimparCarteiraMouseClicked
+        // Limpa os campos
         clearFields();
-    }//GEN-LAST:event_limparMouseClicked
+    }//GEN-LAST:event_botaoLimparCarteiraMouseClicked
+
+    private void botaoBuscarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarModeloMouseClicked
+        // Deixa os botoes inferiores invisiveis
+        botaoInferiorModeloInicial(false);
+        botaoInferiorModeloFinal(false);
+        
+        if(textEspecieModelo.getText().length() == 0){
+            // Campo especie do pet vazio
+            JOptionPane.showMessageDialog(this,"Preencha o campo Espécie do pet");
+        }
+        else{
+            if(textRacaModelo.getText().length() == 0){
+                clearFields();
+                // Campo raca do pet vazio
+                // Busca apenas por especie e exibe tabela e botoes inferiores
+                
+                // Exemplo:
+                int n = 1;
+                DefaultTableModel dtm = (DefaultTableModel) tableModelo1.getModel();
+                String especie = "Cachorro";
+                String raca = "Vira lata";
+                
+                Object[] dados = {n,especie,raca};
+                dtm.addRow(dados);
+                botaoInferiorModeloInicial(true);
+            }
+            else{
+                clearFields();
+                // Campo raca do pet nao vazio
+                // Busca por especie e raca e exibe tabela e botoes inferiores
+            }
+            
+        }
+        
+    }//GEN-LAST:event_botaoBuscarModeloMouseClicked
+
+    private void botaoLimparModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLimparModeloMouseClicked
+        // Limpa os campos
+        clearFields();
+    }//GEN-LAST:event_botaoLimparModeloMouseClicked
+
+    private void botaoCadastrarModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoCadastrarModeloActionPerformed
+
+    private void botaoAlterarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAlterarModeloMouseClicked
+        int linha = tableModelo1.getSelectedRow();
+        
+        if(linha == -1){
+            JOptionPane.showMessageDialog(this,"Selecione um modelo");
+        }
+        else{
+            String Especie = (String) tableModelo1.getValueAt(linha,1);
+            String Raca = (String) tableModelo1.getValueAt(linha,2);
+            
+            clearFields();
+            clearTable();
+            
+            CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+            cl.show(painelPrincipal, "tela3");
+        
+            labelEspecie.setText("Espécie: " + Especie);
+            labelRaca.setText("Raça: " + Raca);
+            
+            /* >>>>> Importante <<<<*/
+            // realiza busca pela especie e raca e exibe tabela
+            
+            botaoInferiorModeloInicial(false);
+            botaoInferiorModeloFinal(true);
+        }
+        
+    }//GEN-LAST:event_botaoAlterarModeloMouseClicked
+
+    private void botaoExcluirModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoExcluirModeloMouseClicked
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoExcluirModeloMouseClicked
+
+    private void textEspecieModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEspecieModeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textEspecieModeloActionPerformed
 
     private void clearFields(){
-        textCpf.setText("");
-        textRaca.setText("");
-        textEspecie.setText("");
-        textNome.setText("");
+        // Primeira tela
+        textCpfCarteira.setText("");
+        textRacaCarteira.setText("");
+        textEspecieCarteira.setText("");
+        textNomeCarteira.setText("");
+        
+        // Segunda tela
+        textEspecieModelo.setText("");
+        textRacaModelo.setText("");
+        
+        
     }
     
+    private void clearTable(){
+        DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);   
+        }
+        
+        dtm = (DefaultTableModel) tableModelo1.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);   
+        }
+        
+        dtm = (DefaultTableModel) tableModelo2.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);   
+        }
+    }
+    
+    private void botaoInferiorCarteira(boolean a){
+        botaoRemoverVacinaCarteira.setVisible(a);
+        botaoAlterarVacinaCarteira.setVisible(a);
+        botaoAplicarVacinaCarteira.setVisible(a);
+        botaoInserirVacinaCarteira.setVisible(a);
+    }
+    
+    private void botaoInferiorModeloInicial(boolean a){
+        botaoExcluirModelo.setVisible(a);
+        botaoAlterarModelo.setVisible(a);
+        botaoCadastrarModelo.setVisible(a);
+    }
+    
+    private void botaoInferiorModeloFinal(boolean a){
+        botaoRemoverVacinaModelo.setVisible(a);
+        botaoAlterarVacinaModelo.setVisible(a);
+        botaoInserirVacinaModelo.setVisible(a);
+    }
+        
     /**
      * @param args the command line arguments
      */
@@ -414,27 +957,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableVacina;
-    private javax.swing.JButton buscar;
+    private javax.swing.JButton botaoAlterarModelo;
+    private javax.swing.JButton botaoAlterarVacinaCarteira;
+    private javax.swing.JButton botaoAlterarVacinaModelo;
+    private javax.swing.JButton botaoAplicarVacinaCarteira;
+    private javax.swing.JButton botaoBuscarCarteira;
+    private javax.swing.JButton botaoBuscarModelo;
+    private javax.swing.JButton botaoCadastrarModelo;
+    private javax.swing.JButton botaoExcluirModelo;
+    private javax.swing.JButton botaoInserirVacinaCarteira;
+    private javax.swing.JButton botaoInserirVacinaModelo;
+    private javax.swing.JButton botaoLimparCarteira;
+    private javax.swing.JButton botaoLimparModelo;
+    private javax.swing.JButton botaoRemoverVacinaCarteira;
+    private javax.swing.JButton botaoRemoverVacinaModelo;
     private javax.swing.JMenu carteiraVacinacao;
-    private javax.swing.JLabel cpfCliente;
-    private javax.swing.JLabel especiePet;
+    private javax.swing.JLabel cpfClienteCarteira;
+    private javax.swing.JLabel especiePetCarteira;
+    private javax.swing.JLabel especiePetModelo;
+    private javax.swing.JLabel fundoCarteira;
+    private javax.swing.JLabel fundoModelo;
+    private javax.swing.JLabel fundoModelo1;
     private javax.swing.JMenu imprimir;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton limpar;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel labelEspecie;
+    private javax.swing.JLabel labelRaca;
     private javax.swing.JMenu modeloCarteira;
-    private javax.swing.JLabel nomePet;
-    private javax.swing.JLabel racaPet;
+    private javax.swing.JLabel nomePetCarteira;
+    private javax.swing.JPanel painelBorda1;
+    private javax.swing.JPanel painelBorda2;
+    private javax.swing.JPanel painelBorda3;
+    private javax.swing.JPanel painelCarteira;
+    private javax.swing.JPanel painelModelo;
+    private javax.swing.JPanel painelModelo1;
+    private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JLabel racaPetCarteira;
+    private javax.swing.JLabel racaPetModelo;
     private javax.swing.JMenu sair;
+    private javax.swing.JTable tableModelo1;
+    private javax.swing.JTable tableModelo2;
+    private javax.swing.JTable tableVacina;
     private javax.swing.JPanel tela1;
     private javax.swing.JPanel tela2;
-    private javax.swing.JTextField textCpf;
-    private javax.swing.JTextField textEspecie;
-    private javax.swing.JTextField textNome;
-    private javax.swing.JTextField textRaca;
-    private javax.swing.JLabel z;
+    private javax.swing.JPanel tela3;
+    private javax.swing.JTextField textCpfCarteira;
+    private javax.swing.JTextField textEspecieCarteira;
+    private javax.swing.JTextField textEspecieModelo;
+    private javax.swing.JTextField textNomeCarteira;
+    private javax.swing.JTextField textRacaCarteira;
+    private javax.swing.JTextField textRacaModelo;
     // End of variables declaration//GEN-END:variables
 }

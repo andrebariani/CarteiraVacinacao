@@ -8,7 +8,7 @@ package carteiraVacinacao.bean;
 import carteiraVacinacao.dao.CarteiraDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,7 +48,7 @@ public class Carteira {
             strVacina += ";";
             
             SimpleDateFormat s = new SimpleDateFormat(dateFormat);
-            strVacina += s.format(temp.getData().getTime());
+            strVacina += s.format(temp.getData());
 
             strVacina += ";";
             
@@ -72,16 +72,16 @@ public class Carteira {
             
             aux.setVacina(vVacina[i]);
             
-            Calendar calaux = Calendar.getInstance();
+            Date dataAux;
             SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
             
             try {
-                calaux.setTime(sdf.parse(vVacina[1+i]));
+                dataAux = sdf.parse(vVacina[1+i]);
             } catch(Exception e){
                 return;
             }
             
-            aux.setData(calaux);
+            aux.setData(dataAux);
             
             if("T".equals(vVacina[2+i])) {
                 aux.setAplicada(true);
@@ -107,7 +107,7 @@ public class Carteira {
         }
     }
 
-    public boolean agendarVacina(String vacina, Calendar data) {
+    public boolean agendarVacina(String vacina, Date data) {
         int index = carteiraVacina.indexOf(vacina);
         
         if(index == -1) {

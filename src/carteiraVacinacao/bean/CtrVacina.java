@@ -6,6 +6,7 @@
 package carteiraVacinacao.bean;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.Calendar;
  */
 public class CtrVacina {
     private String vacina;
-    private Calendar data;
+    private Date data;
     private boolean aplicada;
 
     public String getVacina() {
@@ -24,11 +25,11 @@ public class CtrVacina {
         this.vacina = vacina;
     }
 
-    public Calendar getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Calendar data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

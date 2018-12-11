@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author lauanS
  */
 public class Facade {
-    Modelo modelo;
-    Carteira carteira;
+    private Modelo modelo;
+    private Carteira carteira;
     
-    Cliente cliModExterno;
-    Paciente pacModExterno;
+    private Cliente cliModExterno;
+    private Paciente pacModExterno;
     
     
     
@@ -25,43 +25,94 @@ public class Facade {
     //ObS:  Troca de paramentro (especie -> e)
     //      Troca de retorno (void -> String)
     
-    // 
-    public String buscarMod(String )
+    /** Retorna uma string formatada com as racas daquela especie
+     *  @param e Especie a ser buscada no banco
+     *  @return Uma string contendo todas as racas daquela especie
+     *          Cada raca estara separada por ';'
+     *          Retorna NULL se nao encontrar
+     */
+    public String buscarMod(String e)
     {
-        ArrayList<Modelo> m = modelo.buscarMod();   
+        ArrayList<Modelo> m = modelo.buscarMod(e);   
+        String retorno = "";
+   
+        //Verifica se o campo esta vazio
+        if(m.isEmpty())
+            return retorno;
         
+        //Pegando todas as especie e racas
         for(int i = 0; i < m.size(); i++)
         {
-            m.get(i).importarMod(, );
+            retorno += m.get(i).getEspecie();
+            retorno += ";";
+            retorno += m.get(i).getRaca();
         }
+        //Adicionando o ponto e virgula final
+        retorno += ";";
         
-        
-        return "Trocar";
+        return retorno;
     }
     
+     /** Cadastra um novo modelo no banco de dados
+     *   @param e Especie do animal
+     *   @param r Raca do animal 
+     */
     public void cadastrarMod(String e, String r)
     {
-        modelo.cadastrarMod();
+        if(this.importarMod(e, r) == 1)
+        {
+            modelo.cadastrarMod();
+        }
     }
     
-    public void excluirMod()
+     /** Remove o modelo especificado
+     *   @param e Especie do animal
+     *   s@param r Raca do animal 
+     */
+    public void excluirMod(String e, String r)
     {
-    
+        if(this.importarMod(e, r) == 1)
+        {
+            modelo.excluirMod(e, r);
+        }
     }
     
-    public void importarMod(String e, String r)
+    /** Obtem o as vacinas do modelo especificado, e preenche 
+     *  o modelo para usar outros metodos, como excluirMod()
+     * @param e Especie do animal
+     * @param r Raca do animal
+     * @return Uma string formatada com as vacinas
+     */
+    public int importarMod(String e, String r)
     {
-    
+        return modelo.importarMod(e, r);
     }
     
-    public void addVacina(String vacina)
+     /** Adiciona a vacina no modelo especificado
+     * @param e Especie do animal
+     * @param r Raca do animal
+     * @param vacina Nome da vacina, uma mensagem de erro aparece
+     *          ao tentar adicionar uma vacina ja existente
+     */
+    public void addVacina(String e, String r, String vacina)
     {
-    
-    }
-    
-    public void delVacina(String vacina)
+        if(this.importarMod(e, r) == 1)
+        {
+            modelo.addVacina(vacina);
+        }
+    }    
+     /** Remove a vacina no modelo especificado
+     * @param e Especie do animal
+     * @param r Raca do animal
+     * @param vacina Nome da vacina, uma mensagem de erro aparece
+     *          ao tentar remover uma vacina ja que nao existe no modelo
+     */  
+    public void delVacina(String e, String r, String vacina)
     {
-    
+        if(this.importarMod(e, r) == 1)
+        {
+            modelo.delVacina(vacina);
+        }
     }
     
     

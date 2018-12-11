@@ -35,10 +35,10 @@ public class CtrVacinaDAO {
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso: " + c.getNome());
+            JOptionPane.showMessageDialog(null, "Vacina inserida com sucesso: " + ctr.getVacina());
 
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir cliente");
+             JOptionPane.showMessageDialog(null, "Falha ao inserir vacina");
         }finally{
             Conexao.closeConnection(con, stmt);
         }

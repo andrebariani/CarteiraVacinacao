@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class CarteiraDAO {
     private ClienteDAO cdao;
     private PacienteDAO pdao;
+    private CtrVacinaDAO ctrdao;
     
     
     public boolean create(Carteira c){
@@ -54,16 +55,18 @@ public class CarteiraDAO {
             
             if(rs.next()){
                 c.setClienteModExterno(cdao.readCliente(rs.getLong("cpf_cliente")));
-                c.setPacienteModExterno(pdao.readPaciente(rs.getLong("cpf_cliente, nome_paciente")));
+                c.setPacienteModExterno(pdao.readPaciente(rs.getLong("cpf_cliente"), rs.getString("nome_paciente")));
                 c.setQtdCarteiras(rs.getInt("qtd"));
-                c.setVetorVacina(rs.getString("vacinas"));
+                c.setCarteiraVacina(ctrdao.read(rs.getLong("cpf_cliente"), rs.getString("nome_paciente")));
             }else{
                 JOptionPane.showMessageDialog(null, "Carteira não existe");
+                return false;
             }
             
-            
+            return true;
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao buscar carteira");
+             return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }

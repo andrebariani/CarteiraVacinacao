@@ -6,7 +6,6 @@
 package carteiraVacinacao.bean;
 
 import carteiraVacinacao.dao.CarteiraDAO;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +20,7 @@ public class Carteira {
     private Cliente clienteModExterno;
     private Paciente pacienteModExterno;
     private ArrayList<CtrVacina> carteiraVacina;
+    
     private final String dateFormat;
     
     private CarteiraDAO carteiraBD;
@@ -31,8 +31,8 @@ public class Carteira {
         this.carteiraBD.create(this);
     }
     
-    public void excluirCart() {
-        this.carteiraBD.remove(this);
+    public void excluirCart(long cpf, String nome) {
+        this.carteiraBD.remove(cpf, nome);
     }
     
     public void imprimir() {
@@ -74,7 +74,12 @@ public class Carteira {
             
             Calendar calaux = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-            calaux.setTime(sdf.parse(vVacina[1+i]));
+            
+            try {
+                calaux.setTime(sdf.parse(vVacina[1+i]));
+            } catch(Exception e){
+                return;
+            }
             
             aux.setData(calaux);
             
@@ -128,7 +133,7 @@ public class Carteira {
     }
     
     public void buscarCart(int id_cli, String nome) {
-        this.carteiraBD.read( id_cli );
+        this.carteiraBD.read( id_cli, nome, this );
     }
     
     public int getQtdCarteiras() {
@@ -153,5 +158,17 @@ public class Carteira {
 
     public void setPacienteModExterno(Paciente pacienteModExterno) {
         this.pacienteModExterno = pacienteModExterno;
-    }      
+    }
+    
+    public ArrayList<CtrVacina> getALVacina() {
+        return this.carteiraVacina;
+    }
+    
+    public ArrayList<CtrVacina> getCarteiraVacina() {
+        return carteiraVacina;
+    }
+
+    public void setCarteiraVacina(ArrayList<CtrVacina> carteiraVacina) {
+        this.carteiraVacina = carteiraVacina;
+    }
 }

@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
  *
  * @author lauanS
  */
+
+/** Classe responsavel pela gerencia de Modelos de carteira de vacinacao */
 public class Modelo {
     private String especie;
     private String raca;
@@ -21,7 +23,7 @@ public class Modelo {
     private final ArrayList<String> vacinas;
 
     
-    
+    /** Instancia um modelo */
     public Modelo()
     {
         this.especie = "";
@@ -29,10 +31,15 @@ public class Modelo {
         this.vacinas = new ArrayList();
         this.qtdVacinas = 0;
     }
-    
-    public Modelo(String especie, String raca) {
-        this.especie = especie;
-        this.raca = raca;
+    //<OBS> troca de param (especie, raca)
+    /** Instancia um modelo com a especie e raca informada 
+     *  OBS: nao verifica no banco se ja existe um modelo para essa especie e raca
+     * @param e Especie
+     * @param r Raca
+     */
+    public Modelo(String e, String r) {
+        this.especie = e;
+        this.raca = r;
         this.vacinas = new ArrayList();
         this.qtdVacinas = 0;
     }
@@ -40,6 +47,10 @@ public class Modelo {
     public String getEspecie() {
         return especie;
     }
+    
+    /** Atualiza a especie do modelo 
+      *  @param especie Somento letras de a-z e espaços e '-'
+      */
     public void setEspecie(String especie) {
         if(especie.matches("[\\Da-zA-Z -]"))
         {
@@ -52,9 +63,15 @@ public class Modelo {
         }
     }
 
+    /** Retorna a raca do modelo
+     * @return  Nome da raca */
     public String getRaca() {
         return raca;
     }
+    
+    /** Atualiza a raca do modelo 
+     *  @param raca Somento letras de a-z e espaços e '-'
+     */
     public void setRaca(String raca) {
         if(raca.matches("[\\Da-zA-Z -]"))
         {
@@ -66,11 +83,15 @@ public class Modelo {
                         "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /** Retorna a quantidade vacina */
     public int getQtdVacinas() {
         return qtdVacinas;
     }
     
+    /** Atualiza a quantidade de vacina
+     * @param qtdVacinas Nova quantidade de vacinas
+     */
     public void setQtdVacinas(int qtdVacinas) {
         if(qtdVacinas >= 0)
         {
@@ -85,7 +106,10 @@ public class Modelo {
     }
     
     
-    //Retorna a vacina da posicao indicada
+    /** Retorna a vacina da posicao indicada 
+     * @param posicao Posicao no array 
+     * @return O nome da vacina
+     */
     public String getVacina(int posicao)
     {
         if(posicao < this.qtdVacinas)
@@ -102,8 +126,12 @@ public class Modelo {
               
     }
     
-    //busca todos os modelos para a especie indicada
+    
     //<OBS> troca de retorno
+    /** Busca todos os modelos para a especie indicada 
+     *  @param e Especie do animal
+     *  @return Um arraylist com objetos modelos preenchidos
+     */
     public ArrayList<Modelo> buscarMod(String e)
     {
         ModeloDAO mBD = new ModeloDAO();
@@ -113,12 +141,12 @@ public class Modelo {
         
     }
 
-    // Salva o modelo atual
     //<OBS> Troca de parametros
+    /** Salva o modelo atual  */
     public void cadastrarMod()
     {
         ModeloDAO mBD = new ModeloDAO();
-        Modelo m = mBD.readModelo(this.especie, this.raca);
+        Modelo m = mBD.readModelo(this);
         
         //Verifica se ja existe um modelo para a especie e raca especificada
         if(m == null)
@@ -134,20 +162,30 @@ public class Modelo {
        
     }
     
-    // Exclui o modelo especificado
     //<OBS> Troca de parametros
+     /** Exclui o modelo especificado 
+     * @param e especie do animal
+     * @param r raca do animal
+     */
     public void excluirMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
         mBD.remove(e, r);
     }
 
-    //Carrega o modelo
+    
     //<OBS> trocou o retorno (void -> int)
+    /** Carrega o modelo especificado 
+     * @param e especie do animal
+     * @param r raca do animal
+     * @return retorna 1 se deu certo, 0 se deu errado
+     */
     public int importarMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
-        Modelo m = mBD.readModelo(e, r);
+        this.especie = e;
+        this.raca = r;        
+        Modelo m = mBD.readModelo(this);
         //Verifica se foi encontrado algum modelo
         if(m != null)
         {
@@ -167,7 +205,10 @@ public class Modelo {
         }
     }
 
-    //Retorna todas as vacinas separadas por ";"    
+      
+     /** retorna o vetor vacina formatados em uma string
+      *  @return Retorna todas as vacinas separadas por ";"  
+      */
     public String getVetorVacina()
     {
         String v = "";
@@ -179,7 +220,9 @@ public class Modelo {
         return v;
     }
     
-    //Adiciona toda a string no array
+    /** Aparti de uma string formatada,  preenche o vetor vacinas 
+      * @param v vacinas do animal, separando cada vacina com ';'
+      */
     public void setVetorVacina(String v)
     {
         //Apaga todos os valores do ArrayList
@@ -190,6 +233,9 @@ public class Modelo {
         this.vacinas.addAll(Arrays.asList(m));
     }
     
+    /** Adiciona uma nova vacina
+      * @param vacina nome da vacina
+      */
     public void addVacina(String vacina)
     {
         //Buscando o elemento, se n encontrar, add
@@ -209,6 +255,9 @@ public class Modelo {
 
     }
     
+    /** Delete uma nova vacina
+      * @param vacina nome da vacina
+      */
     public void delVacina(String vacina)
     {
         //Buscando o elemento, se encontrar, del

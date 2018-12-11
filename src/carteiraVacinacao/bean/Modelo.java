@@ -146,10 +146,10 @@ public class Modelo {
     public void cadastrarMod()
     {
         ModeloDAO mBD = new ModeloDAO();
-        Modelo m = mBD.readModelo(this);
+        
         
         //Verifica se ja existe um modelo para a especie e raca especificada
-        if(m == null)
+        if(!mBD.readModelo(this.especie, this.raca, this))
         {
             //Cadastrando o modelo no banco de dados
             mBD.create(this);
@@ -183,11 +183,9 @@ public class Modelo {
     public int importarMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
-        this.especie = e;
-        this.raca = r;        
-        Modelo m = mBD.readModelo(this);
+        
         //Verifica se foi encontrado algum modelo
-        if(m != null)
+        if(mBD.readModelo(e, r, this))
         {
             //Atualiza o objeto atual com os dados obtidos
             this.setEspecie(m.getEspecie());

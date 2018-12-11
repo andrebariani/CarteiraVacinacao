@@ -20,7 +20,7 @@ public class Facade {
     
     
     
-    //Métodos para a claase modelo
+    //Métodos para a classse modelo
     
     //ObS:  Troca de paramentro (especie -> e)
     //      Troca de retorno (void -> String)

@@ -909,12 +909,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                 DefaultTableModel dtm = (DefaultTableModel) tableModelo1.getModel();
                 StringTokenizer Tok = new StringTokenizer(retorno);
-                String raca;
-                
+                String r,e;
+                System.out.println(retorno);
                 while (Tok.hasMoreElements()){
-                    raca = Tok.nextToken(delimitador);
-
-                    Object[] dados = {n,especie,raca};
+                    e = Tok.nextToken(delimitador);
+                    r = Tok.nextToken(delimitador);
+                       System.out.println(e+ "" + r);
+                    Object[] dados = {n,e,r};
                     dtm.addRow(dados);
                    
                     n++;

@@ -8,6 +8,7 @@ package carteiraVacinacao.bean;
 import carteiraVacinacao.dao.ModeloDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -116,11 +117,11 @@ public class Modelo {
      *  @param e Especie do animal
      *  @return Um arraylist com objetos modelos preenchidos
      */
-    public ArrayList<Modelo> buscarMod(String e)
+    public List<Modelo> buscarMod(String e)
     {
         ModeloDAO mBD = new ModeloDAO();
        
-        ArrayList<Modelo> m = mBD.readEspecie(e);
+        List<Modelo> m = mBD.readEspecie(e);
        
         return m;    
         

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,12 +41,12 @@ public class ModeloDAO {
         }
     }
     
-    public ArrayList<Modelo> read(){
+    public List<Modelo> read(){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Modelo m = new Modelo();
-        ArrayList<Modelo> modelos = new ArrayList<>();
+        List<Modelo> modelos = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement("SELECT * FROM modelo");
@@ -71,12 +72,12 @@ public class ModeloDAO {
         }
     }
       
-    public ArrayList<Modelo> readEspecie(String especie){
+    public List<Modelo> readEspecie(String especie){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Modelo m = new Modelo();
-        ArrayList<Modelo> modelos = new ArrayList<>();
+        List<Modelo> modelos = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie = ?");
@@ -92,6 +93,8 @@ public class ModeloDAO {
                 
                 modelos.add(m);
             }
+            
+            
             return modelos;
             
         } catch (SQLException ex) {

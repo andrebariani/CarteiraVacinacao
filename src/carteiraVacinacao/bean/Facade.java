@@ -5,6 +5,7 @@
  */
 package carteiraVacinacao.bean;
 
+import carteiraVacinacao.dao.PacienteDAO;
 import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -29,6 +30,27 @@ public class Facade {
     }
     
     //Métodos para a classse carteira
+    
+    public boolean verificaModelo( long cpf, String nome ) {
+        Paciente p;
+        PacienteDAO pdao = new PacienteDAO();
+        p = pdao.readPaciente(cpf, nome);
+        
+        if(p != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void importarModelo( long cpf, String nome ) {
+        Paciente p;
+        PacienteDAO pdao = new PacienteDAO();
+        p = pdao.readPaciente(cpf, nome);
+        
+        carteira.importarModelo(modelo.getVacinas());
+    }
+    
    public void cadastrarCart( long cpf, String nome_pet ) {
         carteira.cadastrarCart(cpf, nome_pet);
     }

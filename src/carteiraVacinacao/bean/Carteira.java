@@ -42,6 +42,14 @@ public class Carteira {
    
     public Carteira() { this.dateFormat = "dd/MM/yyyy"; }
     
+    public void importarModelo(List<String> Vacinas) {
+        int i = 0;
+	while (i < Vacinas.size()) {
+            carteiraVacina.get(i).setVacina(Vacinas.get(i));
+            i++;
+	}
+    }
+    
     public void cadastrarCart( long cpf, String nome_pet ) {
         Cliente cl = new Cliente();
         Paciente p = new Paciente();
@@ -118,9 +126,12 @@ public class Carteira {
             
             strVacina += ";";
             
-            SimpleDateFormat s = new SimpleDateFormat(dateFormat);
-            strVacina += s.format(temp.getData());
-
+            if(temp.getData() != null) {
+                SimpleDateFormat s = new SimpleDateFormat(dateFormat);
+                strVacina += s.format(temp.getData());
+            } else {
+                strVacina += " ";
+            }
             strVacina += ";";
             
             if(temp.isAplicada()) {

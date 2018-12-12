@@ -5,7 +5,18 @@
  */
 package carteiraVacinacao.bean;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +35,124 @@ public class Facade {
         carteira = new Carteira();
         cliModExterno = new Cliente();
         pacModExterno = new Paciente();
+    }
+    
+    //Métodos para a classse carteira
+    public void cadastrarCart() {
+        carteira.carteiraBD.create(carteira);
+    }
+    
+    public void excluirCart(long cpf, String nome) {
+        carteira.carteiraBD.remove(cpf, nome);
+    }
+    
+    public void imprimir() throws DocumentException, FileNotFoundException {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
+ 
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        Chunk chunk = new Chunk("Hello World", font);
+ 
+        document.add(chunk);
+        document.close();
+    }
+    
+    public String getVetorVacina(){
+        String strVacina = null;
+        
+        for(CtrVacina temp : carteira.getCarteiraVacina()) {
+            strVacina += temp.getVacina();
+            
+            strVacina += ";";
+            
+            SimpleDateFormat s = new SimpleDateFormat(carteira.dateFormat);
+            strVacina += s.format(temp.getData());
+
+            strVacina += ";";
+            
+            if(temp.isAplicada()) {
+                strVacina += "T";
+            } else {
+                strVacina += "F";
+            }
+            
+            strVacina += ";";
+        }
+        
+        return strVacina;
+    }
+    
+    public void setVetorVacina(String strVacina){
+        String vVacina[] = strVacina.split(";");
+        
+        for(int i = 0 ; i < 9999 ; i+=3) {
+            CtrVacina aux = new CtrVacina();
+            
+            aux.setVacina(vVacina[i]);
+            
+            Date dataAux;
+            SimpleDateFormat sdf = new SimpleDateFormat(carteira.dateFormat);
+            
+            try {
+                dataAux = sdf.parse(vVacina[1+i]);
+            } catch(Exception e){
+                return;
+            }
+            
+            aux.setData(dataAux);
+            
+            if("T".equals(vVacina[2+i])) {
+                aux.setAplicada(true);
+            } else {
+                aux.setAplicada(false);
+            }
+            
+            carteira.getCarteiraVacina().add(aux);
+        }
+        
+    }
+    
+    public boolean aplicarVacina(String vacina) {
+        int index = carteira.getCarteiraVacina().indexOf(vacina);
+        
+        if(index == -1) {
+            carteira.getCarteiraVacina().get(index).setAplicada(true);
+            return true;
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    public boolean agendarVacina(String vacina, Date data) {
+        int index = carteira.getCarteiraVacina().indexOf(vacina);
+        
+        if(index == -1) {
+            carteira.getCarteiraVacina().get(index).setData(data);
+            return true;
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+     
+    public boolean delVacina(String vacina) {
+        int index = carteira.getCarteiraVacina().indexOf(vacina);
+        
+        if(carteira.getCarteiraVacina().remove(carteira.getCarteiraVacina().get(index))) {
+            return true;
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
+    public void buscarCart(int id_cli, String nome) {
+        carteira.carteiraBD.read( id_cli, nome, carteira );
     }
     
     //Métodos para a classse modelo

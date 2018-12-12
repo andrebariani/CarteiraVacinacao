@@ -30,9 +30,9 @@ public class Carteira {
     private Paciente pacienteModExterno;
     private ArrayList<CtrVacina> carteiraVacina;
     
-    private final String dateFormat;
+    public String dateFormat;
     
-    private CarteiraDAO carteiraBD;
+    public CarteiraDAO carteiraBD;
    
     public Carteira() { this.dateFormat = "dd/MM/yyyy"; }
     
@@ -175,10 +175,6 @@ public class Carteira {
 
     public void setPacienteModExterno(Paciente pacienteModExterno) {
         this.pacienteModExterno = pacienteModExterno;
-    }
-    
-    public ArrayList<CtrVacina> getALVacina() {
-        return this.carteiraVacina;
     }
     
     public ArrayList<CtrVacina> getCarteiraVacina() {

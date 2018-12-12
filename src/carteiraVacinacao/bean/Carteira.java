@@ -42,15 +42,13 @@ public class Carteira {
    
     public Carteira() { this.dateFormat = "dd/MM/yyyy"; }
     
-    public void cadastrarCart( long cpf, String nome_pet, String especie, String raca ) {
+    public void cadastrarCart( long cpf, String nome_pet ) {
         Cliente cl = new Cliente();
         Paciente p = new Paciente();
         Carteira ca = new Carteira();
         
         cl.setCpf(cpf);
         p.setNome(nome_pet);
-        p.setEspecie(especie);
-        p.setRaca(raca);
         
         ca.setClienteModExterno(cl);
         ca.setPacienteModExterno(p);

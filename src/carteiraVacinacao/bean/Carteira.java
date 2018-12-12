@@ -10,8 +10,13 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -49,10 +54,49 @@ public class Carteira {
         PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
  
         document.open();
-        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Chunk chunk = new Chunk("Hello World", font);
+        Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+        
+        String header = clienteModExterno.getNome() + "\n";
+        header += clienteModExterno.getCpf() + "\n";
+        
+        header += "\n" + pacienteModExterno.getNome()+ "\n";
+        header += pacienteModExterno.getEspecie() + "\n";
+        header += pacienteModExterno.getRaca() + "\n";
+        
+        Chunk chunk = new Chunk(header, smallfont);
  
         document.add(chunk);
+        
+        Rectangle small = new Rectangle(290,100);
+        PdfPTable table = new PdfPTable(3);
+        
+        table.setTotalWidth(new float[]{ 160, 120 });
+        table.setLockedWidth(true);
+        
+        // first row
+        PdfPCell cell = new PdfPCell(new Phrase("Some text here"));
+        cell.setFixedHeight(30);
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setColspan(2);
+        table.addCell(cell);
+        
+        // second row
+        cell = new PdfPCell(new Phrase("Some more text", smallfont));
+        cell.setFixedHeight(30);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBorder(Rectangle.NO_BORDER);
+        table.addCell(cell);
+        
+        table.addCell(cell);
+        // third row
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("and something else here", smallfont));
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        table.addCell(cell);
+
+        document.add(table);
+        
         document.close();
     }
     

@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author leona
@@ -25,6 +27,8 @@ public class InserirVacina extends javax.swing.JDialog {
     public String getVacina(){
         return nome;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +48,7 @@ public class InserirVacina extends javax.swing.JDialog {
         botaoCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -53,10 +58,25 @@ public class InserirVacina extends javax.swing.JDialog {
         labelVacina.setText("Digite o nome da vacina desejada no campo abaixo:");
 
         botaoSalvar.setText("Salvar");
+        botaoSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoSalvarMouseClicked(evt);
+            }
+        });
 
         botaoLimpar.setText("Limpar");
+        botaoLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoLimparMouseClicked(evt);
+            }
+        });
 
         botaoCancelar.setText("Cancelar");
+        botaoCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -122,8 +142,33 @@ public class InserirVacina extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botaoSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoSalvarMouseClicked
+        if(nomeVacina.getText().length() > 0){
+            nome = nomeVacina.getText();
+            clearFields();
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Campo vazio, preencha!");
+        }
+    }//GEN-LAST:event_botaoSalvarMouseClicked
+
+    private void botaoLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLimparMouseClicked
+        clearFields();
+    }//GEN-LAST:event_botaoLimparMouseClicked
+
+    private void botaoCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCancelarMouseClicked
+        clearFields();
+        nome = "";
+        this.dispose();
+    }//GEN-LAST:event_botaoCancelarMouseClicked
+
+    private void clearFields(){
+        nomeVacina.setText("");
+    }
     /**
      * @param args the command line arguments
      */

@@ -188,13 +188,12 @@ public class Modelo {
         //Verifica se foi encontrado algum modelo
         if(mBD.readModelo(e, r, this))
         {
+            // Modelo encotrado
             return 1;
         }
         else
         {
-            //Mensagem avisando que o modelo n foi encontrado
-            JOptionPane.showMessageDialog(null, "Modelo não encontrada",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+            // Modelo nao encontrado
             return 0;
         }
     }

@@ -22,8 +22,11 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="imprimir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="  Imprimir  "/>
+            <Property name="text" type="java.lang.String" value="  Gerar carteira  "/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imprimirMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="sair">
           <Properties>

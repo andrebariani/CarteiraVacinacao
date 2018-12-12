@@ -5,9 +5,13 @@
  */
 package view;
 import carteiraVacinacao.bean.Facade;
+import com.itextpdf.text.DocumentException;
 import java.awt.CardLayout;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -726,7 +730,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(modeloCarteira);
 
-        imprimir.setText("  Imprimir  ");
+        imprimir.setText("  Gerar carteira  ");
+        imprimir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imprimirMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(imprimir);
 
         sair.setText("  Sair  ");
@@ -812,7 +821,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         botaoInferiorModeloFinal(false);
     }//GEN-LAST:event_sairMouseClicked
 
-    @SuppressWarnings("empty-statement")
+    //@SuppressWarnings("empty-statement")
     private void botaoBuscarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarCarteiraMouseClicked
         // Limpa todas as tabelas
         clearTable();
@@ -1023,7 +1032,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         int retorno = fachada.importarMod(e, r);
         if(retorno == 0){
             clearFields();
-            JOptionPane.showMessageDialog(this,"Modelo foi cadastrado, insira vacinas");
+            DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
+            
+            int i = 0;
+            while(i < dtm.getRowCount()){
+                String vacina = (String) tableModelo3.getValueAt(i,1);
+                fachada.addVacina(e,r,vacina);
+                i++;
+            }
+            fachada.cadastrarMod(e, r);
+            JOptionPane.showMessageDialog(this,"Modelo cadastrado com sucesso");
             botaoInferiorCadastrarModelo(true);
         }
         else{
@@ -1034,8 +1052,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void botaoInserirVacinaModeloCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoInserirVacinaModeloCadastrarMouseClicked
         InserirVacina inserir = new InserirVacina(this,true);
         inserir.setVisible(true);
-        JOptionPane.showMessageDialog(this,inserir.getVacina());
+        String retorno = inserir.getVacina();
+        if(!retorno.equals("")){
+            DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
+            int n = dtm.getRowCount();
+            Object[] dados = {n+1,retorno};
+            dtm.addRow(dados);
+        }
     }//GEN-LAST:event_botaoInserirVacinaModeloCadastrarMouseClicked
+
+    private void imprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imprimirMouseClicked
+        try {
+            fachada.imprimir();
+        } catch (DocumentException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_imprimirMouseClicked
 
     private void cadatrarModelo(){
         
@@ -1071,6 +1105,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         while(dtm.getRowCount() != 0){
             dtm.removeRow(0);   
         }
+        
+        dtm = (DefaultTableModel) tableModelo3.getModel();
+        while(dtm.getRowCount() != 0){
+            dtm.removeRow(0);   
+        }
+        
     }
     
     private void botaoInferiorCarteira(boolean a){

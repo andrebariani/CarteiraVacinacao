@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,14 +47,15 @@ public class CtrVacinaDAO {
         }
     }
     
-    public ArrayList<CtrVacina> read(long cpf, String nomePaciente){
+    public List<CtrVacina> read(long cpf, String nomePaciente){
         Connection con = Conexao.getConnection();
         ArrayList<CtrVacina> controle = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        CtrVacina ctr = new CtrVacina();
+        CtrVacina ctr = null;
         
         try {
+            
             stmt = con.prepareStatement("SELECT * FROM ctrVacina WHERE cpf_dono = ? and nome_paciente = ?");
             stmt.setLong(1, cpf);
             stmt.setString(2, nomePaciente);
@@ -61,6 +63,7 @@ public class CtrVacinaDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
+               ctr = new CtrVacina();
                ctr.setVacina(rs.getString("nome_vacina"));
                ctr.setData(rs.getDate("data_vacina"));
                ctr.setAplicada(rs.getBoolean("aplicada"));

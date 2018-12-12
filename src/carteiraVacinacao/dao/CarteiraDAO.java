@@ -28,11 +28,10 @@ public class CarteiraDAO {
         PreparedStatement stmt = null;
         
         try {
-        stmt = con.prepareStatement("INSERT INTO Cliente VALUES (?, ?, ?, ?);");
+        stmt = con.prepareStatement("INSERT INTO Cliente VALUES (?, ?, ?);");
         stmt.setLong(1, c.getClienteModExterno().getCpf());
-        stmt.setInt(2, c.getPacienteModExterno().getId());
+        stmt.setString(2, c.getPacienteModExterno().getNome());
         stmt.setInt(3, c.getQtdCarteiras());
-        stmt.setString(4, c.getVetorVacina());
         return true;
         
         } catch (SQLException ex) {

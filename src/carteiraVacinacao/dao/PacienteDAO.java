@@ -33,7 +33,6 @@ public class PacienteDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                p.setId(rs.getInt("id"));
                 p.setNome(rs.getString("nome"));
                 p.setEspecie(rs.getString("especie"));
                 p.setRaca(rs.getString("raca"));
@@ -64,7 +63,6 @@ public class PacienteDAO {
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                p.setId(rs.getInt("id"));
                 p.setNome(rs.getString("nome"));
                 p.setEspecie(rs.getString("especie"));
                 p.setRaca(rs.getString("raca"));

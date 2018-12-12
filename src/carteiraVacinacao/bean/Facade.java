@@ -92,11 +92,11 @@ public class Facade {
             retorno += m.get(i).getEspecie();
             retorno += ";";
             retorno += m.get(i).getRaca();
+            retorno += ";";
         }
-        //Adicionando o ponto e virgula final
-        retorno += ";";
         
-        return retorno;
+        System.out.println(retorno); 
+       return retorno;
     }
     
      /** Cadastra um novo modelo no banco de dados

@@ -119,12 +119,10 @@ public class Modelo {
      */
     public List<Modelo> buscarMod(String e)
     {
-        System.out.println("BuscarMod " + e);
         ModeloDAO mBD = new ModeloDAO();
        
         List<Modelo> m = mBD.readEspecie(e);
         
-        System.out.println("BuscarMod " + e);
         for (Modelo model : m){
             System.out.println(model.getRaca());
         }

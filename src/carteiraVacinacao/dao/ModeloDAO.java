@@ -92,7 +92,6 @@ public class ModeloDAO {
                 
                 modelos.add(m);
             }
-            
             return modelos;
             
         } catch (SQLException ex) {

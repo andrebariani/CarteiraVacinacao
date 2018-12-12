@@ -22,6 +22,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -30,8 +31,8 @@ import javax.swing.JOptionPane;
  *
  * @author André
  */
-public class Carteira {   
-    private int qtdCarteiras;
+public class Carteira {  
+    private int qtdVacinas;
     private Cliente clienteModExterno;
     private Paciente pacienteModExterno;
     private List<CtrVacina> carteiraVacina;
@@ -40,7 +41,14 @@ public class Carteira {
     
     public CarteiraDAO carteiraBD;
    
-    public Carteira() { this.dateFormat = "dd/MM/yyyy"; }
+    public Carteira() { 
+        this.dateFormat = "dd/MM/yyyy"; 
+        qtdVacinas = 0;
+        clienteModExterno = new Cliente();
+        pacienteModExterno = new Paciente();
+        carteiraVacina = new ArrayList<>();
+        carteiraBD = new CarteiraDAO();
+    }
     
     public void importarModelo(List<String> Vacinas) {
         int i = 0;
@@ -215,18 +223,15 @@ public class Carteira {
     }
     
     public boolean buscarCart(long id_cli, String nome) {
-        if(this.carteiraBD.read( id_cli, nome, this ))
-            return true;
-        else
-            return false;
+        return carteiraBD.read( id_cli, nome, this );
     }
     
-    public int getQtdCarteiras() {
-        return qtdCarteiras;
+    public int getQtdVacinas() {
+        return qtdVacinas;
     }
 
-    public void setQtdCarteiras(int qtdCarteiras) {
-        this.qtdCarteiras = qtdCarteiras;
+    public void setQtdVacinas(int qtd) {
+        this.qtdVacinas = qtd;
     }
 
     public Cliente getClienteModExterno() {

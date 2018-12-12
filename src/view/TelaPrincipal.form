@@ -229,16 +229,25 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Remover vacina"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoRemoverVacinaCarteiraMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoAgendarVacinaCarteira">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Agendar vacina"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoAgendarVacinaCarteiraMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoInserirVacinaCarteira">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Inserir vacina"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoInserirVacinaCarteiraMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoAplicarVacinaCarteira">
                   <Properties>
@@ -284,9 +293,9 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="botaoLimparCarteira" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                                       <Component id="botaoBuscarCarteira" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1068,6 +1077,246 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="fundoModelo2">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/images/fundo.jpg"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="0" y="0" width="1330" height="800"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="tela5">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="0" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="tela5"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="painelModelo3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="30" y="30" width="1260" height="730"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                                  <Component id="painelBorda5" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="491" max="32767" attributes="0"/>
+                                  <Component id="botaoInserirVacinaModeloCadastrar1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="botaoRemoverVacinaModeloCadastrar1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="botaoCadastrarModeloCadastrar1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="86" pref="86" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="painelBorda5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="349" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="botaoRemoverVacinaModeloCadastrar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoCadastrarModeloCadastrar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoInserirVacinaModeloCadastrar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="botaoRemoverVacinaModeloCadastrar1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remover vacina"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="botaoInserirVacinaModeloCadastrar1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Inserir vacina"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoInserirVacinaModeloCadastrar1MouseClicked"/>
+                  </Events>
+                </Component>
+                <Container class="javax.swing.JPanel" name="painelBorda5">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
+                        <CompoundBorder>
+                          <Border PropertyName="inside" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Cadastrar carteira">
+                              <Font PropertyName="font" name="Tahoma" size="18" style="0"/>
+                            </TitledBorder>
+                          </Border>
+                        </CompoundBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="textCpfCarteiraCadastrar" max="32767" attributes="0"/>
+                                      <Component id="textEspecieCarteiraCadastrar" alignment="0" pref="195" max="32767" attributes="0"/>
+                                      <Component id="especiePetCarteiraCadastrar" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="cpfClienteCarteiraCadastrar" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nomeClienteCarteiraCadastrar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="textNomeCarteiraCadastrar" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="racaPetCarteiraCadastrar" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="textRacaCarteiraCadastrar" alignment="0" pref="195" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="nomePetCarteiraCadastrar" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textNomePCarteiraCadastrar" min="-2" pref="195" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="nomeClienteCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cpfClienteCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="textCpfCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textNomeCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="especiePetCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="racaPetCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="textEspecieCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textRacaCarteiraCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                      <Component id="nomePetCarteiraCadastrar" min="-2" pref="16" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="textNomePCarteiraCadastrar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="cpfClienteCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="CPF do Cliente:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="textCpfCarteiraCadastrar">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="nomeClienteCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Nome do Cliente:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="textNomeCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="jTextField3"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="especiePetCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Esp&#xe9;cie do Pet:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="textEspecieCarteiraCadastrar">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="racaPetCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Ra&#xe7;a do Pet:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="textRacaCarteiraCadastrar">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="nomePetCarteiraCadastrar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Nome do Pet:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="textNomePCarteiraCadastrar">
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JButton" name="botaoCadastrarModeloCadastrar1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCadastrarModeloCadastrar1MouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="fundoModelo3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/fundo.jpg"/>

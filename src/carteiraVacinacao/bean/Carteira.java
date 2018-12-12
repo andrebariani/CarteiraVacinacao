@@ -56,17 +56,25 @@ public class Carteira {
         document.open();
         Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
         
+        /*
         String header = clienteModExterno.getNome() + "\n";
         header += clienteModExterno.getCpf() + "\n";
         
         header += "\n" + pacienteModExterno.getNome()+ "\n";
         header += pacienteModExterno.getEspecie() + "\n";
         header += pacienteModExterno.getRaca() + "\n";
+        */
         
+        String header = "Horacio Ferreira DeLucca" + "\n";
+        header += "43387919205" + "\n";
+        
+        header += "\n" + "Rex" + "\n";
+        header += "Canina" + "\n";
+        header += "Dachshund" + "\n";
         Chunk chunk = new Chunk(header, smallfont);
  
         document.add(chunk);
-        
+        /*
         Rectangle small = new Rectangle(290,100);
         PdfPTable table = new PdfPTable(3);
         
@@ -96,7 +104,7 @@ public class Carteira {
         table.addCell(cell);
 
         document.add(table);
-        
+        */
         document.close();
     }
     

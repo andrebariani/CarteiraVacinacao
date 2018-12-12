@@ -195,8 +195,10 @@ public class Facade {
      */
     public void cadastrarMod(String e, String r)
     {
-        if(this.importarMod(e, r) == 1)
+        if(this.importarMod(e, r) == 0)
         {
+            modelo.setEspecie(e);
+            modelo.setRaca(r);
             modelo.cadastrarMod();
         }
     }
@@ -232,10 +234,9 @@ public class Facade {
      */
     public void addVacina(String e, String r, String vacina)
     {
-        if(this.importarMod(e, r) == 1)
-        {
+        
             modelo.addVacina(vacina);
-        }
+        
     }    
      /** Remove a vacina no modelo especificado
      * @param e Especie do animal

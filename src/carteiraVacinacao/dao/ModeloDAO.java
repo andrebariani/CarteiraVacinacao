@@ -31,6 +31,8 @@ public class ModeloDAO {
         stmt.setInt(3, m.getQtdVacinas());
         stmt.setString(4, m.getVetorVacina());
         
+        stmt.executeUpdate();
+        
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
         }finally{

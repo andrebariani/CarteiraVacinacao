@@ -52,15 +52,7 @@ public class Modelo {
       *  @param especie Somento letras de a-z e espaços e '-'
       */
     public void setEspecie(String especie) {
-        if(especie.matches("[\\Da-zA-Z -]"))
-        {
             this.especie = especie;
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Insira apenas letras e espaços",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     /** Retorna a raca do modelo
@@ -73,15 +65,7 @@ public class Modelo {
      *  @param raca Somento letras de a-z e espaços e '-'
      */
     public void setRaca(String raca) {
-        if(raca.matches("[\\Da-zA-Z -]"))
-        {
             this.raca = raca;
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Insira apenas letras e espaços",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
     
     /** Retorna a quantidade vacina */

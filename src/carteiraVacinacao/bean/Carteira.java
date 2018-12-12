@@ -193,8 +193,11 @@ public class Carteira {
         }
     }
     
-    public void buscarCart(long id_cli, String nome) {
-        this.carteiraBD.read( id_cli, nome, this );
+    public boolean buscarCart(long id_cli, String nome) {
+        if(this.carteiraBD.read( id_cli, nome, this ))
+            return true;
+        else
+            return false;
     }
     
     public int getQtdCarteiras() {

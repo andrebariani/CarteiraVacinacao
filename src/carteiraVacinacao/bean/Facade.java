@@ -195,8 +195,11 @@ public class Facade {
         }
     }
     
-    public void buscarCart(long id_cli, String nome) {
-        carteira.carteiraBD.read( id_cli, nome, carteira );
+    public boolean buscarCart(long id_cli, String nome) {
+        if(carteira.carteiraBD.read( id_cli, nome, carteira ))
+            return true;
+        else
+            return false;
     }
     
     //Métodos para a classse modelo

@@ -21,8 +21,7 @@ public class Modelo {
     private String especie;
     private String raca;
     private int qtdVacinas;
-    private final ArrayList<String> vacinas;
-
+    private final List<String> vacinas;
     
     /** Instancia um modelo */
     public Modelo()
@@ -256,6 +255,10 @@ public class Modelo {
             JOptionPane.showMessageDialog(null, "Vacina não encontrada",
                         "Erro", JOptionPane.ERROR_MESSAGE);
 	}
+    }
+    
+    public List<String> getVacinas() {
+        return vacinas;
     }
     
 }

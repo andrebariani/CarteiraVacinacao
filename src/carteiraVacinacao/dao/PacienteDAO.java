@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class PacienteDAO {
     public ArrayList<Paciente> readPaciente(long cpfDono){
-        Paciente p = new Paciente();
+        Paciente p = null;
         ArrayList<Paciente> pacientes = new ArrayList<>() ;
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -33,6 +33,7 @@ public class PacienteDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
+                new Paciente();
                 p.setNome(rs.getString("nome"));
                 p.setEspecie(rs.getString("especie"));
                 p.setRaca(rs.getString("raca"));
@@ -68,17 +69,16 @@ public class PacienteDAO {
                 p.setRaca(rs.getString("raca"));
                 p.setCpfDono(rs.getLong("cpf_dono"));
                
+                return p;
             }else{
-                JOptionPane.showMessageDialog(null, "id não cadastrado");
-                Conexao.closeConnection(con, stmt, rs);
                 return null;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha na leitura");
             Conexao.closeConnection(con, stmt, rs);
             return null;
+        }finally{
+            Conexao.closeConnection(con, stmt, rs);
         }
-        Conexao.closeConnection(con, stmt, rs);
-        return p;
     }
 }

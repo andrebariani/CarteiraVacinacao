@@ -45,7 +45,7 @@ public class ModeloDAO {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Modelo m = new Modelo();
+        Modelo m = null;
         List<Modelo> modelos = new ArrayList<>();
         
         try {
@@ -54,6 +54,7 @@ public class ModeloDAO {
             rs = stmt.executeQuery();
         
             while(rs.next()){
+                m = new Modelo();
                 m.setEspecie(rs.getString("especie"));
                 m.setRaca(rs.getString("Raca"));
                 m.setQtdVacinas(rs.getInt("qtd"));
@@ -76,32 +77,32 @@ public class ModeloDAO {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Modelo m = new Modelo();
-        List<Modelo> modelos = new ArrayList<>();
+        Modelo m = null;
+        List<Modelo> modelos = new ArrayList();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie = ?");
+            stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie LIKE ?");
             stmt.setString(1, especie);
             
             rs = stmt.executeQuery();
-            
+            int i = 0;
             while(rs.next()){
+                m = new Modelo();
                 m.setEspecie(rs.getString("especie"));
-                m.setRaca(rs.getString("Raca"));
+                m.setRaca(rs.getString("raca"));
                 m.setQtdVacinas(rs.getInt("qtd"));
                 m.setVetorVacina(rs.getString("vacinas"));
+               
                 
                 modelos.add(m);
             }
-            
-            
             return modelos;
             
         } catch (SQLException ex) {
              System.out.println(ex.getMessage());
              return null;
         }finally{
-            Conexao.closeConnection(con, stmt);
+            Conexao.closeConnection(con, stmt, rs);
         }
     }
     

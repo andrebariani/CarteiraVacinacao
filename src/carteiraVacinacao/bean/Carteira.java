@@ -13,6 +13,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -41,8 +42,20 @@ public class Carteira {
    
     public Carteira() { this.dateFormat = "dd/MM/yyyy"; }
     
-    public void cadastrarCart() {
-        this.carteiraBD.create(this);
+    public void cadastrarCart( long cpf, String nome_pet, String especie, String raca ) {
+        Cliente cl = new Cliente();
+        Paciente p = new Paciente();
+        Carteira ca = new Carteira();
+        
+        cl.setCpf(cpf);
+        p.setNome(nome_pet);
+        p.setEspecie(especie);
+        p.setRaca(raca);
+        
+        ca.setClienteModExterno(cl);
+        ca.setPacienteModExterno(p);
+        
+        this.carteiraBD.create(ca);
     }
     
     public void excluirCart(long cpf, String nome) {
@@ -64,47 +77,38 @@ public class Carteira {
         header += pacienteModExterno.getEspecie() + "\n";
         header += pacienteModExterno.getRaca() + "\n";
         */
+        Paragraph para = new Paragraph();
+        para.add(new Chunk("Horacio Ferreira DeLucca" + "\n"));
+        para.add(new Chunk("27329105981") + "\n");
+        para.add(new Chunk("Rex") + "\n");
+        para.add(new Chunk("Canino") + "\n");
+        para.add(new Chunk("Golden Retriever") + "\n");
+        //Chunk chunk = new Chunk(header, smallfont);
         
-        String header = "Horacio Ferreira DeLucca" + "\n";
-        header += "43387919205" + "\n";
-        
-        header += "\n" + "Rex" + "\n";
-        header += "Canina" + "\n";
-        header += "Dachshund" + "\n";
-        Chunk chunk = new Chunk(header, smallfont);
- 
-        document.add(chunk);
-        /*
+        document.add(para);
         Rectangle small = new Rectangle(290,100);
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(2);
         
         table.setTotalWidth(new float[]{ 160, 120 });
         table.setLockedWidth(true);
         
         // first row
-        PdfPCell cell = new PdfPCell(new Phrase("Some text here"));
+        PdfPCell cell = new PdfPCell(new Phrase("Vacina tal"));
         cell.setFixedHeight(30);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setColspan(2);
         table.addCell(cell);
         
         // second row
-        cell = new PdfPCell(new Phrase("Some more text", smallfont));
+        cell = new PdfPCell(new Phrase("Vacina tol"));
         cell.setFixedHeight(30);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setBorder(Rectangle.NO_BORDER);
         table.addCell(cell);
         
         table.addCell(cell);
-        // third row
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("and something else here", smallfont));
-        cell.setBorder(Rectangle.NO_BORDER);
-        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        table.addCell(cell);
-
+        
         document.add(table);
-        */
         document.close();
     }
     

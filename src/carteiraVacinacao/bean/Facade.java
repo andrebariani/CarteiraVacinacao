@@ -29,8 +29,8 @@ public class Facade {
     }
     
     //Métodos para a classse carteira
-    public void cadastrarCart() {
-        carteira.carteiraBD.create(carteira);
+   public void cadastrarCart( long cpf, String nome_pet, String especie, String raca ) {
+        carteira.cadastrarCart(cpf, nome_pet, especie, raca);
     }
     
     public void excluirCart(long cpf, String nome) {

@@ -30,7 +30,7 @@ public class Conexao {
         if(instanceConnection == null)
             try {
                 Class.forName(DRIVER);
-                instanceConnection = DriverManager.getConnection(URL, USER, PASS);
+                instanceConnection = (Connection) DriverManager.getConnection(URL, USER, PASS);
             } catch (ClassNotFoundException | SQLException ex) {
                throw new RuntimeException("Erro na conexão: " , ex);
             }

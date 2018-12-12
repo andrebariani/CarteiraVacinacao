@@ -79,6 +79,7 @@ public class ModeloDAO {
         try {
             stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie = ?");
             stmt.setString(1, especie);
+            rs = stmt.executeQuery();
             
             while(rs.next()){
                 m.setEspecie(rs.getString("especie"));

@@ -888,18 +888,20 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="botaoRemoverVacinaModeloCadastrar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="botaoInserirVacinaModeloCadastrar" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="painelBorda4" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jScrollPane5" max="32767" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="botaoInserirVacinaModeloCadastrar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="botaoRemoverVacinaModeloCadastrar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="botaoCadastrarModeloCadastrar" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="86" pref="86" max="-2" attributes="0"/>
@@ -911,12 +913,13 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="painelBorda4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" pref="423" max="-2" attributes="0"/>
-                          <EmptySpace pref="55" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="botaoInserirVacinaModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="botaoRemoverVacinaModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoCadastrarModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoInserirVacinaModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       </Group>
@@ -980,6 +983,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Inserir vacina"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoInserirVacinaModeloCadastrarMouseClicked"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="painelBorda4">
                   <Properties>
@@ -1005,25 +1011,15 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="especiePetModeloCadastrar" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                          <Component id="textEspecieModeloCadastrar" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="racaPetModeloCadastrar" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="textRacaModeloCadastrar" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="547" max="-2" attributes="0"/>
-                                      <Component id="botaoLimparModeloCadastrar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="botaoCadastrarModeloCadastrar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="especiePetModeloCadastrar" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="textEspecieModeloCadastrar" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="265" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="racaPetModeloCadastrar" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="textRacaModeloCadastrar" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="572" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1039,15 +1035,7 @@
                                   <Component id="textEspecieModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="textRacaModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="botaoLimparModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="botaoCadastrarModeloCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1070,24 +1058,16 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="textRacaModeloCadastrar">
                     </Component>
-                    <Component class="javax.swing.JButton" name="botaoCadastrarModeloCadastrar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Cadastrar"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCadastrarModeloCadastrarMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="botaoLimparModeloCadastrar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpar"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoLimparModeloCadastrarMouseClicked"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="botaoCadastrarModeloCadastrar">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCadastrarModeloCadastrarMouseClicked"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="fundoModelo2">

@@ -135,8 +135,9 @@ public class Modelo {
     public ArrayList<Modelo> buscarMod(String e)
     {
         ModeloDAO mBD = new ModeloDAO();
+       
         ArrayList<Modelo> m = mBD.readEspecie(e);
-        
+       
         return m;    
         
     }

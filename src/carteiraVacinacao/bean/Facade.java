@@ -6,6 +6,7 @@
 package carteiraVacinacao.bean;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,12 @@ public class Facade {
     private Cliente cliModExterno;
     private Paciente pacModExterno;
     
-    
+    public Facade(){
+        modelo = new Modelo();
+        carteira = new Carteira();
+        cliModExterno = new Cliente();
+        pacModExterno = new Paciente();
+    }
     
     //Métodos para a classse modelo
     
@@ -33,6 +39,7 @@ public class Facade {
      */
     public String buscarMod(String e)
     {
+        
         ArrayList<Modelo> m = modelo.buscarMod(e);   
         String retorno = "";
    

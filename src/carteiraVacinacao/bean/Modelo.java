@@ -155,11 +155,12 @@ public class Modelo {
      /** Exclui o modelo especificado 
      * @param e especie do animal
      * @param r raca do animal
+     * @return true se conseguir excluir ou false se nao conseguir excluir
      */
-    public void excluirMod(String e, String r)
+    public boolean excluirMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
-        mBD.remove(e, r);
+        return mBD.remove(e, r);
     }
 
     
@@ -216,22 +217,27 @@ public class Modelo {
     
     /** Adiciona uma nova vacina
       * @param vacina nome da vacina
+     * @return true se conseguir adicionar a vacina, false se nao conseguir
       */
-    public void addVacina(String vacina)
+    public boolean addVacina(String vacina)
     {
         //Buscando o elemento, se n encontrar, add
         int search = this.vacinas.indexOf(vacina);
+        
         //Se nao encontrou nenhuma vacina, adiciona
         if(search == -1)
         {
             this.vacinas.add(vacina);
             this.qtdVacinas++;
+            ModeloDAO mBD = new ModeloDAO();
+            
+            return mBD.update(this);
         }
         else
         {
-            //Mensagem avisando que a vacina ja foi adicionada
-            JOptionPane.showMessageDialog(null, "Vacina ja adicionada",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            //Vacina ja foi adicionada
+            return false;
         }
 
     }
@@ -239,21 +245,24 @@ public class Modelo {
     /** Delete uma nova vacina
       * @param vacina nome da vacina
       */
-    public void delVacina(String vacina)
+    public boolean delVacina(String vacina)
     {
         //Buscando o elemento, se encontrar, del
         int search = this.vacinas.indexOf(vacina);
+        
         //Se encontrou a vacina, remove
         if(search != -1)
         {
             this.vacinas.remove(search);
             this.qtdVacinas--;
+            ModeloDAO mBD = new ModeloDAO();
+            
+            return mBD.update(this);
         }
         else
         {
-            //Mensagem avisando que a vacina nao foi encontrada 
-            JOptionPane.showMessageDialog(null, "Vacina não encontrada",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+            //Vacina nao foi encontrada 
+            return false;
 	}
     }
     

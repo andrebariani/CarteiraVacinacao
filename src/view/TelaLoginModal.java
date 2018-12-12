@@ -129,7 +129,7 @@ public class TelaLoginModal extends javax.swing.JDialog {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(txtLogin.getText().equals("Admin") && txtSenha.getText().equals("Admin") ){
+        if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin") ){
             this.dispose();
         }
         else{

@@ -158,7 +158,7 @@ public class ModeloDAO {
         }
     }
     
-    public void update(Modelo m){
+    public boolean update(Modelo m){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         
@@ -170,9 +170,9 @@ public class ModeloDAO {
         stmt.setString(4, m.getRaca());
         
         stmt.executeUpdate();
-        
+        return true;
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao atualizar Modelo");
+            return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }

@@ -137,14 +137,16 @@ public class Facade {
     
      /** Remove o modelo especificado
      *   @param e Especie do animal
-     *   s@param r Raca do animal 
+     *   @param r Raca do animal 
+     *   @return  true se conseguir excluir ou false se nao conseguir excluir
      */
-    public void excluirMod(String e, String r)
+    public boolean excluirMod(String e, String r)
     {
         if(this.importarMod(e, r) == 1)
         {
-            modelo.excluirMod(e, r);
+            return modelo.excluirMod(e, r);
         }
+        return false;
     }
     
     /** Obtem o as vacinas do modelo especificado, e preenche 
@@ -163,24 +165,44 @@ public class Facade {
      * @param r Raca do animal
      * @param vacina Nome da vacina, uma mensagem de erro aparece
      *          ao tentar adicionar uma vacina ja existente
+     * @return 
      */
-    public void addVacina(String e, String r, String vacina)
+    public boolean addVacina(String e, String r, String vacina)
     {
-        
-            modelo.addVacina(vacina);
+            if(modelo.importarMod(e, r) == 1){
+                return modelo.addVacina(vacina);
+            }
+            else{
+                return false;
+            }
         
     }    
+    
+    
      /** Remove a vacina no modelo especificado
      * @param e Especie do animal
      * @param r Raca do animal
      * @param vacina Nome da vacina, uma mensagem de erro aparece
      *          ao tentar remover uma vacina ja que nao existe no modelo
      */  
-    public void delVacina(String e, String r, String vacina)
+    public boolean delVacina(String e, String r, String vacina)
     {
-        if(this.importarMod(e, r) == 1)
+        if(modelo.importarMod(e, r) == 1)
         {
-            modelo.delVacina(vacina);
+            return modelo.delVacina(vacina);
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public String getVetorVacina(String e, String r){
+        if(modelo.importarMod(e, r) == 1)
+        {
+            return modelo.getVetorVacina();
+        }
+        else{
+            return "";
         }
     }
     

@@ -16,7 +16,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -28,7 +28,7 @@ public class Carteira {
     private int qtdCarteiras;
     private Cliente clienteModExterno;
     private Paciente pacienteModExterno;
-    private ArrayList<CtrVacina> carteiraVacina;
+    private List<CtrVacina> carteiraVacina;
     
     public String dateFormat;
     
@@ -177,11 +177,11 @@ public class Carteira {
         this.pacienteModExterno = pacienteModExterno;
     }
     
-    public ArrayList<CtrVacina> getCarteiraVacina() {
+    public List<CtrVacina> getCarteiraVacina() {
         return carteiraVacina;
     }
 
-    public void setCarteiraVacina(ArrayList<CtrVacina> carteiraVacina) {
+    public void setCarteiraVacina(List<CtrVacina> carteiraVacina) {
         this.carteiraVacina = carteiraVacina;
     }
 }

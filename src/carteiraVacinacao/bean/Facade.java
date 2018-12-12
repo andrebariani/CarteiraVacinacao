@@ -15,7 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -169,7 +169,7 @@ public class Facade {
     public String buscarMod(String e)
     {
         
-        ArrayList<Modelo> m = modelo.buscarMod(e);   
+        List<Modelo> m = modelo.buscarMod(e);   
         String retorno = "";
    
         //Verifica se o campo esta vazio

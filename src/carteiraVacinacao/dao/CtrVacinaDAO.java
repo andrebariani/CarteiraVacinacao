@@ -77,4 +77,27 @@ public class CtrVacinaDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+    
+    public boolean update(CtrVacina ctr, long cpfDono, String nomePaciente){
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("UPDATE ctrvacina SET data_vacina = ?, aplicada = ? WHERE cpf_dono = ? AND nome_paciente = ? AND nome_vacina = ?");
+            stmt.setLong(1, cpfDono);
+            stmt.setString(2, nomePaciente);
+            stmt.setString(3, ctr.getVacina());
+        
+            stmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Vacina atualizada com sucesso");
+            return true;
+        
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Falha ao atualizar Vacina");
+             return false;
+        }finally{
+            Conexao.closeConnection(con, stmt);
+        }
+    }
 }

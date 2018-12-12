@@ -188,11 +188,6 @@ public class Modelo {
         //Verifica se foi encontrado algum modelo
         if(mBD.readModelo(e, r, this))
         {
-            //Atualiza o objeto atual com os dados obtidos
-            this.setEspecie(m.getEspecie());
-            this.setRaca(m.getRaca());
-            this.setQtdVacinas(m.getQtdVacinas());
-            this.setVetorVacina(m.getVetorVacina());
             return 1;
         }
         else

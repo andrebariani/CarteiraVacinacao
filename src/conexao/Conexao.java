@@ -27,14 +27,12 @@ public class Conexao {
     private static Connection instanceConnection;
     
     public static Connection getConnection(){
-        if(instanceConnection == null)
-            try {
-                Class.forName(DRIVER);
-                instanceConnection = (Connection) DriverManager.getConnection(URL, USER, PASS);
-            } catch (ClassNotFoundException | SQLException ex) {
-               throw new RuntimeException("Erro na conexão: " , ex);
-            }
-        return instanceConnection;
+        try {
+            Class.forName(DRIVER);
+            return (Connection) DriverManager.getConnection(URL, USER, PASS);
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new RuntimeException("Erro na conexão: " , ex);
+        }
     }
     
     public static void closeConnection(Connection con){

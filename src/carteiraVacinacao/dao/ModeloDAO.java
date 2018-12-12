@@ -48,6 +48,8 @@ public class ModeloDAO {
         
         try {
             stmt = con.prepareStatement("SELECT * FROM modelo");
+            
+            rs = stmt.executeQuery();
         
             while(rs.next()){
                 m.setEspecie(rs.getString("especie"));
@@ -57,12 +59,11 @@ public class ModeloDAO {
                 
                 modelos.add(m);
             }
-            
-            JOptionPane.showMessageDialog(null, "Modelo inserido com sucesso");
+      
             return modelos;
             
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+             JOptionPane.showMessageDialog(null, "Falha ao ler Modelo");
              return null;
         }finally{
             Conexao.closeConnection(con, stmt);
@@ -79,6 +80,7 @@ public class ModeloDAO {
         try {
             stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie = ?");
             stmt.setString(1, especie);
+            
             rs = stmt.executeQuery();
             
             while(rs.next()){
@@ -93,14 +95,14 @@ public class ModeloDAO {
             return modelos;
             
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+             System.out.println(ex.getMessage());
              return null;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
     }
     
-    public void readModelo(String especie, String raca , Modelo m){
+    public boolean readModelo(String especie, String raca , Modelo m){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -111,21 +113,27 @@ public class ModeloDAO {
             stmt.setString(1, especie);
             stmt.setString(2, raca);
             
-            while(rs.next()){
+            rs = stmt.executeQuery();
+            
+            if(rs.next()){
                 m.setEspecie(rs.getString("especie"));
                 m.setRaca(rs.getString("Raca"));
                 m.setQtdVacinas(rs.getInt("qtd"));
                 m.setVetorVacina(rs.getString("vacinas"));
+                return true;
+            }else{
+                return false;
             }
            
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao ler Modelo");
+             return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
     }
     
-    public void remove(String especie, String raca){
+    public boolean remove(String especie, String raca){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         
@@ -134,9 +142,13 @@ public class ModeloDAO {
         stmt.setString(1, especie);
         stmt.setString(2, raca);
         
+        stmt.executeUpdate();
+        
+        return true;
         
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+             JOptionPane.showMessageDialog(null, "Falha ao remover Modelo");
+             return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
@@ -153,6 +165,7 @@ public class ModeloDAO {
         stmt.setString(3, m.getEspecie());
         stmt.setString(4, m.getRaca());
         
+        stmt.executeUpdate();
         
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao atualizar Modelo");

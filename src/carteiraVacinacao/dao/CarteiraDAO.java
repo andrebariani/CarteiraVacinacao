@@ -53,6 +53,8 @@ public class CarteiraDAO {
             stmt.setLong(1, cpf);
             stmt.setString(2, nome);
             
+            rs = stmt.executeQuery();
+            
             if(rs.next()){
                 c.setClienteModExterno(cdao.readCliente(rs.getLong("cpf_cliente")));
                 c.setPacienteModExterno(pdao.readPaciente(rs.getLong("cpf_cliente"), rs.getString("nome_paciente")));
@@ -81,9 +83,10 @@ public class CarteiraDAO {
         stmt.setLong(1, cpfDono);
         stmt.setString(2, nomePaciente);
         
+        stmt.executeUpdate();
         
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+             JOptionPane.showMessageDialog(null, "Falha ao remover Modelo");
         }finally{
             Conexao.closeConnection(con, stmt);
         }

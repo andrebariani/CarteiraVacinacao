@@ -206,7 +206,7 @@ public class Carteira {
     public boolean aplicarVacina(String vacina) {
         int index = carteiraVacina.indexOf(vacina);
         
-        if(index == -1) {
+        if(index != -1) {
             carteiraVacina.get(index).setAplicada(true);
             return true;
         }
@@ -219,7 +219,7 @@ public class Carteira {
     public boolean agendarVacina(String vacina, Date data) {
         int index = carteiraVacina.indexOf(vacina);
         
-        if(index == -1) {
+        if(index != -1) {
             carteiraVacina.get(index).setData(data);
             return true;
         }

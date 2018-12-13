@@ -56,7 +56,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelCarteira = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableVacina = new javax.swing.JTable();
-        botaoRemoverVacinaCarteira = new javax.swing.JButton();
+        botaoRemoveCarteira = new javax.swing.JButton();
         botaoAgendarVacinaCarteira = new javax.swing.JButton();
         botaoInserirVacinaCarteira = new javax.swing.JButton();
         botaoAplicarVacinaCarteira = new javax.swing.JButton();
@@ -173,10 +173,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tableVacina.getColumnModel().getColumn(2).setMaxWidth(200);
         }
 
-        botaoRemoverVacinaCarteira.setText("Remover vacina");
-        botaoRemoverVacinaCarteira.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoRemoveCarteira.setText("Remover Carteira");
+        botaoRemoveCarteira.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoRemoverVacinaCarteiraMouseClicked(evt);
+                botaoRemoveCarteiraMouseClicked(evt);
             }
         });
 
@@ -320,10 +320,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(painelBorda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelCarteiraLayout.createSequentialGroup()
                         .addComponent(gerarPDF)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoInserirVacinaCarteira)
                         .addGap(100, 100, 100)
-                        .addComponent(botaoRemoverVacinaCarteira)
+                        .addComponent(botaoRemoveCarteira)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addComponent(botaoInserirVacinaCarteira)
                         .addGap(100, 100, 100)
                         .addComponent(botaoAgendarVacinaCarteira)
                         .addGap(100, 100, 100)
@@ -342,10 +342,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoInserirVacinaCarteira)
-                    .addComponent(botaoRemoverVacinaCarteira)
                     .addComponent(botaoAplicarVacinaCarteira)
                     .addComponent(botaoAgendarVacinaCarteira)
-                    .addComponent(gerarPDF))
+                    .addComponent(gerarPDF)
+                    .addComponent(botaoRemoveCarteira))
                 .addGap(40, 40, 40))
         );
 
@@ -1222,34 +1222,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoInserirVacinaCarteiraMouseClicked
     
         
-    private void botaoRemoverVacinaCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverVacinaCarteiraMouseClicked
-        int linha = tableVacina.getSelectedRow();
+    private void botaoRemoveCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoveCarteiraMouseClicked
+       
         String c = labelC.getText();
         long cpf = Long.parseLong(c);
         String nome = labelN.getText();
         
-        if(linha == -1){
-            JOptionPane.showMessageDialog(this,"Selecione uma vacina");
+        
+       
+        
+        if(fachada.excluirCart(cpf,nome)){
+            
+            clearFields();
+            clearTable();
+            JOptionPane.showMessageDialog(this,"Carteira removida com sucesso!");
         }
         else{
-            String nomeVacina = (String) tableVacina.getValueAt(linha,3);
-            if(fachada.delVacina(cpf,nome,nomeVacina)){
-                int n = linha;
-                DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
-                dtm.removeRow(linha);   
-                
-                while(n < dtm.getRowCount()){
-                    dtm.setValueAt(n+1, n, 0);
-                    n++;
-                }
-                JOptionPane.showMessageDialog(this,"Vacina removida com sucesso!");
-            }
-            else{
-                JOptionPane.showMessageDialog(this,"Não foi possível remover essa vacina!");
-            }
-            
+            JOptionPane.showMessageDialog(this,"Não foi possível remover essa carteira!");
         }
-    }//GEN-LAST:event_botaoRemoverVacinaCarteiraMouseClicked
+            
+        
+    }//GEN-LAST:event_botaoRemoveCarteiraMouseClicked
 
     private void botaoAgendarVacinaCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAgendarVacinaCarteiraMouseClicked
         int linha = tableVacina.getSelectedRow();
@@ -1263,15 +1256,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         else{
             AplicarVacina aplicar = new AplicarVacina(this,true);
             aplicar.setVisible(true);
-            String retorno;
-            retorno = aplicar.getVacina();
+            String retorno = aplicar.getVacina();
+            
             if(!retorno.equals("")){
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                
                 try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date dataAux;
                     dataAux = sdf.parse(retorno);
-                    if(fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dataAux)){
+                    java.sql.Date dsql = new java.sql.Date(dataAux.getTime());
+                    System.out.println(dsql);
+                    if(fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dsql)){
                         JOptionPane.showMessageDialog(this,"Agendado com sucesso!!");
                         tableVacina.setValueAt(retorno, linha, 2);
                     }
@@ -1280,6 +1276,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     }
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(this,"Data invalida!");
+                    System.out.println(e.getMessage());
                 }
                 
             }
@@ -1512,7 +1509,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
     
     private void botaoInferiorCarteira(boolean a){
-        botaoRemoverVacinaCarteira.setVisible(a);
+        botaoRemoveCarteira.setVisible(a);
         botaoAgendarVacinaCarteira.setVisible(a);
         botaoAplicarVacinaCarteira.setVisible(a);
         botaoInserirVacinaCarteira.setVisible(a);
@@ -1583,7 +1580,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botaoInserirVacinaModeloCadastrar;
     private javax.swing.JButton botaoLimparCarteira;
     private javax.swing.JButton botaoLimparModelo;
-    private javax.swing.JButton botaoRemoverVacinaCarteira;
+    private javax.swing.JButton botaoRemoveCarteira;
     private javax.swing.JButton botaoRemoverVacinaModelo;
     private javax.swing.JButton botaoRemoverVacinaModeloCadastrar;
     private javax.swing.JMenu carteiraVacinacao;

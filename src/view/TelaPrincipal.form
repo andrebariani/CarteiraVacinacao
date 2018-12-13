@@ -123,10 +123,10 @@
                               <Component id="painelBorda1" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="gerarPDF" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="botaoInserirVacinaCarteira" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="botaoRemoverVacinaCarteira" min="-2" max="-2" attributes="0"/>
+                                  <Component id="botaoRemoveCarteira" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="141" max="32767" attributes="0"/>
+                                  <Component id="botaoInserirVacinaCarteira" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="botaoAgendarVacinaCarteira" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -149,10 +149,10 @@
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="botaoInserirVacinaCarteira" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="botaoRemoverVacinaCarteira" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="botaoAplicarVacinaCarteira" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="botaoAgendarVacinaCarteira" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="gerarPDF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botaoRemoveCarteira" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
@@ -226,12 +226,12 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="botaoRemoverVacinaCarteira">
+                <Component class="javax.swing.JButton" name="botaoRemoveCarteira">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Remover vacina"/>
+                    <Property name="text" type="java.lang.String" value="Remover Carteira"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoRemoverVacinaCarteiraMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoRemoveCarteiraMouseClicked"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoAgendarVacinaCarteira">

@@ -39,7 +39,7 @@ public class CtrVacinaDAO {
             
             //seta valores que serao inseridos no banco de dados
             stmt.setString(1, ctr.getVacina());
-            stmt.setDate(2, (Date) ctr.getData());
+            stmt.setDate(2, ctr.getData());
             stmt.setBoolean(3, ctr.isAplicada());
             stmt.setLong(4, cpfDono);
             stmt.setString(5, nomePaciente);
@@ -136,6 +136,7 @@ public class CtrVacinaDAO {
             return true;
         
         } catch (SQLException ex) {
+            System.out.println("oii");
              return false;
         }finally{
             Conexao.closeConnection(con, stmt);

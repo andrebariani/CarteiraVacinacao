@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -37,11 +37,9 @@ public class ClienteDAO {
                 
                 return c;
             }else{
-                JOptionPane.showMessageDialog(null, "CPF não cadastrado");
                 return null;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na leitura");
             return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);
@@ -70,7 +68,6 @@ public class ClienteDAO {
             return clientes;
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na leitura");
             return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);

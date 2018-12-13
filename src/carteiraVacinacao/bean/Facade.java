@@ -91,8 +91,8 @@ public class Facade {
         carteira.cadastrarCart(cpf, nome_pet);
     }
     
-    public void excluirCart(long cpf, String nome) {
-        carteira.carteiraBD.remove(cpf, nome);
+    public boolean excluirCart(long cpf, String nome) {
+        return carteira.carteiraBD.remove(cpf, nome);
     }
     
     public boolean gerarPDF(long cpf, String nome)
@@ -127,15 +127,7 @@ public class Facade {
         
     }
      
-    public boolean delVacina(Long cpf, String nome, String vacina) {
-        if(carteira.buscarCart(cpf, nome)){
-            return carteira.delVacina(vacina);
-        }
-        else{
-            return false;
-        }
-        
-    }
+   
     
     public boolean buscarCart(long cpf, String nome) {
         return carteira.buscarCart(cpf, nome);

@@ -45,7 +45,7 @@ public class Carteira {
     public CtrVacinaDAO CtrVacinaBD;
    
     public Carteira() { 
-        this.dateFormat = "dd/MM/yyyy"; 
+        this.dateFormat = "yyyy-MM-dd"; 
         qtdVacinas = 0;
         clienteModExterno = new Cliente();
         pacienteModExterno = new Paciente();
@@ -102,9 +102,10 @@ public class Carteira {
     /** Exclui carteira do banco de dados
      * @param cpf
      * @param nome
+     * @return 
      */
-    public void excluirCart(long cpf, String nome) {
-        this.carteiraBD.remove(cpf, nome);
+    public boolean excluirCart(long cpf, String nome) {
+        return this.carteiraBD.remove(cpf, nome);
     }
     
     /** Gera Arquivo de extensão pdf contendo dados da carteira
@@ -248,24 +249,7 @@ public class Carteira {
      * @param vacina
      * @return boolean
      */
-    public boolean delVacina(String vacina) {
-        int i = 0,index = -1;
-        while(i < carteiraVacina.size()){
-            String v = carteiraVacina.get(i).getVacina();
-            if(v.equals(vacina)){
-                index = i;
-            }
-            i++;
-        }
-        
-        if(carteiraVacina.remove(carteiraVacina.get(index))) {
-            return this.CtrVacinaBD.update(carteiraVacina.get(index), clienteModExterno.getCpf(), pacienteModExterno.getNome());
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
+   
     
     /** Busca carteira dado como parametro o cpf do cliente e o nome 
      *  do pet.

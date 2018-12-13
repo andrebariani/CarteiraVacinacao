@@ -85,11 +85,9 @@ public class Carteira {
      *  retorna true se foi possível atualizar no banco de dados
      *  retorna false caso contrário
      */
-    public boolean addVacina(String vacina, Date data) {
+    public boolean addVacina(String vacina) {
         CtrVacina va = new CtrVacina();
         va.setVacina(vacina);
-        va.setData(data);
-        
         carteiraVacina.add(va);
         
         return this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());

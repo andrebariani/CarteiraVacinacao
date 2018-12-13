@@ -37,10 +37,11 @@ public class Facade {
         
         p = pdao.readPaciente(cpf, nome);
         
-        String e = p.getEspecie();
-        String r = p.getRaca();
+        
         
         if(p != null) {
+            String e = p.getEspecie();
+            String r = p.getRaca();
             if(modelo.importarMod(e, r) == 1){
                 return true;
             }
@@ -94,6 +95,7 @@ public class Facade {
     }
     
     public boolean buscarCart(long id_cli, String nome) {
+        System.out.println(id_cli + nome);
         return carteira.buscarCart(id_cli, nome);
     }
     

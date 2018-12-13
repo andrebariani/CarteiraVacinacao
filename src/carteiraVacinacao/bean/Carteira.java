@@ -73,7 +73,7 @@ public class Carteira {
         ca.setClienteModExterno(cl);
         ca.setPacienteModExterno(p);
         
-        this.carteiraBD.create(ca);
+        carteiraBD.create(ca);
     }
     
     public boolean addVacina(String vacina, Date data) {

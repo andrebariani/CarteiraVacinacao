@@ -34,11 +34,21 @@ public class Facade {
     public boolean verificaModelo( long cpf, String nome ) {
         Paciente p;
         PacienteDAO pdao = new PacienteDAO();
+        
         p = pdao.readPaciente(cpf, nome);
         
+        String e = p.getEspecie();
+        String r = p.getRaca();
+        
         if(p != null) {
-            return true;
-        } else {
+            if(modelo.importarMod(e, r) == 1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } 
+        else {
             return false;
         }
     }
@@ -169,12 +179,12 @@ public class Facade {
      */
     public boolean addVacina(String e, String r, String vacina)
     {
-            if(modelo.importarMod(e, r) == 1){
-                return modelo.addVacina(vacina);
-            }
-            else{
-                return false;
-            }
+        if(modelo.importarMod(e, r) == 1){
+            return modelo.addVacina(vacina);
+        }
+        else{
+            return false;
+        }
         
     }    
     

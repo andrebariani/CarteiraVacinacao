@@ -125,6 +125,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         tableVacina.setBackground(new java.awt.Color(204, 204, 255));
         tableVacina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableVacina.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableVacina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -149,6 +150,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         tableVacina.setGridColor(new java.awt.Color(0, 0, 0));
+        tableVacina.setRowHeight(30);
         tableVacina.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tableVacina.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableVacina);
@@ -300,8 +302,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelModelo.setBackground(new java.awt.Color(255, 255, 255));
         painelModelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableModelo1.setBackground(new java.awt.Color(204, 204, 255));
+        tableModelo1.setBackground(new java.awt.Color(255, 0, 0));
         tableModelo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableModelo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableModelo1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -326,6 +329,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         tableModelo1.setGridColor(new java.awt.Color(0, 0, 0));
+        tableModelo1.setRowHeight(30);
         tableModelo1.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tableModelo1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tableModelo1);
@@ -547,7 +551,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(labelR)
                 .addGap(18, 18, 18)
                 .addComponent(labelRaca, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         painelBorda3Layout.setVerticalGroup(
             painelBorda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,15 +570,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelModelo1Layout.setHorizontalGroup(
             painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelModelo1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
                 .addGroup(painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(painelBorda3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelModelo1Layout.createSequentialGroup()
-                        .addGap(714, 714, 714)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botaoRemoverVacinaModelo)
                         .addGap(150, 150, 150)
-                        .addComponent(botaoInserirVacinaModelo)))
+                        .addComponent(botaoInserirVacinaModelo))
+                    .addGroup(painelModelo1Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(painelBorda3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGap(86, 86, 86))
         );
         painelModelo1Layout.setVerticalGroup(
@@ -583,16 +589,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(painelBorda3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(painelModelo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoInserirVacinaModelo)
-                    .addComponent(botaoRemoverVacinaModelo))
+                    .addComponent(botaoRemoverVacinaModelo)
+                    .addComponent(botaoInserirVacinaModelo))
                 .addGap(40, 40, 40))
         );
 
         tela3.add(painelModelo1);
-        painelModelo1.setBounds(30, 30, 1260, 730);
+        painelModelo1.setBounds(40, 0, 1260, 730);
 
         fundoModelo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
         fundoModelo1.setText("jLabel1");
@@ -852,7 +858,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             for (int i = 0; i < verificador.length(); i++) {
                 Character caractere = verificador.charAt(i);
                 if (!Character.isDigit(caractere)) {
-                    //É String
+                    //É letra
                     valido = false;
                 }
             }

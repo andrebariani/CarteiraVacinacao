@@ -51,8 +51,8 @@ public class CtrVacinaDAO {
         Connection con = Conexao.getConnection();
         ArrayList<CtrVacina> controle = new ArrayList<>();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
-        CtrVacina ctr = null;
+        ResultSet rs;
+        CtrVacina ctr;
         
         try {
             
@@ -74,7 +74,7 @@ public class CtrVacinaDAO {
             return controle;
             
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+            System.out.println(ex.getMessage());
              return null;
         }finally{
             Conexao.closeConnection(con, stmt);
@@ -87,9 +87,11 @@ public class CtrVacinaDAO {
         
         try {
             stmt = con.prepareStatement("UPDATE ctrvacina SET data_vacina = ?, aplicada = ? WHERE cpf_dono = ? AND nome_paciente = ? AND nome_vacina = ?");
-            stmt.setLong(1, cpfDono);
-            stmt.setString(2, nomePaciente);
-            stmt.setString(3, ctr.getVacina());
+            stmt.setBoolean(1, ctr.isAplicada());
+            stmt.setDate(2, (Date) ctr.getData());
+            stmt.setLong(3, cpfDono);
+            stmt.setString(4, nomePaciente);
+            stmt.setString(5, ctr.getVacina());
         
             stmt.executeUpdate();
             

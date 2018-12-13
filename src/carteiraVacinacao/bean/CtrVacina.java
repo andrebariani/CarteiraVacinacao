@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class CtrVacina {
     private String vacina;
-    private Date data;
+    private String data;
     private boolean aplicada;
 
     public String getVacina() {
@@ -25,11 +25,11 @@ public class CtrVacina {
         this.vacina = vacina;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

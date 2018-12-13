@@ -39,17 +39,15 @@ public class Carteira {
     private Paciente pacienteModExterno;
     private List<CtrVacina> carteiraVacina;
     
-    public String dateFormat;
-    
     public CarteiraDAO carteiraBD;
     public CtrVacinaDAO CtrVacinaBD;
    
     public Carteira() { 
-        this.dateFormat = "yyyy-MM-dd"; 
         qtdVacinas = 0;
         clienteModExterno = new Cliente();
         pacienteModExterno = new Paciente();
         carteiraVacina = new ArrayList<>();
+        
         carteiraBD = new CarteiraDAO();
         CtrVacinaBD = new CtrVacinaDAO();
     }
@@ -110,6 +108,7 @@ public class Carteira {
     
     /** Gera Arquivo de extensão pdf contendo dados da carteira
      *  e incluindo uma tabela de todas as vacinas marcadas na carteira
+     * @return 
      */
     public boolean gerarPDF() {
         try {
@@ -146,8 +145,9 @@ public class Carteira {
             for(int i = 0 ; i < carteiraVacina.size() ; i++) {
                 // first row
                 String p = carteiraVacina.get(i).getVacina();
-                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-                p += "\n" + sdf.format(carteiraVacina.get(i).getData());
+                
+                p += "\n" + carteiraVacina.get(i).getData();
+                
                 PdfPCell cell = new PdfPCell(new Phrase(p));
                 cell.setBorder(Rectangle.BOX);
                 table.addCell(cell);
@@ -177,12 +177,8 @@ public class Carteira {
             
             strVacina += ";";
             
-            if(temp.getData() != null) {
-                SimpleDateFormat s = new SimpleDateFormat(dateFormat);
-                strVacina += s.format(temp.getData());
-            } else {
-                strVacina += " ";
-            }
+            strVacina += temp.getData();
+            
             strVacina += ";";
             
             if(temp.isAplicada()) {
@@ -199,6 +195,7 @@ public class Carteira {
     
     /** Define vacina de parâmetro como aplicada
      * @param vacina
+     * @return 
      */
     public boolean aplicarVacina(String vacina) {
         int i = 0,index = -1;
@@ -224,8 +221,9 @@ public class Carteira {
     /** Define data para agendamento da vacina
      * @param vacina
      * @param data
+     * @return 
      */
-    public boolean agendarVacina(String vacina, Date data) {
+    public boolean agendarVacina(String vacina, String data) {
         int i = 0,index = -1;
         while(i < carteiraVacina.size()){
             String v = carteiraVacina.get(i).getVacina();

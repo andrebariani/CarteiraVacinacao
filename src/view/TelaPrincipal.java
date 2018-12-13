@@ -25,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 public class TelaPrincipal extends javax.swing.JFrame {
 
     private Facade fachada;
+    private long id_cliente;
+    private String nome_pet;
     
     public TelaPrincipal() {
         TelaLoginModal tlm = new TelaLoginModal(this,true);
@@ -869,6 +871,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
         long cpf = Long.parseLong(textCpfCarteira.getText());
         String nome = textNomeCarteira.getText();
+        id_cliente = cpf;
+        nome_pet = nome;
         boolean retorno = fachada.buscarCart(cpf,nome);
                 
         
@@ -876,7 +880,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             // Carteira encontrada
             String Demo = fachada.getVetorVacina();
             String Deli = ";";
-
+            if(Demo.equals("")){
+                clearFields();
+                botaoInferiorCarteira(true);
+                return;
+            }
             DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
             StringTokenizer Tok = new StringTokenizer(Demo);
             int n=1;
@@ -1124,17 +1132,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         InserirVacina inserir = new InserirVacina(this,true);
         inserir.setVisible(true);
         String retorno = inserir.getVacina();
+        
         if(!retorno.equals("")){
-            if(fachada.aplicarVacina(retorno)){
-                DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
-                int n = dtm.getRowCount();
-                Object[] dados = {n+1,"Não aplicada"," ",retorno};
-                dtm.addRow(dados);
-                JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
+            if(fachada.buscarCart(id_cliente, nome_pet)){
+                if(fachada.addVacina(retorno)){
+                    DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
+                    int n = dtm.getRowCount();
+                    Object[] dados = {n+1,"Não aplicada"," ",retorno};
+                    dtm.addRow(dados);
+                    JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
+                }
             }
             else{
-                JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
-            }
+                    JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
+                }
         }
     }//GEN-LAST:event_botaoInserirVacinaCarteiraMouseClicked
 

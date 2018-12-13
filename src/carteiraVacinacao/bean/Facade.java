@@ -95,10 +95,12 @@ public class Facade {
     }
     
     public boolean buscarCart(long id_cli, String nome) {
-        System.out.println(id_cli + nome);
         return carteira.buscarCart(id_cli, nome);
     }
     
+    public boolean addVacina(String vacina){
+        return carteira.addVacina(vacina);
+    }
     //Métodos para a classse modelo
     
     //ObS:  Troca de paramentro (especie -> e)

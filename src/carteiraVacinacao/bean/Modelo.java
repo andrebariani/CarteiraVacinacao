@@ -28,21 +28,11 @@ public class Modelo {
     {
         this.especie = "";
         this.raca = "";
-        this.vacinas = new ArrayList();
+        this.vacinas = new ArrayList<>();
         this.qtdVacinas = 0;
     }
-    //<OBS> troca de param (especie, raca)
-    /** Instancia um modelo com a especie e raca informada 
-     *  OBS: nao verifica no banco se ja existe um modelo para essa especie e raca
-     * @param e Especie
-     * @param r Raca
-     */
-    public Modelo(String e, String r) {
-        this.especie = e;
-        this.raca = r;
-        this.vacinas = new ArrayList();
-        this.qtdVacinas = 0;
-    }
+    
+    
     // gets e sets
     public String getEspecie() {
         return especie;
@@ -52,7 +42,7 @@ public class Modelo {
       *  @param especie Somento letras de a-z e espaços e '-'
       */
     public void setEspecie(String especie) {
-            this.especie = especie;
+        this.especie = especie;
     }
 
     /** Retorna a raca do modelo
@@ -65,10 +55,11 @@ public class Modelo {
      *  @param raca Somento letras de a-z e espaços e '-'
      */
     public void setRaca(String raca) {
-            this.raca = raca;
+        this.raca = raca;
     }
     
-    /** Retorna a quantidade vacina */
+    /** Retorna a quantidade vacina
+     * @return  */
     public int getQtdVacinas() {
         return qtdVacinas;
     }
@@ -80,13 +71,7 @@ public class Modelo {
         if(qtdVacinas >= 0)
         {
             this.qtdVacinas = qtdVacinas;
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Quantidade de vacinas inválida",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        }    
     }
     
     
@@ -96,20 +81,22 @@ public class Modelo {
      */
     public String getVacina(int posicao)
     {
-        if(posicao < this.qtdVacinas)
+        if(posicao < this.vacinas.size())
         {
             return this.vacinas.get(posicao);
         }
         else
         {
-            //Mensagem que a vacina ja foi adicionada
-            JOptionPane.showMessageDialog(null, "Vacina não encontrada",
-                        "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
               
     }
     
+    public void setVetorVacina(String v){
+        this.vacinas.clear();
+        String m[] = v.split(";");
+        this.vacinas.addAll(Arrays.asList(m));
+    }
     
     //<OBS> troca de retorno
     /** Busca todos os modelos para a especie indicada 
@@ -122,34 +109,21 @@ public class Modelo {
        
         List<Modelo> m = mBD.readEspecie(e);
         
-        for (Modelo model : m){
-            System.out.println(model.getRaca());
-        }
-               
         return m;    
         
     }
 
     //<OBS> Troca de parametros
-    /** Salva o modelo atual  */
-    public void cadastrarMod()
+    /** Salva o modelo atual
+     * @param e
+     * @param r
+     * @return  */
+    public boolean cadastrarMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
-        
-        
-        //Verifica se ja existe um modelo para a especie e raca especificada
-        if(!mBD.readModelo(this.especie, this.raca, this))
-        {
-            
-            //Cadastrando o modelo no banco de dados
-            mBD.create(this);
-        }
-        else
-        {
-            //Se ja existir, atualiza o modelo no BD com os dados atuais
-            mBD.update(this);
-        }
-       
+        this.especie = e;
+        this.raca = r;
+        return mBD.create(this);
     }
     
     //<OBS> Troca de parametros
@@ -171,21 +145,10 @@ public class Modelo {
      * @param r raca do animal
      * @return retorna 1 se deu certo, 0 se deu errado
      */
-    public int importarMod(String e, String r)
+    public boolean importarMod(String e, String r)
     {
         ModeloDAO mBD = new ModeloDAO();
-        
-        //Verifica se foi encontrado algum modelo
-        if(mBD.readModelo(e, r, this))
-        {
-            // Modelo encotrado
-            return 1;
-        }
-        else
-        {
-            // Modelo nao encontrado
-            return 0;
-        }
+        return mBD.readModelo(e, r, this);
     }
 
       
@@ -203,74 +166,73 @@ public class Modelo {
         return v;
     }
     
-    /** Aparti de uma string formatada,  preenche o vetor vacinas 
-      * @param v vacinas do animal, separando cada vacina com ';'
-      */
-    public void setVetorVacina(String v)
-    {
-        //Apaga todos os valores do ArrayList
-        this.vacinas.clear();
-        //Separa a string
-        String m[] = v.split(";");
-        //Adiciona todas as novas vacinas
-        this.vacinas.addAll(Arrays.asList(m));
-    }
-    
     /** Adiciona uma nova vacina
+     * @param e
+     * @param r
       * @param vacina nome da vacina
      * @return true se conseguir adicionar a vacina, false se nao conseguir
       */
-    public boolean addVacina(String vacina)
+    public boolean addVacina(String e, String r, String vacina)
     {
-        //Buscando o elemento, se n encontrar, add
-        int search = this.vacinas.indexOf(vacina);
         
-        //Se nao encontrou nenhuma vacina, adiciona
-        if(search == -1)
-        {
-            this.vacinas.add(vacina);
-            this.qtdVacinas++;
-            System.out.println(vacina);
-            System.out.println(this.getVetorVacina());
-            ModeloDAO mBD = new ModeloDAO();
+        if(this.importarMod(e, r)){
+            //Buscando a vacina
+            int search = this.vacinas.indexOf(vacina);
             
-            return mBD.update(this);
+            if(search == -1)
+            {
+                //Se nao encontrou nenhuma vacina, adiciona
+                this.vacinas.add(vacina);
+                this.qtdVacinas++;
+
+                ModeloDAO mBD = new ModeloDAO();
+
+                return mBD.update(this);
+            }
+            else
+            {
+                //Vacina ja foi adicionada
+                return false;
+            }
         }
-        else
-        {
-            
-            //Vacina ja foi adicionada
+        else{
             return false;
         }
-
     }
     
     /** Delete uma nova vacina
+     * @param e
+     * @param r
       * @param vacina nome da vacina
+     * @return 
       */
-    public boolean delVacina(String vacina)
+    public boolean delVacina(String e, String r, String vacina)
     {
-        //Buscando o elemento, se encontrar, del
-        int search = this.vacinas.indexOf(vacina);
         
-        //Se encontrou a vacina, remove
-        if(search != -1)
-        {
-            this.vacinas.remove(search);
-            this.qtdVacinas--;
-            ModeloDAO mBD = new ModeloDAO();
-            
-            return mBD.update(this);
+        if(this.importarMod(e, r)){
+            //Buscando a vacina
+            int search = this.vacinas.indexOf(vacina);
+            if(search != -1)
+            {
+                //Se nao encontrou nenhuma vacina, adiciona
+                this.vacinas.remove(search);
+                this.qtdVacinas--;
+
+                ModeloDAO mBD = new ModeloDAO();
+
+                return mBD.update(this);
+            }
+            else
+            {
+                //Vacina ja foi adicionada
+                return false;
+            }
         }
-        else
-        {
-            //Vacina nao foi encontrada 
+        else{
             return false;
-	}
+        }
     }
     
-    public List<String> getVacinas() {
-        return vacinas;
-    }
+    
     
 }

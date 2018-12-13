@@ -23,8 +23,9 @@ public class ModeloDAO {
     
     /** Insere um Modelo no banco dados 
       * @param m objeto da classe Modelo
+     * @return 
       */
-    public void create(Modelo m){
+    public boolean create(Modelo m){
         //Solicita conexao com banco
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -41,9 +42,10 @@ public class ModeloDAO {
         
         //Executa sql setado no statement 
         stmt.executeUpdate();
+        return true;
         
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir Modelo");
+            return false;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
@@ -51,12 +53,13 @@ public class ModeloDAO {
     
     
     /** Lê todos os modelos cadastrados no banco de dados e retorna uma lista com os modelos
+     * @return 
       */
     public List<Modelo> read(){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Modelo m = null;
+        ResultSet rs;
+        Modelo m;
         List<Modelo> modelos = new ArrayList<>();
         
         try {
@@ -84,9 +87,8 @@ public class ModeloDAO {
             //retorna lista de modelos 
             return modelos;
             
-        } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao ler Modelo");
-             return null;
+        } catch (SQLException ex) { 
+            return null;
         }finally{
             Conexao.closeConnection(con, stmt);
         }
@@ -95,12 +97,13 @@ public class ModeloDAO {
     
     /** Lê todos os modelos cadastrados no banco de dados de uma certa especie e retorna uma lista com os modelos
      * @param especie String com a especie que deseja ser procurada  
+     * @return   
       */
     public List<Modelo> readEspecie(String especie){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Modelo m = null;
+        Modelo m;
         List<Modelo> modelos = new ArrayList();
         
         try {
@@ -144,9 +147,10 @@ public class ModeloDAO {
     public boolean readModelo(String especie, String raca , Modelo m){
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
+        ResultSet rs;
 
-        
+        System.out.println(especie+raca);
+                
         try {
             //Gera sql que sera executado no banco
             stmt = con.prepareStatement("SELECT * FROM modelo WHERE especie = ?  AND raca = ?");
@@ -163,10 +167,11 @@ public class ModeloDAO {
                 m.setRaca(rs.getString("Raca"));
                 m.setQtdVacinas(rs.getInt("qtd"));
                 m.setVetorVacina(rs.getString("vacinas"));
-                
+                System.out.println(rs.getString("especie"));
                 //Retorna que foi feita a leitura de um modelo
                 return true;
             }else{
+                System.out.println("oii");
                 //Retorna que o modelo não existe no banco de dados
                 return false;
             }
@@ -223,7 +228,7 @@ public class ModeloDAO {
         stmt.setString(2, m.getVetorVacina());
         stmt.setString(3, m.getEspecie());
         stmt.setString(4, m.getRaca());
-        
+            System.out.println("oi" + m.getVetorVacina()+" " + m.getEspecie());
         //Executa sql setado no statement 
         stmt.executeUpdate();
         

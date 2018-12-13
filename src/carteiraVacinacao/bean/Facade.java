@@ -10,6 +10,7 @@ import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -42,8 +43,39 @@ public class Facade {
         if(p != null) {
             String e = p.getEspecie();
             String r = p.getRaca();
-            if(modelo.importarMod(e, r) == 1){
-                return true;
+            return modelo.importarMod(e, r);
+        } 
+        else {
+            return false;
+        }
+    }
+    
+    public boolean importarModelo( long cpf, String nome ) {
+        Paciente p;
+        PacienteDAO pdao = new PacienteDAO();
+        
+        p = pdao.readPaciente(cpf, nome);
+        
+        
+        
+        if(p != null) {
+            String e = p.getEspecie();
+            String r = p.getRaca();
+            if(modelo.importarMod(e, r)){
+                if(carteira.buscarCart(cpf,nome)){
+                    String vac = modelo.getVetorVacina();
+                    StringTokenizer Tok = new StringTokenizer(vac);
+                    String delimitador = ";";
+                    String v;
+
+                    while (Tok.hasMoreElements()){
+                        v= Tok.nextToken(delimitador);
+                        carteira.addVacina(v);
+                    }
+                }
+                else{
+                    return false;
+                }
             }
             else{
                 return false;
@@ -52,14 +84,7 @@ public class Facade {
         else {
             return false;
         }
-    }
-    
-    public void importarModelo( long cpf, String nome ) {
-        Paciente p;
-        PacienteDAO pdao = new PacienteDAO();
-        p = pdao.readPaciente(cpf, nome);
-        
-        carteira.importarModelo(modelo.getVacinas());
+        return false;
     }
     
    public void cadastrarCart( long cpf, String nome_pet ) {
@@ -70,7 +95,9 @@ public class Facade {
         carteira.carteiraBD.remove(cpf, nome);
     }
     
-    public void imprimir() throws DocumentException, FileNotFoundException {
+    public void imprimir(long cpf, String nome)
+    {
+        carteira.buscarCart(cpf,nome);
         carteira.imprimir();
     }
     
@@ -163,14 +190,9 @@ public class Facade {
      *   @param e Especie do animal
      *   @param r Raca do animal 
      */
-    public void cadastrarMod(String e, String r)
+    public boolean cadastrarMod(String e, String r)
     {
-        if(this.importarMod(e, r) == 0)
-        {
-            modelo.setEspecie(e);
-            modelo.setRaca(r);
-            modelo.cadastrarMod();
-        }
+        return modelo.cadastrarMod(e,r);
     }
     
      /** Remove o modelo especificado
@@ -180,11 +202,7 @@ public class Facade {
      */
     public boolean excluirMod(String e, String r)
     {
-        if(this.importarMod(e, r) == 1)
-        {
-            return modelo.excluirMod(e, r);
-        }
-        return false;
+        return modelo.excluirMod(e, r);
     }
     
     /** Obtem o as vacinas do modelo especificado, e preenche 
@@ -193,7 +211,7 @@ public class Facade {
      * @param r Raca do animal
      * @return Uma string formatada com as vacinas
      */
-    public int importarMod(String e, String r)
+    public boolean importarMod(String e, String r)
     {
         return modelo.importarMod(e, r);
     }
@@ -206,15 +224,8 @@ public class Facade {
      * @return true se conseguiu adicionar vacina no modelo, false caso nao
      */
     public boolean addVacina(String e, String r, String vacina)
-    {
-        if(modelo.importarMod(e, r) == 1){
-            
-            return modelo.addVacina(vacina);
-        }
-        else{
-            return false;
-        }
-        
+    { 
+            return modelo.addVacina(e,r,vacina);
     }    
     
     
@@ -227,13 +238,7 @@ public class Facade {
      */  
     public boolean delVacina(String e, String r, String vacina)
     {
-        if(modelo.importarMod(e, r) == 1)
-        {
-            return modelo.delVacina(vacina);
-        }
-        else{
-            return false;
-        }
+        return modelo.delVacina(e,r,vacina);
     }
     
      /** Obtem todas as vacinas do modelo especificado
@@ -242,7 +247,7 @@ public class Facade {
      * @return String com os nomes das vacinas para o modelo
      */  
     public String getVetorVacina(String e, String r){
-        if(modelo.importarMod(e, r) == 1)
+        if(modelo.importarMod(e, r))
         {
             return modelo.getVetorVacina();
         }

@@ -706,6 +706,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         botaoRemoverVacinaModeloCadastrar.setText("Remover vacina");
+        botaoRemoverVacinaModeloCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoRemoverVacinaModeloCadastrarMouseClicked(evt);
+            }
+        });
 
         botaoInserirVacinaModeloCadastrar.setText("Inserir vacina");
         botaoInserirVacinaModeloCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1056,9 +1061,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 clearTable();
                 String e = textEspecieModelo.getText();
                 String r = textRacaModelo.getText();
-                int retorno = fachada.importarMod(e, r);
                 
-                if(retorno == 0){
+                if(!fachada.importarMod(e, r)){
                     int resposta = JOptionPane.showConfirmDialog(this,"Modelo não foi encontrado, deseja cadastrar um novo modelo?", "Modelo não encontrado!", JOptionPane.YES_NO_OPTION);
     
                     if (resposta == JOptionPane.YES_OPTION) {  
@@ -1148,16 +1152,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void botaoCadastrarModeloCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadastrarModeloCadastrarMouseClicked
         String e = textEspecieModeloCadastrar.getText();
         String r = textRacaModeloCadastrar.getText();
-        int retorno = fachada.importarMod(e, r);
         
-        if(retorno == 0){
+        
+        if(!fachada.importarMod(e, r)){
             clearFields();
             DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
             fachada.cadastrarMod(e, r);
             int i = 0;
             while(i < dtm.getRowCount()){
                 String vacina = (String) tableModelo3.getValueAt(i,1);
-                JOptionPane.showMessageDialog(this,vacina);
+                
                 fachada.addVacina(e,r,vacina);
                 i++;
             }
@@ -1176,8 +1180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         inserir.setVisible(true);
         String retorno = inserir.getVacina();
         
-        String e = textEspecieModeloCadastrar.getText();
-        String r = textRacaModeloCadastrar.getText();
+        
         
         if(!retorno.equals("")){
             
@@ -1192,13 +1195,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoInserirVacinaModeloCadastrarMouseClicked
 
     private void imprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imprimirMouseClicked
-        try {
-            fachada.imprimir();
-        } catch (DocumentException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        /// nao implementado ainda
+        ///fachada.imprimir(e,r);
     }//GEN-LAST:event_imprimirMouseClicked
 
     private void botaoCadastrarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadastrarModeloMouseClicked
@@ -1361,6 +1359,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_botaoAplicarVacinaCarteiraMouseClicked
+
+    private void botaoRemoverVacinaModeloCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverVacinaModeloCadastrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoRemoverVacinaModeloCadastrarMouseClicked
 
     private void mudarToTela1(){
         clearFields();

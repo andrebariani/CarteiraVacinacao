@@ -109,21 +109,14 @@ public class Carteira {
         document.open();
         Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
         
-        /*
-        String header = clienteModExterno.getNome() + "\n";
-        header += clienteModExterno.getCpf() + "\n";
-        
-        header += "\n" + pacienteModExterno.getNome()+ "\n";
-        header += pacienteModExterno.getEspecie() + "\n";
-        header += pacienteModExterno.getRaca() + "\n";
-        */
         Paragraph para = new Paragraph();
-        para.add(new Chunk("Horacio Ferreira DeLucca" + "\n"));
-        para.add(new Chunk("27329105981") + "\n");
-        para.add(new Chunk("Rex") + "\n");
-        para.add(new Chunk("Canino") + "\n");
-        para.add(new Chunk("Golden Retriever") + "\n");
-        //Chunk chunk = new Chunk(header, smallfont);
+        para.add(new Chunk(clienteModExterno.getNome() + "\n"));
+        para.add(new Chunk(clienteModExterno.getCpf() + "\n"));
+        
+        para.add(new Chunk("\n" + pacienteModExterno.getNome()+ "\n"));
+        para.add(new Chunk(pacienteModExterno.getEspecie() + "\n"));
+        para.add(new Chunk(pacienteModExterno.getRaca() + "\n" + "\n"));
+        
         
         document.add(para);
         Rectangle small = new Rectangle(290,100);
@@ -140,31 +133,23 @@ public class Carteira {
         table.setTotalWidth(new float[]{ 180, 120 });
         table.setLockedWidth(true);
         
-        //for(int i = 0 ; i < carteiraVacina.size() ; i++) {
+        for(int i = 0 ; i < carteiraVacina.size() ; i++) {
             // first row
-            //String p = carteiraVacina.get(i).getVacina();
-            //SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-            //p += "\n" + sdf.format(carteiraVacina.get(i).getData());
-            String p = "Vacina pra raiva\n05 de janeiro de 2018\n";
+            String p = carteiraVacina.get(i).getVacina();
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+            p += "\n" + sdf.format(carteiraVacina.get(i).getData());
             PdfPCell cell = new PdfPCell(new Phrase(p));
             cell.setBorder(Rectangle.BOX);
             table.addCell(cell);
 
             // second row
-            cell = new PdfPCell(new Phrase("SIM!"));
+            if(carteiraVacina.get(i).isAplicada())
+                cell = new PdfPCell(new Phrase("SIM!"));
+            else
+                cell = new PdfPCell(new Phrase("NÃO!"));
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             table.addCell(cell);
-            
-            p = "Vacina pra conjutivite\n02 de fevereiro de 2018\n";
-            cell = new PdfPCell(new Phrase(p));
-            cell.setBorder(Rectangle.BOX);
-            table.addCell(cell);
-
-            // second row
-            cell = new PdfPCell(new Phrase("SIM!"));
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(cell);
-        //}
+        }
         
         document.add(table);
         document.close();
@@ -259,6 +244,8 @@ public class Carteira {
     }
      
     /** Deleta vacina da carteira
+     * @param vacina
+     * @return boolean
      */
     public boolean delVacina(String vacina) {
         int index = carteiraVacina.indexOf(vacina);

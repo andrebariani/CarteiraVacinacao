@@ -76,14 +76,14 @@ public class Carteira {
         this.carteiraBD.create(ca);
     }
     
-    public void addVacina(String vacina, Date data) {
+    public boolean addVacina(String vacina, Date data) {
         CtrVacina va = new CtrVacina();
         va.setVacina(vacina);
         va.setData(data);
         
         carteiraVacina.add(va);
         
-        this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
+        return this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
     public void excluirCart(long cpf, String nome) {

@@ -79,7 +79,6 @@ public class Carteira {
         ca.setPacienteModExterno(p);
         
         carteiraBD.create(ca);
-        CtrVacinaBD.create(carteiraVacina.get(0), clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
     /** Adiciona nova vacina a carteira
@@ -91,7 +90,7 @@ public class Carteira {
         va.setVacina(vacina);
         carteiraVacina.add(va);
         
-        return this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
+        return this.CtrVacinaBD.create(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
     /** Exclui carteira do banco de dados

@@ -117,7 +117,7 @@ public class Facade {
             retorno += ";";
         }
         
-        System.out.println(retorno); 
+        
        return retorno;
     }
     
@@ -165,7 +165,7 @@ public class Facade {
      * @param r Raca do animal
      * @param vacina Nome da vacina, uma mensagem de erro aparece
      *          ao tentar adicionar uma vacina ja existente
-     * @return 
+     * @return true se conseguiu adicionar vacina no modelo, false caso nao
      */
     public boolean addVacina(String e, String r, String vacina)
     {
@@ -184,6 +184,7 @@ public class Facade {
      * @param r Raca do animal
      * @param vacina Nome da vacina, uma mensagem de erro aparece
      *          ao tentar remover uma vacina ja que nao existe no modelo
+     * @return true se conseguiu deletar vacina do modelo, false caso nao
      */  
     public boolean delVacina(String e, String r, String vacina)
     {
@@ -196,6 +197,11 @@ public class Facade {
         }
     }
     
+     /** Obtem todas as vacinas do modelo especificado
+     * @param e Especie do animal
+     * @param r Raca do animal
+     * @return String com os nomes das vacinas para o modelo
+     */  
     public String getVetorVacina(String e, String r){
         if(modelo.importarMod(e, r) == 1)
         {

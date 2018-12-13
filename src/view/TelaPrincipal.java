@@ -938,7 +938,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 clearTable();
                 int n = 1;
                 String especie = textEspecieModelo.getText();
-                //System.out.println(especie);
+                
                 String retorno =  fachada.buscarMod(especie);
                 
                 if(retorno.length() == 0){
@@ -955,7 +955,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 DefaultTableModel dtm = (DefaultTableModel) tableModelo1.getModel();
                 StringTokenizer Tok = new StringTokenizer(retorno);
                 String r,e;
-                System.out.println(retorno);
+                
                 while (Tok.hasMoreElements()){
                     e = Tok.nextToken(delimitador);
                     r = Tok.nextToken(delimitador);
@@ -1026,8 +1026,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 DefaultTableModel dtm = (DefaultTableModel) tableModelo2.getModel();
                 StringTokenizer Tok = new StringTokenizer(retorno);
                 String v,delimitador = ";";
-                int n=0;
-                System.out.println(retorno);
+                int n=1;
                 while (Tok.hasMoreElements()){
                     v = Tok.nextToken(delimitador);
                    
@@ -1215,8 +1214,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             String nomeVacina = (String) tableModelo2.getValueAt(linha,1);
             String e = labelEspecie.getText();
             String r = labelRaca.getText();
+            
             if(fachada.delVacina(e,r,nomeVacina)){
+                int n = linha;
+                DefaultTableModel dtm = (DefaultTableModel) tableModelo2.getModel();
+                dtm.removeRow(linha);   
                 
+                while(n < dtm.getRowCount()){
+                    dtm.setValueAt(n+1, n, 0);
+                    n++;
+                }
                 JOptionPane.showMessageDialog(this,"Vacina removida com sucesso!");
             }
             else{

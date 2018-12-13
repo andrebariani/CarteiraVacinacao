@@ -147,6 +147,7 @@ public class Modelo {
      */
     public boolean importarMod(String e, String r)
     {
+        limpar();
         ModeloDAO mBD = new ModeloDAO();
         return mBD.readModelo(e, r, this);
     }

@@ -47,7 +47,7 @@ public class InserirVacina extends javax.swing.JDialog {
         botaoLimpar = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Inserir vacina");
         setResizable(false);
 

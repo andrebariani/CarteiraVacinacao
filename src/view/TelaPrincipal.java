@@ -1211,7 +1211,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(fachada.addVacina(cpf,nome,retorno)){
                 DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
                 int n = dtm.getRowCount();
-                Object[] dados = {n+1,"Não aplicada"," ",retorno};
+                Object[] dados = {n+1,"Não aplicada","null",retorno};
                 dtm.addRow(dados);
                 JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
             }

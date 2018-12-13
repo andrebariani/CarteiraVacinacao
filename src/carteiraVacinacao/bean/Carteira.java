@@ -118,12 +118,12 @@ public class Carteira {
             Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
             
             Paragraph para = new Paragraph();
-            para.add(new Chunk(clienteModExterno.getNome() + "\n"));
-            para.add(new Chunk(clienteModExterno.getCpf() + "\n"));
+            para.add(new Chunk("Nome do Cliente: " + clienteModExterno.getNome() + "\n"));
+            para.add(new Chunk("CPF do Cliente: " + clienteModExterno.getCpf() + "\n"));
             
-            para.add(new Chunk("\n" + pacienteModExterno.getNome()+ "\n"));
-            para.add(new Chunk(pacienteModExterno.getEspecie() + "\n"));
-            para.add(new Chunk(pacienteModExterno.getRaca() + "\n" + "\n"));
+            para.add(new Chunk("\n" + "Nome do Pet: " + pacienteModExterno.getNome()+ "\n"));
+            para.add(new Chunk("Especie do Pet: " + pacienteModExterno.getEspecie() + "\n"));
+            para.add(new Chunk("Raca do Pet: " + pacienteModExterno.getRaca() + "\n" + "\n"));
             
             
             document.add(para);
@@ -132,8 +132,8 @@ public class Carteira {
             
             Stream.of("Vacina", "Foi Aplicada?").forEach(columnTitle -> {
                 PdfPCell header = new PdfPCell();
-                header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                header.setBorderWidth(2);
+                header.setBackgroundColor(BaseColor.CYAN);
+                header.setBorderWidth(1);
                 header.setPhrase(new Phrase(columnTitle));
                 table.addCell(header);
             });

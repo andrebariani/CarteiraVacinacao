@@ -48,21 +48,6 @@ public class Carteira {
         CtrVacinaBD = new CtrVacinaDAO();
     }
     
-    /** Importa vacinas de um modelo para serem
-     *  armazenadas em carteira
-     *  @param Vacinas
-     */
-    public void importarModelo(List<String> Vacinas) {
-        int i = 0;
-        qtdVacinas = Vacinas.size();
-        carteiraVacina.clear();
-        
-	while (i < Vacinas.size()) {
-            carteiraVacina.get(i).setVacina(Vacinas.get(i));
-            i++;
-	}
-    }
-    
     /** Realiza cadastro de carteira
      * @param cpf
      * @param nome_pet
@@ -91,9 +76,17 @@ public class Carteira {
     public boolean addVacina(String vacina) {
         CtrVacina va = new CtrVacina();
         va.setVacina(vacina);
-        carteiraVacina.add(va);
-        qtdVacinas++;
-        return this.CtrVacinaBD.create(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
+        if(this.CtrVacinaBD.create(va, clienteModExterno.getCpf(), pacienteModExterno.getNome()))
+        {
+            carteiraVacina.add(va);
+            qtdVacinas++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+       
     }
     
     /** Exclui carteira do banco de dados

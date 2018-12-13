@@ -37,7 +37,7 @@ public class TesteCtrVacina {
     /** Testa se aplica a vacina */
     @Test
     public void TesteSetAplicada(){
-        c.setAplicada(false);
+        c.setAplicada(true);
         assertTrue(c.isAplicada());
     }
     

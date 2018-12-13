@@ -72,6 +72,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         labelC = new javax.swing.JLabel();
         labelNome = new javax.swing.JLabel();
         labelN = new javax.swing.JLabel();
+        gerarPDF = new javax.swing.JButton();
         fundoCarteira = new javax.swing.JLabel();
         tela2 = new javax.swing.JPanel();
         painelModelo = new javax.swing.JPanel();
@@ -116,7 +117,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         carteiraVacinacao = new javax.swing.JMenu();
         modeloCarteira = new javax.swing.JMenu();
-        imprimir = new javax.swing.JMenu();
         sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -240,7 +240,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(botaoLimparCarteira)
                         .addGap(100, 100, 100)
                         .addComponent(botaoBuscarCarteira)))
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         painelBorda1Layout.setVerticalGroup(
             painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,8 +298,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        gerarPDF.setText("Gerar carteira para PDF");
+        gerarPDF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gerarPDFMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelCarteiraLayout = new javax.swing.GroupLayout(painelCarteira);
         painelCarteira.setLayout(painelCarteiraLayout);
@@ -312,7 +319,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(painelBorda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelCarteiraLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(gerarPDF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botaoInserirVacinaCarteira)
                         .addGap(100, 100, 100)
                         .addComponent(botaoRemoverVacinaCarteira)
@@ -336,7 +344,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(botaoInserirVacinaCarteira)
                     .addComponent(botaoRemoverVacinaCarteira)
                     .addComponent(botaoAplicarVacinaCarteira)
-                    .addComponent(botaoAgendarVacinaCarteira))
+                    .addComponent(botaoAgendarVacinaCarteira)
+                    .addComponent(gerarPDF))
                 .addGap(40, 40, 40))
         );
 
@@ -822,14 +831,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(modeloCarteira);
 
-        imprimir.setText("  Gerar carteira  ");
-        imprimir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imprimirMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(imprimir);
-
         sair.setText("  Sair  ");
         sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1194,11 +1195,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoInserirVacinaModeloCadastrarMouseClicked
 
-    private void imprimirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imprimirMouseClicked
-        /// nao implementado ainda
-        ///fachada.imprimir(e,r);
-    }//GEN-LAST:event_imprimirMouseClicked
-
     private void botaoCadastrarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCadastrarModeloMouseClicked
         mudarToTela4();
     }//GEN-LAST:event_botaoCadastrarModeloMouseClicked
@@ -1267,15 +1263,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         else{
             AplicarVacina aplicar = new AplicarVacina(this,true);
             aplicar.setVisible(true);
-            String retorno = aplicar.getVacina();
+            String retorno;
+            retorno = aplicar.getVacina();
             if(!retorno.equals("")){
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     Date dataAux;
                     dataAux = sdf.parse(retorno);
-                    fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dataAux);
-                    tableVacina.setValueAt(retorno, linha, 2);
+                    if(fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dataAux)){
+                        JOptionPane.showMessageDialog(this,"Agendado com sucesso!!");
+                        tableVacina.setValueAt(retorno, linha, 2);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this,"Falha ao agendar vacina");
+                    }
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(this,"Data invalida!");
                 }
@@ -1350,11 +1352,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Selecione uma vacina");
         }
         else{
+            String verificador = (String) tableVacina.getValueAt(linha,2);
+           
+            boolean valido = true;
+
+            
+            Character caractere = verificador.charAt(0);
+            if (!Character.isDigit(caractere)) {
+                //É letra
+                valido = false;
+            }
+            
+            if(valido == false){
+                JOptionPane.showMessageDialog(this,"Agende uma data antes de aplicar uma vacina");
+                return;
+            }
+            
             String nomeVacina = (String) tableVacina.getValueAt(linha,3);
             if(fachada.aplicarVacina(cpf, nome, nomeVacina)){
                 tableVacina.setValueAt("Aplicada", linha, 1);
                 JOptionPane.showMessageDialog(this,"Vacina aplicada com sucesso");
                 
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Falha ao aplicar vacina");
             }
         }
 
@@ -1378,6 +1399,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Vacina removida com sucesso!");
         }
     }//GEN-LAST:event_botaoRemoverVacinaModeloCadastrarMouseClicked
+
+    private void gerarPDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gerarPDFMouseClicked
+        String c = labelC.getText();
+        long cpf = Long.parseLong(c);
+        String n = labelN.getText();
+        if(fachada.gerarPDF(cpf,n)){
+            JOptionPane.showMessageDialog(this,"Carteira gerada com sucesso!");
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Falha ao gerar carteira");
+        }
+    }//GEN-LAST:event_gerarPDFMouseClicked
 
     private void mudarToTela1(){
         clearFields();
@@ -1561,7 +1594,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel fundoModelo;
     private javax.swing.JLabel fundoModelo1;
     private javax.swing.JLabel fundoModelo2;
-    private javax.swing.JMenu imprimir;
+    private javax.swing.JButton gerarPDF;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -110,7 +110,7 @@ public class Carteira {
     /** Gera Arquivo de extensão pdf contendo dados da carteira
      *  e incluindo uma tabela de todas as vacinas marcadas na carteira
      */
-    public void imprimir() {
+    public boolean gerarPDF() {
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("CV_" + clienteModExterno.getNome() + "_" + pacienteModExterno.getNome() + ".pdf"));
@@ -162,8 +162,9 @@ public class Carteira {
             
             document.add(table);
             document.close();
+            return true;
         } catch (Exception ex) {
-            Logger.getLogger(Carteira.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
@@ -199,14 +200,22 @@ public class Carteira {
      * @param vacina
      */
     public boolean aplicarVacina(String vacina) {
-        int index = carteiraVacina.indexOf(vacina);
+        int i = 0,index = -1;
+        while(i < carteiraVacina.size()){
+            String v = carteiraVacina.get(i).getVacina();
+            if(v.equals(vacina)){
+                index = i;
+            }
+            i++;
+        }
         
+       
         if(index != -1) {
             carteiraVacina.get(index).setAplicada(true);
             return true;
         }
         else {
-            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            
             return false;
         }
     }
@@ -216,14 +225,21 @@ public class Carteira {
      * @param data
      */
     public boolean agendarVacina(String vacina, Date data) {
-        int index = carteiraVacina.indexOf(vacina);
+        int i = 0,index = -1;
+        while(i < carteiraVacina.size()){
+            String v = carteiraVacina.get(i).getVacina();
+            if(v.equals(vacina)){
+                index = i;
+            }
+            i++;
+        }
         
         if(index != -1) {
             carteiraVacina.get(index).setData(data);
             return true;
         }
         else {
-            JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            
             return false;
         }
     }
@@ -233,7 +249,14 @@ public class Carteira {
      * @return boolean
      */
     public boolean delVacina(String vacina) {
-        int index = carteiraVacina.indexOf(vacina);
+        int i = 0,index = -1;
+        while(i < carteiraVacina.size()){
+            String v = carteiraVacina.get(i).getVacina();
+            if(v.equals(vacina)){
+                index = i;
+            }
+            i++;
+        }
         
         if(carteiraVacina.remove(carteiraVacina.get(index))) {
             return true;

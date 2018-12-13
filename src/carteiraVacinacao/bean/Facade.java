@@ -95,10 +95,10 @@ public class Facade {
         carteira.carteiraBD.remove(cpf, nome);
     }
     
-    public void imprimir(long cpf, String nome)
+    public boolean gerarPDF(long cpf, String nome)
     {
         carteira.buscarCart(cpf,nome);
-        carteira.imprimir();
+        return carteira.gerarPDF();
     }
     
     public String getVetorVacina(){

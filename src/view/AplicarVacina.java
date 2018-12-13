@@ -48,6 +48,7 @@ public class AplicarVacina extends javax.swing.JDialog {
         botaoCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agendar vacina");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -55,7 +56,7 @@ public class AplicarVacina extends javax.swing.JDialog {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createTitledBorder("Agendar vacina")));
 
-        labelData.setText("Digite a data para a aplicação da vacina no campo abaixo:");
+        labelData.setText("Vacina disponível. Digite a data para a aplicação da vacina:");
 
         botaoSalvar.setText("Salvar");
         botaoSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -92,7 +93,7 @@ public class AplicarVacina extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dataVacina, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 64, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(botaoCancelar)))
                         .addGap(49, 49, 49)
                         .addComponent(botaoLimpar)

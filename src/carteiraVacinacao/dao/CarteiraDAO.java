@@ -32,6 +32,9 @@ public class CarteiraDAO {
         stmt.setLong(1, c.getClienteModExterno().getCpf());
         stmt.setString(2, c.getPacienteModExterno().getNome());
         stmt.setInt(3, c.getQtdVacinas());
+        
+        stmt.executeUpdate();
+        
         return true;
         
         } catch (SQLException ex) {

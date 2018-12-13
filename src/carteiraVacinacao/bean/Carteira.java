@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,24 +104,42 @@ public class Carteira {
         Rectangle small = new Rectangle(290,100);
         PdfPTable table = new PdfPTable(2);
         
-        table.setTotalWidth(new float[]{ 160, 120 });
+        Stream.of("Vacina", "Foi Aplicada?").forEach(columnTitle -> {
+            PdfPCell header = new PdfPCell();
+            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            header.setBorderWidth(2);
+            header.setPhrase(new Phrase(columnTitle));
+            table.addCell(header);
+        });
+        
+        table.setTotalWidth(new float[]{ 180, 120 });
         table.setLockedWidth(true);
         
-        // first row
-        PdfPCell cell = new PdfPCell(new Phrase("Vacina tal"));
-        cell.setFixedHeight(30);
-        cell.setBorder(Rectangle.NO_BORDER);
-        cell.setColspan(2);
-        table.addCell(cell);
-        
-        // second row
-        cell = new PdfPCell(new Phrase("Vacina tol"));
-        cell.setFixedHeight(30);
-        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setBorder(Rectangle.NO_BORDER);
-        table.addCell(cell);
-        
-        table.addCell(cell);
+        //for(int i = 0 ; i < carteiraVacina.size() ; i++) {
+            // first row
+            //String p = carteiraVacina.get(i).getVacina();
+            //SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+            //p += "\n" + sdf.format(carteiraVacina.get(i).getData());
+            String p = "Vacina pra raiva\n05 de janeiro de 2018\n";
+            PdfPCell cell = new PdfPCell(new Phrase(p));
+            cell.setBorder(Rectangle.BOX);
+            table.addCell(cell);
+
+            // second row
+            cell = new PdfPCell(new Phrase("SIM!"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            table.addCell(cell);
+            
+            p = "Vacina pra conjutivite\n02 de fevereiro de 2018\n";
+            cell = new PdfPCell(new Phrase(p));
+            cell.setBorder(Rectangle.BOX);
+            table.addCell(cell);
+
+            // second row
+            cell = new PdfPCell(new Phrase("SIM!"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            table.addCell(cell);
+        //}
         
         document.add(table);
         document.close();

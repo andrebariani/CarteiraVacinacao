@@ -6,6 +6,7 @@
 package carteiraVacinacao.bean;
 
 import carteiraVacinacao.dao.CarteiraDAO;
+import carteiraVacinacao.dao.CtrVacinaDAO;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -41,6 +42,7 @@ public class Carteira {
     public String dateFormat;
     
     public CarteiraDAO carteiraBD;
+    public CtrVacinaDAO CtrVacinaBD;
    
     public Carteira() { 
         this.dateFormat = "dd/MM/yyyy"; 
@@ -49,6 +51,7 @@ public class Carteira {
         pacienteModExterno = new Paciente();
         carteiraVacina = new ArrayList<>();
         carteiraBD = new CarteiraDAO();
+        CtrVacinaBD = new CtrVacinaDAO();
     }
     
     public void importarModelo(List<String> Vacinas) {
@@ -71,6 +74,16 @@ public class Carteira {
         ca.setPacienteModExterno(p);
         
         this.carteiraBD.create(ca);
+    }
+    
+    public void addVacina(String vacina, Date data) {
+        CtrVacina va = new CtrVacina();
+        va.setVacina(vacina);
+        va.setData(data);
+        
+        carteiraVacina.add(va);
+        
+        this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
     public void excluirCart(long cpf, String nome) {

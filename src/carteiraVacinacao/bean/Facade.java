@@ -208,6 +208,7 @@ public class Facade {
     public boolean addVacina(String e, String r, String vacina)
     {
         if(modelo.importarMod(e, r) == 1){
+            
             return modelo.addVacina(vacina);
         }
         else{

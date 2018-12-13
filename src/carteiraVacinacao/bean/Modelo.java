@@ -140,6 +140,7 @@ public class Modelo {
         //Verifica se ja existe um modelo para a especie e raca especificada
         if(!mBD.readModelo(this.especie, this.raca, this))
         {
+            
             //Cadastrando o modelo no banco de dados
             mBD.create(this);
         }
@@ -194,7 +195,7 @@ public class Modelo {
     public String getVetorVacina()
     {
         String v = "";
-        for(int i = 0; i < this.qtdVacinas; i++)
+        for(int i = 0; i < this.vacinas.size(); i++)
         {
             v += this.vacinas.get(i) + ";";
         }
@@ -229,6 +230,8 @@ public class Modelo {
         {
             this.vacinas.add(vacina);
             this.qtdVacinas++;
+            System.out.println(vacina);
+            System.out.println(this.getVetorVacina());
             ModeloDAO mBD = new ModeloDAO();
             
             return mBD.update(this);

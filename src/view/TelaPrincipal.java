@@ -67,6 +67,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         textNomeCarteira = new javax.swing.JTextField();
         botaoBuscarCarteira = new javax.swing.JButton();
         botaoLimparCarteira = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        labelCpf = new javax.swing.JLabel();
+        labelC = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
+        labelN = new javax.swing.JLabel();
         fundoCarteira = new javax.swing.JLabel();
         tela2 = new javax.swing.JPanel();
         painelModelo = new javax.swing.JPanel();
@@ -125,7 +130,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelCarteira.setBackground(new java.awt.Color(255, 255, 255));
         painelCarteira.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableVacina.setBackground(new java.awt.Color(204, 204, 255));
+        tableVacina.setBackground(new java.awt.Color(153, 153, 255));
         tableVacina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tableVacina.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableVacina.setModel(new javax.swing.table.DefaultTableModel(
@@ -190,6 +195,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         botaoAplicarVacinaCarteira.setText("Aplicar vacina");
+        botaoAplicarVacinaCarteira.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoAplicarVacinaCarteiraMouseClicked(evt);
+            }
+        });
 
         painelBorda1.setBackground(new java.awt.Color(255, 255, 255));
         painelBorda1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createTitledBorder(null, "Buscar carteira de vacinação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18)))); // NOI18N
@@ -219,26 +229,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(painelBorda1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textCpfCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfClienteCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110)
+                .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textNomeCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomePetCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelBorda1Layout.createSequentialGroup()
-                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textCpfCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpfClienteCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(110, 110, 110)
-                        .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomePetCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textNomeCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(560, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBorda1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(250, 250, 250)
                         .addComponent(botaoLimparCarteira)
-                        .addGap(99, 99, 99)
-                        .addComponent(botaoBuscarCarteira)
-                        .addGap(231, 231, 231))))
+                        .addGap(100, 100, 100)
+                        .addComponent(botaoBuscarCarteira)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         painelBorda1Layout.setVerticalGroup(
             painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelBorda1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cpfClienteCarteira)
                     .addComponent(nomePetCarteira))
@@ -246,11 +253,52 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textCpfCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textNomeCarteira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addGroup(painelBorda1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoLimparCarteira)
                     .addComponent(botaoBuscarCarteira))
+                .addContainerGap())
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createTitledBorder(null, "Dados da carteira de vacinação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18)))); // NOI18N
+
+        labelCpf.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        labelCpf.setText("CPF do cliente:");
+
+        labelC.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+
+        labelNome.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        labelNome.setText("Nome do Pet:");
+
+        labelN.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelC, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCpf))
+                .addGap(112, 112, 112)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelNome)
+                    .addComponent(labelN, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCpf)
+                    .addComponent(labelNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout painelCarteiraLayout = new javax.swing.GroupLayout(painelCarteira);
@@ -260,6 +308,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCarteiraLayout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addComponent(painelBorda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelCarteiraLayout.createSequentialGroup()
@@ -276,10 +325,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelCarteiraLayout.setVerticalGroup(
             painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCarteiraLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addContainerGap()
                 .addComponent(painelBorda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(painelCarteiraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoInserirVacinaCarteira)
@@ -304,7 +355,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelModelo.setBackground(new java.awt.Color(255, 255, 255));
         painelModelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableModelo1.setBackground(new java.awt.Color(255, 0, 0));
+        tableModelo1.setBackground(new java.awt.Color(153, 153, 255));
         tableModelo1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tableModelo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableModelo1.setModel(new javax.swing.table.DefaultTableModel(
@@ -478,6 +529,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelModelo1.setBackground(new java.awt.Color(255, 255, 255));
         painelModelo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        tableModelo2.setBackground(new java.awt.Color(153, 153, 255));
         tableModelo2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tableModelo2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableModelo2.setModel(new javax.swing.table.DefaultTableModel(
@@ -504,6 +556,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         tableModelo2.setGridColor(new java.awt.Color(0, 0, 0));
+        tableModelo2.setRowHeight(30);
         tableModelo2.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tableModelo2.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(tableModelo2);
@@ -600,7 +653,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         tela3.add(painelModelo1);
-        painelModelo1.setBounds(40, 0, 1260, 730);
+        painelModelo1.setBounds(30, 30, 1260, 730);
 
         fundoModelo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.jpg"))); // NOI18N
         fundoModelo1.setText("jLabel1");
@@ -615,7 +668,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelModelo2.setBackground(new java.awt.Color(255, 255, 255));
         painelModelo2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        tableModelo3.setBackground(new java.awt.Color(153, 153, 255));
         tableModelo3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tableModelo3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableModelo3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -640,6 +695,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         tableModelo3.setGridColor(new java.awt.Color(0, 0, 0));
+        tableModelo3.setRowHeight(30);
         tableModelo3.setSelectionBackground(new java.awt.Color(0, 0, 153));
         tableModelo3.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(tableModelo3);
@@ -726,8 +782,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(painelBorda4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(painelModelo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoInserirVacinaModeloCadastrar)
                     .addComponent(botaoCadastrarModeloCadastrar)
@@ -869,6 +925,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return;
             }
         }
+        String c = textCpfCarteira.getText();
         long cpf = Long.parseLong(textCpfCarteira.getText());
         String nome = textNomeCarteira.getText();
         id_cliente = cpf;
@@ -883,6 +940,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             if(Demo.equals("")){
                 clearFields();
                 botaoInferiorCarteira(true);
+                labelC.setText(c);
+                labelN.setText(nome);
                 return;
             }
             DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
@@ -906,6 +965,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
             clearFields();
             botaoInferiorCarteira(true);
+            labelC.setText(c);
+            labelN.setText(nome);
         } 
         else {
             // Carteira nao encontrada
@@ -913,7 +974,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
             if (resposta == JOptionPane.YES_OPTION){
                 fachada.cadastrarCart(cpf,nome);
-                
+                labelC.setText(c);
+                labelN.setText(nome);
                 boolean r = fachada.verificaModelo(cpf,nome);
                 if(r == true){
                     int importar = JOptionPane.showConfirmDialog(this,"Carteira desse pet foi cadastrada com sucesso, deseja importar um modelo pré definido?", "Carteira cadastrada!", JOptionPane.YES_NO_OPTION);
@@ -933,8 +995,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoBuscarCarteiraMouseClicked
 
     private void botaoLimparCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLimparCarteiraMouseClicked
+        String c = labelC.getText();
+        String n = labelN.getText();
+        
         // Limpa os campos
         clearFields();
+        
+        labelC.setText(c);
+        labelN.setText(n);
     }//GEN-LAST:event_botaoLimparCarteiraMouseClicked
 
     private void botaoBuscarModeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoBuscarModeloMouseClicked
@@ -994,6 +1062,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     int resposta = JOptionPane.showConfirmDialog(this,"Modelo não foi encontrado, deseja cadastrar um novo modelo?", "Modelo não encontrado!", JOptionPane.YES_NO_OPTION);
     
                     if (resposta == JOptionPane.YES_OPTION) {  
+                        
                         mudarToTela4();
                     }
                     return;
@@ -1051,8 +1120,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
             
-            botaoInferiorModeloInicial(false);
-            botaoInferiorModeloFinal(true);
+            
         }
         
     }//GEN-LAST:event_botaoAlterarModeloMouseClicked
@@ -1085,14 +1153,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         if(retorno == 0){
             clearFields();
             DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
-            
+            fachada.cadastrarMod(e, r);
             int i = 0;
             while(i < dtm.getRowCount()){
                 String vacina = (String) tableModelo3.getValueAt(i,1);
+                JOptionPane.showMessageDialog(this,vacina);
                 fachada.addVacina(e,r,vacina);
                 i++;
             }
-            fachada.cadastrarMod(e, r);
+            
             JOptionPane.showMessageDialog(this,"Modelo cadastrado com sucesso");
             
             mudarToTela2();
@@ -1106,11 +1175,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         InserirVacina inserir = new InserirVacina(this,true);
         inserir.setVisible(true);
         String retorno = inserir.getVacina();
+        
+        String e = textEspecieModeloCadastrar.getText();
+        String r = textRacaModeloCadastrar.getText();
+        
         if(!retorno.equals("")){
+            
             DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
             int n = dtm.getRowCount();
             Object[] dados = {n+1,retorno};
             dtm.addRow(dados);
+            JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
+           
+            
         }
     }//GEN-LAST:event_botaoInserirVacinaModeloCadastrarMouseClicked
 
@@ -1132,35 +1209,45 @@ public class TelaPrincipal extends javax.swing.JFrame {
         InserirVacina inserir = new InserirVacina(this,true);
         inserir.setVisible(true);
         String retorno = inserir.getVacina();
+        String c = labelC.getText();
+        long cpf = Long.parseLong(c);
+        String nome = labelN.getText();
         
         if(!retorno.equals("")){
-            if(fachada.buscarCart(id_cliente, nome_pet)){
-                if(fachada.addVacina(retorno)){
-                    DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
-                    int n = dtm.getRowCount();
-                    Object[] dados = {n+1,"Não aplicada"," ",retorno};
-                    dtm.addRow(dados);
-                    JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
-                }
-                else{
-                    JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
-                }
+            if(fachada.addVacina(cpf,nome,retorno)){
+                DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
+                int n = dtm.getRowCount();
+                Object[] dados = {n+1,"Não aplicada"," ",retorno};
+                dtm.addRow(dados);
+                JOptionPane.showMessageDialog(this,"Vacina inserida com sucesso!");
             }
             else{
-                    JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
-                }
+                JOptionPane.showMessageDialog(this,"Não foi possível inserir essa vacina!");
+            }
         }
     }//GEN-LAST:event_botaoInserirVacinaCarteiraMouseClicked
-
+    
+        
     private void botaoRemoverVacinaCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverVacinaCarteiraMouseClicked
         int linha = tableVacina.getSelectedRow();
+        String c = labelC.getText();
+        long cpf = Long.parseLong(c);
+        String nome = labelN.getText();
         
         if(linha == -1){
             JOptionPane.showMessageDialog(this,"Selecione uma vacina");
         }
         else{
             String nomeVacina = (String) tableVacina.getValueAt(linha,3);
-            if(fachada.delVacina(nomeVacina)){
+            if(fachada.delVacina(cpf,nome,nomeVacina)){
+                int n = linha;
+                DefaultTableModel dtm = (DefaultTableModel) tableVacina.getModel();
+                dtm.removeRow(linha);   
+                
+                while(n < dtm.getRowCount()){
+                    dtm.setValueAt(n+1, n, 0);
+                    n++;
+                }
                 JOptionPane.showMessageDialog(this,"Vacina removida com sucesso!");
             }
             else{
@@ -1172,6 +1259,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void botaoAgendarVacinaCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAgendarVacinaCarteiraMouseClicked
         int linha = tableVacina.getSelectedRow();
+        String c = labelC.getText();
+        long cpf = Long.parseLong(c);
+        String nome = labelN.getText();
         
         if(linha == -1){
             JOptionPane.showMessageDialog(this,"Selecione uma vacina");
@@ -1186,11 +1276,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 try {
                     Date dataAux;
                     dataAux = sdf.parse(retorno);
-                    fachada.agendarVacina(tableVacina.getValueAt(linha, 3).toString(), dataAux);
+                    fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dataAux);
                     tableVacina.setValueAt(retorno, linha, 2);
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(this,"Data invalida!");
-
                 }
                 
             }
@@ -1253,6 +1342,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoRemoverVacinaModeloMouseClicked
 
+    private void botaoAplicarVacinaCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoAplicarVacinaCarteiraMouseClicked
+        int linha = tableVacina.getSelectedRow();
+        String c = labelC.getText();
+        long cpf = Long.parseLong(c);
+        String nome = labelN.getText();
+        
+        if(linha == -1){
+            JOptionPane.showMessageDialog(this,"Selecione uma vacina");
+        }
+        else{
+            String nomeVacina = (String) tableVacina.getValueAt(linha,3);
+            if(fachada.aplicarVacina(cpf, nome, nomeVacina)){
+                tableVacina.setValueAt("Aplicada", linha, 1);
+                JOptionPane.showMessageDialog(this,"Vacina aplicada com sucesso");
+                
+            }
+        }
+
+    }//GEN-LAST:event_botaoAplicarVacinaCarteiraMouseClicked
+
     private void mudarToTela1(){
         clearFields();
         clearTable();
@@ -1289,7 +1398,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         botaoInferiorCarteira(false);
         botaoInferiorModeloInicial(false);
-        botaoInferiorModeloFinal(false);
+        botaoInferiorModeloFinal(true);
         botaoInferiorCadastrarModelo(false);
     }
     
@@ -1312,7 +1421,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Primeira tela
         textCpfCarteira.setText("");
         textNomeCarteira.setText("");
-        
+        labelC.setText("");
+        labelN.setText("");
+                
         // Segunda tela
         textEspecieModelo.setText("");
         textRacaModelo.setText("");
@@ -1435,12 +1546,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel fundoModelo2;
     private javax.swing.JMenu imprimir;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel labelC;
+    private javax.swing.JLabel labelCpf;
     private javax.swing.JLabel labelE;
     private javax.swing.JLabel labelEspecie;
+    private javax.swing.JLabel labelN;
+    private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelR;
     private javax.swing.JLabel labelRaca;
     private javax.swing.JMenu modeloCarteira;

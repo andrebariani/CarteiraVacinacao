@@ -212,7 +212,7 @@ public class Carteira {
        
         if(index != -1) {
             carteiraVacina.get(index).setAplicada(true);
-            return true;
+            return this.CtrVacinaBD.update(carteiraVacina.get(index), clienteModExterno.getCpf(), pacienteModExterno.getNome());
         }
         else {
             
@@ -236,7 +236,7 @@ public class Carteira {
         
         if(index != -1) {
             carteiraVacina.get(index).setData(data);
-            return true;
+            return this.CtrVacinaBD.update(carteiraVacina.get(index), clienteModExterno.getCpf(), pacienteModExterno.getNome());
         }
         else {
             
@@ -259,7 +259,7 @@ public class Carteira {
         }
         
         if(carteiraVacina.remove(carteiraVacina.get(index))) {
-            return true;
+            return this.CtrVacinaBD.update(carteiraVacina.get(index), clienteModExterno.getCpf(), pacienteModExterno.getNome());
         }
         else {
             JOptionPane.showMessageDialog(null, "Vacina nao encontrada", "Erro", JOptionPane.ERROR_MESSAGE);

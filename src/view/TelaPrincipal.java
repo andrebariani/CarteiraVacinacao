@@ -1258,29 +1258,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             aplicar.setVisible(true);
             String retorno = aplicar.getVacina();
             
-            if(!retorno.equals("")){
-
-                
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date dataAux;
-                    dataAux = sdf.parse(retorno);
-                    java.sql.Date dsql = new java.sql.Date(dataAux.getTime());
-                    System.out.println(dsql);
-                    if(fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), dsql)){
-                        JOptionPane.showMessageDialog(this,"Agendado com sucesso!!");
-                        tableVacina.setValueAt(retorno, linha, 2);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(this,"Falha ao agendar vacina");
-                    }
-                } catch(Exception e){
-                    JOptionPane.showMessageDialog(this,"Data invalida!");
-                    System.out.println(e.getMessage());
+            if(!retorno.equals("")){   
+                if(fachada.agendarVacina(cpf,nome,tableVacina.getValueAt(linha, 3).toString(), retorno)){
+                    JOptionPane.showMessageDialog(this,"Agendado com sucesso!!");
+                    tableVacina.setValueAt(retorno, linha, 2);
                 }
-                
+                else{
+                    JOptionPane.showMessageDialog(this,"Falha ao agendar vacina");
+                }  
             }
-    
         }
 
 
@@ -1510,6 +1496,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     private void botaoInferiorCarteira(boolean a){
         botaoRemoveCarteira.setVisible(a);
+        gerarPDF.setVisible(a);
         botaoAgendarVacinaCarteira.setVisible(a);
         botaoAplicarVacinaCarteira.setVisible(a);
         botaoInserirVacinaCarteira.setVisible(a);

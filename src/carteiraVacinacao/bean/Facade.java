@@ -9,7 +9,6 @@ import carteiraVacinacao.dao.PacienteDAO;
 import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -117,7 +116,7 @@ public class Facade {
          
     }
 
-    public boolean agendarVacina(Long cpf, String nome, String vacina, Date data) {
+    public boolean agendarVacina(Long cpf, String nome, String vacina, String data) {
         if(carteira.buscarCart(cpf, nome)){
             return carteira.agendarVacina(vacina, data);
         }

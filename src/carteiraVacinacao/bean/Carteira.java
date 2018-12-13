@@ -10,7 +10,6 @@ import carteiraVacinacao.dao.CtrVacinaDAO;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
@@ -20,11 +19,9 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Date;
 import java.util.logging.Level;
@@ -59,6 +56,7 @@ public class Carteira {
     
     /** Importa vacinas de um modelo para serem
      *  armazenadas em carteira
+     * @param Vacinas
      */
     public void importarModelo(List<String> Vacinas) {
         int i = 0;
@@ -69,6 +67,9 @@ public class Carteira {
     }
     
     /** Realiza cadastro de carteira
+     * @param cpf
+     * @param nome_pet
+     * @return 
      */
     public boolean cadastrarCart( long cpf, String nome_pet ) {
         Cliente cl = new Cliente();
@@ -87,6 +88,8 @@ public class Carteira {
     /** Adiciona nova vacina a carteira
      *  retorna true se foi possível atualizar no banco de dados
      *  retorna false caso contrário
+     * @param vacina
+     * @return 
      */
     public boolean addVacina(String vacina) {
         CtrVacina va = new CtrVacina();
@@ -97,6 +100,8 @@ public class Carteira {
     }
     
     /** Exclui carteira do banco de dados
+     * @param cpf
+     * @param nome
      */
     public void excluirCart(long cpf, String nome) {
         this.carteiraBD.remove(cpf, nome);
@@ -108,7 +113,7 @@ public class Carteira {
     public void imprimir() {
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("CV_" + clienteModExterno.getNome() + "_" + pacienteModExterno.getNome() + ".pdf"));
             
             document.open();
             Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
@@ -191,6 +196,7 @@ public class Carteira {
     }
     
     /** Define vacina de parâmetro como aplicada
+     * @param vacina
      */
     public boolean aplicarVacina(String vacina) {
         int index = carteiraVacina.indexOf(vacina);
@@ -206,6 +212,8 @@ public class Carteira {
     }
 
     /** Define data para agendamento da vacina
+     * @param vacina
+     * @param data
      */
     public boolean agendarVacina(String vacina, Date data) {
         int index = carteiraVacina.indexOf(vacina);
@@ -238,6 +246,8 @@ public class Carteira {
     
     /** Busca carteira dado como parametro o cpf do cliente e o nome 
      *  do pet.
+     * @param id_cli
+     * @param nome
      */
     public boolean buscarCart(long id_cli, String nome) {
         return carteiraBD.read( id_cli, nome, this );

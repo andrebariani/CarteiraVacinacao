@@ -69,7 +69,7 @@ public class Carteira {
     
     /** Realiza cadastro de carteira
      */
-    public void cadastrarCart( long cpf, String nome_pet ) {
+    public boolean cadastrarCart( long cpf, String nome_pet ) {
         Cliente cl = new Cliente();
         Paciente p = new Paciente();
         Carteira ca = new Carteira();
@@ -80,7 +80,7 @@ public class Carteira {
         ca.setClienteModExterno(cl);
         ca.setPacienteModExterno(p);
         
-        carteiraBD.create(ca);
+        return carteiraBD.create(ca);
     }
     
     /** Adiciona nova vacina a carteira

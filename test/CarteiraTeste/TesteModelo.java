@@ -21,30 +21,31 @@ public class TesteModelo {
     @Test
     public void Teste1CadastrarModelo(){
         m = new Modelo();
+        m.excluirMod("Calopsita", "Arlequim");
         assertTrue(m.cadastrarMod("Calopsita", "Arlequim"));
     }
     
     //Testa cadastrar modelo que existe no banco
     @Test
     public void Teste2CadastrarModelo(){
-         m = new Modelo();
+        m = new Modelo();
+        m.cadastrarMod("Cachorro", "Pincher");
         assertFalse(m.cadastrarMod("Cachorro", "Pincher"));
     }
     
     //Testa importar modelo que existe no banco
     @Test
     public void Teste3ImportarMod(){
-         m = new Modelo();
+        m = new Modelo();
+        m.cadastrarMod("Gato", "Siames");
         assertTrue(m.importarMod("Gato", "Siames")); 
     }
     
     //Testa importar um modelo que não existe
     @Test
     public void Teste4ImportarMod(){
-         m = new Modelo();
-        m.setEspecie("Camundongo");
-        m.setRaca("Albino");
-        
+        m = new Modelo();
+        m.excluirMod("Camundongo", "Albino");
         assertFalse(m.importarMod("Camundongo", "Albino")); 
     }
     //Teste para adicionar vacina 

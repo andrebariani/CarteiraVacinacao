@@ -24,11 +24,12 @@ public class CarteiraDAO {
     
     
     public boolean create(Carteira c){
+        System.out.println("Chegou");
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         
         try {
-        stmt = con.prepareStatement("INSERT INTO Cliente VALUES (?, ?, ?);");
+        stmt = con.prepareStatement("INSERT INTO carteira VALUES (?, ?, ?);");
         stmt.setLong(1, c.getClienteModExterno().getCpf());
         stmt.setString(2, c.getPacienteModExterno().getNome());
         stmt.setInt(3, c.getQtdVacinas());
@@ -38,7 +39,7 @@ public class CarteiraDAO {
         return true;
         
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir carteira");
+             System.out.println(ex.getMessage());
              return false;
         }finally{
             Conexao.closeConnection(con, stmt);

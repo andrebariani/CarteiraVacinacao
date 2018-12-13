@@ -40,7 +40,7 @@ public class CtrVacinaDAO {
             //seta valores que serao inseridos no banco de dados
             stmt.setString(1, ctr.getVacina());
             stmt.setString(2, ctr.getData());
-            stmt.setBoolean(3, ctr.isAplicada());
+            stmt.setInt(3, 0);
             stmt.setLong(4, cpfDono);
             stmt.setString(5, nomePaciente);
             
@@ -90,8 +90,10 @@ public class CtrVacinaDAO {
                //Seta valores obtidos no resultSet
                ctr.setVacina(rs.getString("nome_vacina"));
                ctr.setData(rs.getString("data_vacina"));
-               ctr.setAplicada(rs.getBoolean("aplicada"));
-                
+               if(rs.getInt("aplicada") == 1)
+                   ctr.setAplicada(true);
+               else
+                   ctr.setAplicada(false);
                //Adiciona vacina na lista
                controle.add(ctr);
             }
@@ -122,13 +124,18 @@ public class CtrVacinaDAO {
             stmt = con.prepareStatement("UPDATE ctrvacina SET data_vacina = ?, aplicada = ? WHERE cpf_dono = ? AND nome_paciente = ? AND nome_vacina = ?");
             
             //Seta os valores que serao alualizados na tabela de ctrvacina
-            stmt.setBoolean(1, ctr.isAplicada());
-            stmt.setString(2, ctr.getData());
+            stmt.setString(1, ctr.getData());
+            if(ctr.isAplicada())
+                stmt.setInt(2, 1);
+            else
+                stmt.setInt(2, 0);
+            
             //Seta os valores para a busca da vacina
             stmt.setLong(3, cpfDono);
             stmt.setString(4, nomePaciente);
             stmt.setString(5, ctr.getVacina());
             
+            System.out.println(ctr.getData() + " " + cpfDono + " " + nomePaciente);
             //executa sql no statement
             stmt.executeUpdate();
             
@@ -136,6 +143,7 @@ public class CtrVacinaDAO {
             return true;
         
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
              return false;
         }finally{
             Conexao.closeConnection(con, stmt);

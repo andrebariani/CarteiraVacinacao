@@ -74,7 +74,6 @@ public class PacienteDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
             return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);

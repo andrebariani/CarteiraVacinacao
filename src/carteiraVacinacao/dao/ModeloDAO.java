@@ -131,7 +131,6 @@ public class ModeloDAO {
             return modelos;
             
         } catch (SQLException ex) {
-             System.out.println(ex.getMessage());
              return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);
@@ -148,8 +147,6 @@ public class ModeloDAO {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs;
-
-        System.out.println(especie+raca);
                 
         try {
             //Gera sql que sera executado no banco
@@ -167,11 +164,9 @@ public class ModeloDAO {
                 m.setRaca(rs.getString("Raca"));
                 m.setQtdVacinas(rs.getInt("qtd"));
                 m.setVetorVacina(rs.getString("vacinas"));
-                System.out.println(rs.getString("especie"));
                 //Retorna que foi feita a leitura de um modelo
                 return true;
             }else{
-                System.out.println("oii");
                 //Retorna que o modelo não existe no banco de dados
                 return false;
             }
@@ -228,7 +223,6 @@ public class ModeloDAO {
         stmt.setString(2, m.getVetorVacina());
         stmt.setString(3, m.getEspecie());
         stmt.setString(4, m.getRaca());
-            System.out.println("oi" + m.getVetorVacina()+" " + m.getEspecie());
         //Executa sql setado no statement 
         stmt.executeUpdate();
         

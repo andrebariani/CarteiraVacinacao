@@ -99,7 +99,6 @@ public class CtrVacinaDAO {
             return controle;
             
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
              return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);

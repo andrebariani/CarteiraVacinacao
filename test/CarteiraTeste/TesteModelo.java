@@ -16,50 +16,81 @@ import org.junit.Before;
  */
 public class TesteModelo {
     private Modelo m;
+    private Modelo model;
     
     @Before
     public void setup(){
         m = new Modelo();
-    }
-    
+        model = new Modelo();
+    } 
     //Testa cadastrar modelo não existente no banco
     @Test
     public void Teste1CadastrarModelo(){
-        m.setEspecie("Gato");
-        m.setRaca("Siames");
-        
-        assertEquals(true , m.cadastrarMod());
-        
+        assertTrue(m.cadastrarMod("Calopsita", "Arlequim"));
     }
     
     //Testa cadastrar modelo que existe no banco
     @Test
     public void Teste2CadastrarModelo(){
-        m.setEspecie("Gato");
-        m.setRaca("Siames");
-        
-        assertEquals(false , m.cadastrarMod());
-        
+        assertFalse(m.cadastrarMod("Gato", "Siames"));
     }
-    //Testa cadastrar modelo que existe no banco
+    
+    //Testa importar modelo que existe no banco
     @Test
-    public void Teste3CadastrarModelo(){
-        m.setEspecie("Gato");
-        m.setRaca("Siames");
+    public void Teste3ImportarMod(){
+        assertTrue(m.importarMod("Gato", "Siames")); 
+    }
+    
+    //Testa importar um modelo que não existe
+    @Test
+    public void Teste4ImportarMod(){
+        m.setEspecie("Camundongo");
+        m.setRaca("Albino");
         
-        assertEquals(false , m.cadastrarMod());
+        assertTrue(m.importarMod("Camundongo", "Albino")); 
+    }
+    //Teste para adicionar vacina 
+    @Test
+    public void Teste5AddVacina(){
+        m.addVacina("V4", "Gato", "Siames");
+        
+        assertTrue(m.addVacina("Panleucopenia", "Gato", "Siames")); 
+    }
+    
+    //Teste para adicionar mais uma vacina e getVetorVacina
+    @Test
+    public void Teste6AddVacina(){
+        m.addVacina("Rinotraqueíte", "Gato", "Siames");
+        m.addVacina("Calicivirose", "Gato", "Siames");
+        m.addVacina("Clamidiose", "Gato", "Siames");
+        m.addVacina("Raiva", "Gato", "Siames");
+        
+        model.importarMod("Gato", "Siames");
+                
+        assertEquals("Panleucopenia;Rinotraqueíte;Calicivirose;Clamidiose;Raiva" ,  model.getVetorVacina()); 
         
     }
     
+    //Teste para adicionar vacina repetida 
     @Test
-    public void Teste4ImportarModelo(){
-        m.setEspecie("Gato");
-        m.setRaca("Siames");
+    public void Teste7AddVacina(){
+        m.addVacina("V4", "Gato", "Siames");
         
-        assertEquals(false , m.cadastrarMod());
+        assertFalse(m.addVacina("V4", "Gato", "Siames")); 
+    }
+    //Testa remover uma vacina ja inserida
+    @Test
+    public void Teste7DelVacina(){
+        m.addVacina("V10", "Gato", "Siames");
         
+        assertTrue(m.delVacina("V10", "Gato", "Siames"));
     }
     
+    //Testa remover uma vacina não inserida
+    @Test
+    public void Teste8DelVacina(){
+        assertFalse(m.delVacina("IssoNãoÉVacina", "Gato", "Siames"));
+    }
     
     
 }

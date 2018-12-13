@@ -28,7 +28,7 @@ public class CtrVacinaDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO ctrVacina VALUES (?, ?, ?, ?, ?, ?);");
+            stmt = con.prepareStatement("INSERT INTO ctrVacina VALUES (?, ?, ?, ?, ?);");
             stmt.setString(1, ctr.getVacina());
             stmt.setDate(2, (Date) ctr.getData());
             stmt.setBoolean(3, ctr.isAplicada());

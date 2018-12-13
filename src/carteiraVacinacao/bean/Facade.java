@@ -105,9 +105,7 @@ public class Facade {
         return carteira.getVetorVacina();
     }
     
-    public void setVetorVacina(String strVacina){
-        carteira.setVetorVacina(strVacina);
-    }
+    
     
     public boolean aplicarVacina(Long cpf, String nome, String vacina) {
         if(carteira.buscarCart(cpf, nome)){

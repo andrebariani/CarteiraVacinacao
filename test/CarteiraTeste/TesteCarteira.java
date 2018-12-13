@@ -6,6 +6,8 @@
 package CarteiraTeste;
 
 import carteiraVacinacao.bean.Carteira;
+import carteiraVacinacao.bean.Cliente;
+import carteiraVacinacao.bean.Paciente;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -17,11 +19,20 @@ import org.junit.Test;
  */
 public class TesteCarteira {
     private Carteira c;
-    
+    private Cliente clienteModExterno;
+    private Paciente pacienteModExterno;
     @Before
     public void setup(){
         c = new Carteira();
+        clienteModExterno = new Cliente();
+        pacienteModExterno = new Paciente();
         
+        clienteModExterno.setCpf(54123698740L);
+        
+        pacienteModExterno.setNome("Freddy");
+        pacienteModExterno.setCpfDono(54123698740L);
+        pacienteModExterno.setEspecie("Gato");
+        pacienteModExterno.setEspecie("Tonquines");
     }
     
     /**Testa cadastrar carteira não existente no banco */
@@ -109,8 +120,8 @@ public class TesteCarteira {
        
        c.cadastrarCart(54123698740L, "Freddy");
        
-       c.setClienteModExterno(54123698740L);
-       c.setPacienteModExterno("Freddy"); 
+       c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno); 
        
        assertTrue(c.addVacina("antirrabica"));               
     }
@@ -123,8 +134,8 @@ public class TesteCarteira {
        
        c.cadastrarCart(54123698740L, "Freddy");
        
-       c.setClienteModExterno(54123698740L);
-       c.setPacienteModExterno("Freddy"); 
+       c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno); 
        
        c.addVacina("V8");
        c.addVacina("V10");      
@@ -140,8 +151,8 @@ public class TesteCarteira {
        
        c.cadastrarCart(54123698740L, "Freddy");
        
-       c.setClienteModExterno(54123698740L);
-       c.setPacienteModExterno("Freddy"); 
+       c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno);  
        
        c.addVacina("V8");
        c.addVacina("V10");
@@ -159,10 +170,28 @@ public class TesteCarteira {
         
        c.excluirCart(54123698740L, "Freddy");     
        
-       c.setClienteModExterno(54123698740L);
-       c.setPacienteModExterno("Freddy"); 
+       c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno);  
        
        assertFalse(c.addVacina("antirrabica"));               
+    }
+    
+    /** Testa adicionar uma vacina com um nome maior do que o limite permitido
+     * no banco
+     */
+    @Test
+    public void Teste5AddVacina()
+    {
+        String vacina = "pneumoultramicroscopicossilicovulcanoconiótico com "
+                + "Piperidinoetoxicarbometoxibenzofenona e "
+                + "Hipopotomonstrosesquipedaliofobia ";
+        
+        c.excluirCart(54123698740L, "Freddy");     
+       
+       c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno);  
+       
+        assertFalse(c.addVacina(vacina));
     }
     
     /** Testa excluir carteira */
@@ -221,8 +250,8 @@ public class TesteCarteira {
        
         c.cadastrarCart(54123698740L, "Freddy");
        
-        c.setClienteModExterno(54123698740L);
-        c.setPacienteModExterno("Freddy"); 
+        c.setClienteModExterno(clienteModExterno);
+       c.setPacienteModExterno(pacienteModExterno);  
         
         c.addVacina("Parvovirus felino");
        
@@ -237,8 +266,8 @@ public class TesteCarteira {
        
         c.cadastrarCart(54123698740L, "Freddy");
        
-        c.setClienteModExterno(54123698740L);
-        c.setPacienteModExterno("Freddy"); 
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno); 
   
         c.addVacina("Parvovirus felino");
         
@@ -255,8 +284,8 @@ public class TesteCarteira {
        
         c.cadastrarCart(54123698740L, "Freddy");
        
-        c.setClienteModExterno(54123698740L);
-        c.setPacienteModExterno("Freddy"); 
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno); 
         
         c.aplicarVacina("Parvovirus felino");
                    
@@ -271,8 +300,8 @@ public class TesteCarteira {
        
         c.cadastrarCart(54123698740L, "Freddy");
        
-        c.setClienteModExterno(54123698740L);
-        c.setPacienteModExterno("Freddy"); 
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno); 
         
         boolean v1,v2,v3,v4,v5,v6, result = true;
         

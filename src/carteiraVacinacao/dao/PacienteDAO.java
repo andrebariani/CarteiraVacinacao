@@ -33,7 +33,7 @@ public class PacienteDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                new Paciente();
+                p = new Paciente();
                 p.setNome(rs.getString("nome"));
                 p.setEspecie(rs.getString("especie"));
                 p.setRaca(rs.getString("raca"));
@@ -57,9 +57,9 @@ public class PacienteDAO {
         ResultSet rs = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM paciente WHERE cpf_dono = ? AND nome_paciente = ?");
+            stmt = con.prepareStatement("SELECT * FROM paciente WHERE cpf_dono = ? AND nome = ?");
             stmt.setLong(1, cpf);
-            stmt.setString(1, nome);
+            stmt.setString(2, nome);
             
             rs = stmt.executeQuery();
             

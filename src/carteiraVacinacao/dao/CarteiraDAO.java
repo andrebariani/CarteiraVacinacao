@@ -18,9 +18,16 @@ import javax.swing.JOptionPane;
  * @author lucca
  */
 public class CarteiraDAO {
-    private ClienteDAO cdao;
-    private PacienteDAO pdao;
-    private CtrVacinaDAO ctrdao;
+    private final ClienteDAO cdao;
+    private final PacienteDAO pdao;
+    private final CtrVacinaDAO ctrdao;
+
+    public CarteiraDAO() {
+        this.cdao = new ClienteDAO();
+        this.pdao = new PacienteDAO();
+        this.ctrdao = new CtrVacinaDAO();
+    }
+    
     
     
     public boolean create(Carteira c){
@@ -49,7 +56,7 @@ public class CarteiraDAO {
         
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
+        ResultSet rs;
         
         try {
             stmt = con.prepareStatement("Select * FROM carteira WHERE cpf_cliente = ? AND nome_paciente = ?");
@@ -63,12 +70,12 @@ public class CarteiraDAO {
                 c.setPacienteModExterno(pdao.readPaciente(rs.getLong("cpf_cliente"), rs.getString("nome_paciente")));
                 c.setQtdVacinas(rs.getInt("qtd"));
                 c.setCarteiraVacina(ctrdao.read(rs.getLong("cpf_cliente"), rs.getString("nome_paciente")));
+                
+                return true;
             }else{
-                //JOptionPane.showMessageDialog(null, "Carteira não existe");
+                JOptionPane.showMessageDialog(null, "Carteira não existe");
                 return false;
             }
-            
-            return true;
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Falha ao buscar carteira");
              return false;

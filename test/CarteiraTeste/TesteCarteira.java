@@ -8,7 +8,9 @@ package CarteiraTeste;
 import carteiraVacinacao.bean.Carteira;
 import carteiraVacinacao.bean.Cliente;
 import carteiraVacinacao.bean.Paciente;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -194,20 +196,39 @@ public class TesteCarteira {
         assertFalse(c.addVacina(vacina));
     }
     
-    /** Testa excluir carteira */
+    /** Testa excluir carteira e busca ela no banco de dados */
     @Test
     public void Teste1ExcluirCarteira()
     {
-        long cpf = 54123698740L;
-        
+        long cpf = 54123698740L;      
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);  
+       
         c.cadastrarCart(cpf, "Freddy");
           
-        assertTrue(c.excluirCart(cpf, "Dolby")); 
+        assertTrue(c.excluirCart(cpf, "Freddy")); 
+    }
+    
+    /** Testa excluir carteira */
+    @Test
+    public void Teste2ExcluirCarteira()
+    {
+        long cpf = 54123698740L;      
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);  
+       
+        c.cadastrarCart(cpf, "Freddy");
+          
+        c.excluirCart(cpf, "Freddy"); 
+        
+        assertFalse(c.buscarCart(cpf, "Freddy"));
     }
     
      /** Testa excluir uma carteira nao adicionada*/
     @Test
-    public void Teste2ExcluirCarteira()
+    public void Teste3ExcluirCarteira()
     {
         long cpf = 45121474995L;                    
           
@@ -218,7 +239,7 @@ public class TesteCarteira {
        * informar um pet valido
        */
     @Test
-    public void Teste3ExcluirCarteira()
+    public void Teste4ExcluirCarteira()
     {
         long cpf = 54123698740L;  
         
@@ -231,7 +252,7 @@ public class TesteCarteira {
       * ele no banco de dados
       */
     @Test
-    public void Teste4ExcluirCarteira()
+    public void Teste5ExcluirCarteira()
     {
         long cpf = 54123698740L;  
         
@@ -330,17 +351,91 @@ public class TesteCarteira {
     
      /** Testa Agendar uma vacina */
     @Test
-    public void TesteAgendarVacina1()
+    public void Teste1AgendarVacina1()
     {   
-        Carteira cart = new Carteira();
-        Date data = new Date();
-        data.getTime();
+        c.excluirCart(54123698740L, "Freddy");
+       
+        c.cadastrarCart(54123698740L, "Freddy");
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);
         
         c.addVacina("Parvovirus felino");
 
-        cart.agendarVacina("Parvovirus felino", data);
+        c.agendarVacina("Parvovirus felino", "30/12/2018");
         
-        assertTrue(cart.aplicarVacina("Parvovirus felino"));  
+        assertTrue(c.aplicarVacina("Parvovirus felino"));  
+    }
+    
+     /** Testa Agendar uma vacina nao existente*/
+    @Test
+    public void Teste2AgendarVacina1()
+    {   
+        c.excluirCart(54123698740L, "Freddy");
+       
+        c.cadastrarCart(54123698740L, "Freddy");
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);       
+
+        c.agendarVacina("Parvovirus felino", "30/12/2018");
+        
+        assertFalse(c.aplicarVacina("Parvovirus felino"));  
+    }
+    
+    /** Teste importar um novo modelo de vacina */
+    @Test
+    public void Teste1ImportarModelo()
+    {
+        boolean result = true;
+        
+        c.excluirCart(54123698740L, "Freddy");
+       
+        c.cadastrarCart(54123698740L, "Freddy");
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);       
+
+        
+        List<String> vacinas = new ArrayList<>();
+        vacinas.add("Parvovirus felino");
+        vacinas.add("FPV");
+        vacinas.add("FHV-1");
+        vacinas.add("V8");
+        vacinas.add("Anti-rabbia");
+        vacinas.add("FCV");
+        
+        c.importarModelo(vacinas);
+        
+        for (int i = 0; i < 6; i++) {
+            result = result && c.getCarteiraVacina().get(i).isAplicada();
+        } 
+        
+        result = result && c.getQtdVacinas() == 6;
+        
+        assertTrue(result);        
+    }
+    
+    /** Teste importar um novo modelo vazio */
+    @Test
+    public void Teste2ImportarModelo()
+    {
+        boolean result = true;
+        
+        c.excluirCart(54123698740L, "Freddy");
+       
+        c.cadastrarCart(54123698740L, "Freddy");
+       
+        c.setClienteModExterno(clienteModExterno);
+        c.setPacienteModExterno(pacienteModExterno);       
+
+        
+        List<String> vacinas = new ArrayList<>();
+        
+        c.importarModelo(vacinas);
+         
+        
+        assertEqual(0, c.getQtdVacinas());        
     }
     
 }

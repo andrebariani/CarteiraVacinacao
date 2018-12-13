@@ -39,7 +39,7 @@ public class CtrVacinaDAO {
             
             //seta valores que serao inseridos no banco de dados
             stmt.setString(1, ctr.getVacina());
-            stmt.setDate(2, ctr.getData());
+            stmt.setString(2, ctr.getData());
             stmt.setBoolean(3, ctr.isAplicada());
             stmt.setLong(4, cpfDono);
             stmt.setString(5, nomePaciente);
@@ -89,7 +89,7 @@ public class CtrVacinaDAO {
                
                //Seta valores obtidos no resultSet
                ctr.setVacina(rs.getString("nome_vacina"));
-               ctr.setData(rs.getDate("data_vacina"));
+               ctr.setData(rs.getString("data_vacina"));
                ctr.setAplicada(rs.getBoolean("aplicada"));
                 
                //Adiciona vacina na lista
@@ -123,7 +123,7 @@ public class CtrVacinaDAO {
             
             //Seta os valores que serao alualizados na tabela de ctrvacina
             stmt.setBoolean(1, ctr.isAplicada());
-            stmt.setDate(2, (Date) ctr.getData());
+            stmt.setString(2, ctr.getData());
             //Seta os valores para a busca da vacina
             stmt.setLong(3, cpfDono);
             stmt.setString(4, nomePaciente);
@@ -136,7 +136,6 @@ public class CtrVacinaDAO {
             return true;
         
         } catch (SQLException ex) {
-            System.out.println("oii");
              return false;
         }finally{
             Conexao.closeConnection(con, stmt);

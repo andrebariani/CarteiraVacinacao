@@ -1361,14 +1361,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoAplicarVacinaCarteiraMouseClicked
 
     private void botaoRemoverVacinaModeloCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverVacinaModeloCadastrarMouseClicked
-        int linha = tableModelo2.getSelectedRow();
+        int linha = tableModelo3.getSelectedRow();
         
         if(linha == -1){
             JOptionPane.showMessageDialog(this,"Selecione uma vacina");
         }
         else{
             int n = linha;
-            DefaultTableModel dtm = (DefaultTableModel) tableModelo2.getModel();
+            DefaultTableModel dtm = (DefaultTableModel) tableModelo3.getModel();
             dtm.removeRow(linha);   
 
             while(n < dtm.getRowCount()){

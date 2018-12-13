@@ -171,7 +171,7 @@ public class Carteira {
     }
     
     public String getVetorVacina(){
-        String strVacina = null;
+        String strVacina = "";
         
         for(CtrVacina temp : carteiraVacina) {
             strVacina += temp.getVacina();

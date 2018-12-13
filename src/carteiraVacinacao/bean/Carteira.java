@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Date;
 import java.util.logging.Level;
@@ -187,36 +188,6 @@ public class Carteira {
         }
         
         return strVacina;
-    }
-    
-    public void setVetorVacina(String strVacina){
-        String vVacina[] = strVacina.split(";");
-        
-        for(int i = 0 ; i < 9999 ; i+=3) {
-            CtrVacina aux = new CtrVacina();
-            
-            aux.setVacina(vVacina[i]);
-            
-            Date dataAux;
-            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-            
-            try {
-                dataAux = sdf.parse(vVacina[1+i]);
-            } catch(Exception e){
-                return;
-            }
-            
-            aux.setData(dataAux);
-            
-            if("T".equals(vVacina[2+i])) {
-                aux.setAplicada(true);
-            } else {
-                aux.setAplicada(false);
-            }
-            
-            carteiraVacina.add(aux);
-        }
-        
     }
     
     /** Define vacina de parâmetro como aplicada

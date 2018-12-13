@@ -233,6 +233,10 @@ public class Modelo {
         }
     }
     
+    public void limpar(){
+        this.qtdVacinas = 0;
+        this.vacinas.clear();
+    }
     
     
 }

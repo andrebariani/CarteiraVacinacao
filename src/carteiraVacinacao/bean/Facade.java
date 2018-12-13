@@ -190,7 +190,14 @@ public class Facade {
      */
     public boolean cadastrarMod(String e, String r)
     {
-        return modelo.cadastrarMod(e,r);
+        if(modelo.cadastrarMod(e,r)){
+            modelo.limpar();
+            return true;
+        }else{
+            modelo.limpar();
+            return false;
+        }
+      
     }
     
      /** Remove o modelo especificado
@@ -223,7 +230,14 @@ public class Facade {
      */
     public boolean addVacina(String e, String r, String vacina)
     { 
-            return modelo.addVacina(e,r,vacina);
+            if(modelo.addVacina(e,r,vacina)){
+                modelo.limpar();
+                return true;
+            }else{
+                modelo.limpar();
+                return false;
+            }
+                
     }    
     
     
@@ -236,7 +250,14 @@ public class Facade {
      */  
     public boolean delVacina(String e, String r, String vacina)
     {
-        return modelo.delVacina(e,r,vacina);
+        if(modelo.delVacina(e,r,vacina)){
+                modelo.limpar();
+                return true;
+            }else{
+                modelo.limpar();
+                return false;
+            }
+             
     }
     
      /** Obtem todas as vacinas do modelo especificado

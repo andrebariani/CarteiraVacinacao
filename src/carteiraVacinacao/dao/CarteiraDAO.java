@@ -24,7 +24,6 @@ public class CarteiraDAO {
     
     
     public boolean create(Carteira c){
-        System.out.println("Chegou");
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         

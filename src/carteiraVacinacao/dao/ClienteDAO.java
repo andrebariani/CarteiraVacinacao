@@ -19,28 +19,6 @@ import javax.swing.JOptionPane;
  * @author lucca
  */
 public class ClienteDAO {
-    
-    public void create(Cliente c){
-        Connection con = null;
-        con = Conexao.getConnection();
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = con.prepareStatement("INSERT INTO Cliente VALUES (?, ?);");
-            stmt.setLong(1, c.getCpf());
-            stmt.setString(2, c.getNome());
-            
-            stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso: " + c.getNome());
-
-        } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Falha ao inserir cliente");
-        }finally{
-            Conexao.closeConnection(con, stmt);
-        }
-    }
-    
     public Cliente readCliente(long cpf){
         Cliente c = new Cliente();
         Connection con = Conexao.getConnection();
@@ -56,18 +34,18 @@ public class ClienteDAO {
             if(rs.next()){
                 c.setCpf(rs.getLong("cpf"));
                 c.setNome(rs.getString("nome_cliente"));
+                
+                return c;
             }else{
                 JOptionPane.showMessageDialog(null, "CPF não cadastrado");
-                Conexao.closeConnection(con, stmt, rs);
                 return null;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha na leitura");
-            Conexao.closeConnection(con, stmt, rs);
             return null;
+        }finally{
+            Conexao.closeConnection(con, stmt, rs);
         }
-        Conexao.closeConnection(con, stmt, rs);
-        return c;
     }
     
      public ArrayList<Cliente> read(){
@@ -88,14 +66,15 @@ public class ClienteDAO {
                 
                 clientes.add(c);
             }
+            
+            return clientes;
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha na leitura");
-            Conexao.closeConnection(con, stmt, rs);
             return null;
+        }finally{
+            Conexao.closeConnection(con, stmt, rs);
         }
-        Conexao.closeConnection(con, stmt, rs);
-        return clientes;
-    }
     
-    
+     } 
 }

@@ -74,8 +74,7 @@ public class PacienteDAO {
                 return null;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na leitura");
-            Conexao.closeConnection(con, stmt, rs);
+            System.out.println(ex.getMessage());
             return null;
         }finally{
             Conexao.closeConnection(con, stmt, rs);

@@ -82,24 +82,48 @@ public class Facade {
         carteira.setVetorVacina(strVacina);
     }
     
-    public boolean aplicarVacina(String vacina) {
-        return carteira.aplicarVacina(vacina);
+    public boolean aplicarVacina(Long cpf, String nome, String vacina) {
+        if(carteira.buscarCart(cpf, nome)){
+            return carteira.aplicarVacina(vacina);
+        }
+        else{
+            return false;
+        }
+         
     }
 
-    public boolean agendarVacina(String vacina, Date data) {
-        return carteira.agendarVacina(vacina, data);
+    public boolean agendarVacina(Long cpf, String nome, String vacina, Date data) {
+        if(carteira.buscarCart(cpf, nome)){
+            return carteira.agendarVacina(vacina, data);
+        }
+        else{
+            return false;
+        }
+        
     }
      
-    public boolean delVacina(String vacina) {
-        return carteira.delVacina(vacina);
+    public boolean delVacina(Long cpf, String nome, String vacina) {
+        if(carteira.buscarCart(cpf, nome)){
+            return carteira.delVacina(vacina);
+        }
+        else{
+            return false;
+        }
+        
     }
     
-    public boolean buscarCart(long id_cli, String nome) {
-        return carteira.buscarCart(id_cli, nome);
+    public boolean buscarCart(long cpf, String nome) {
+        return carteira.buscarCart(cpf, nome);
     }
     
-    public boolean addVacina(String vacina){
-        return carteira.addVacina(vacina);
+    public boolean addVacina(long cpf, String nome, String vacina){
+        if(carteira.buscarCart(cpf, nome)){
+             return carteira.addVacina(vacina);
+        }           
+        else{
+            return false;
+        }
+        
     }
     //Métodos para a classse modelo
     

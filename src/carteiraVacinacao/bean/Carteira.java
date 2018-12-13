@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 
@@ -102,57 +104,61 @@ public class Carteira {
     /** Gera Arquivo de extensão pdf contendo dados da carteira
      *  e incluindo uma tabela de todas as vacinas marcadas na carteira
      */
-    public void imprimir() throws DocumentException, FileNotFoundException {
-        Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
- 
-        document.open();
-        Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        
-        Paragraph para = new Paragraph();
-        para.add(new Chunk(clienteModExterno.getNome() + "\n"));
-        para.add(new Chunk(clienteModExterno.getCpf() + "\n"));
-        
-        para.add(new Chunk("\n" + pacienteModExterno.getNome()+ "\n"));
-        para.add(new Chunk(pacienteModExterno.getEspecie() + "\n"));
-        para.add(new Chunk(pacienteModExterno.getRaca() + "\n" + "\n"));
-        
-        
-        document.add(para);
-        Rectangle small = new Rectangle(290,100);
-        PdfPTable table = new PdfPTable(2);
-        
-        Stream.of("Vacina", "Foi Aplicada?").forEach(columnTitle -> {
-            PdfPCell header = new PdfPCell();
-            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            header.setBorderWidth(2);
-            header.setPhrase(new Phrase(columnTitle));
-            table.addCell(header);
-        });
-        
-        table.setTotalWidth(new float[]{ 180, 120 });
-        table.setLockedWidth(true);
-        
-        for(int i = 0 ; i < carteiraVacina.size() ; i++) {
-            // first row
-            String p = carteiraVacina.get(i).getVacina();
-            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-            p += "\n" + sdf.format(carteiraVacina.get(i).getData());
-            PdfPCell cell = new PdfPCell(new Phrase(p));
-            cell.setBorder(Rectangle.BOX);
-            table.addCell(cell);
-
-            // second row
-            if(carteiraVacina.get(i).isAplicada())
-                cell = new PdfPCell(new Phrase("SIM!"));
-            else
-                cell = new PdfPCell(new Phrase("NÃO!"));
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(cell);
+    public void imprimir() {
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
+            
+            document.open();
+            Font smallfont = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+            
+            Paragraph para = new Paragraph();
+            para.add(new Chunk(clienteModExterno.getNome() + "\n"));
+            para.add(new Chunk(clienteModExterno.getCpf() + "\n"));
+            
+            para.add(new Chunk("\n" + pacienteModExterno.getNome()+ "\n"));
+            para.add(new Chunk(pacienteModExterno.getEspecie() + "\n"));
+            para.add(new Chunk(pacienteModExterno.getRaca() + "\n" + "\n"));
+            
+            
+            document.add(para);
+            Rectangle small = new Rectangle(290,100);
+            PdfPTable table = new PdfPTable(2);
+            
+            Stream.of("Vacina", "Foi Aplicada?").forEach(columnTitle -> {
+                PdfPCell header = new PdfPCell();
+                header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                header.setBorderWidth(2);
+                header.setPhrase(new Phrase(columnTitle));
+                table.addCell(header);
+            });
+            
+            table.setTotalWidth(new float[]{ 180, 120 });
+            table.setLockedWidth(true);
+            
+            for(int i = 0 ; i < carteiraVacina.size() ; i++) {
+                // first row
+                String p = carteiraVacina.get(i).getVacina();
+                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+                p += "\n" + sdf.format(carteiraVacina.get(i).getData());
+                PdfPCell cell = new PdfPCell(new Phrase(p));
+                cell.setBorder(Rectangle.BOX);
+                table.addCell(cell);
+                
+                // second row
+                if(carteiraVacina.get(i).isAplicada())
+                    cell = new PdfPCell(new Phrase("SIM!"));
+                else
+                    cell = new PdfPCell(new Phrase("NÃO!"));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                table.addCell(cell);
+            }
+            
+            document.add(table);
+            document.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Carteira.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        document.add(table);
-        document.close();
     }
     
     public String getVetorVacina(){

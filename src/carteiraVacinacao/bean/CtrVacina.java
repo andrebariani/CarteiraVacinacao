@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author lucca
+ * @author André
  */
 public class CtrVacina {
     private String vacina;

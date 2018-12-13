@@ -20,15 +20,11 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author André
@@ -54,10 +50,13 @@ public class Carteira {
     
     /** Importa vacinas de um modelo para serem
      *  armazenadas em carteira
-     * @param Vacinas
+     *  @param Vacinas
      */
     public void importarModelo(List<String> Vacinas) {
         int i = 0;
+        qtdVacinas = Vacinas.size();
+        carteiraVacina.clear();
+        
 	while (i < Vacinas.size()) {
             carteiraVacina.get(i).setVacina(Vacinas.get(i));
             i++;
@@ -93,7 +92,7 @@ public class Carteira {
         CtrVacina va = new CtrVacina();
         va.setVacina(vacina);
         carteiraVacina.add(va);
-        
+        qtdVacinas++;
         return this.CtrVacinaBD.create(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
@@ -242,24 +241,19 @@ public class Carteira {
             return false;
         }
     }
-     
-    /** Deleta vacina da carteira
-     * @param vacina
-     * @return boolean
-     */
-   
-    
+
     /** Busca carteira dado como parametro o cpf do cliente e o nome 
      *  do pet.
      * @param id_cli
      * @param nome
+     * @return 
      */
     public boolean buscarCart(long id_cli, String nome) {
         return carteiraBD.read( id_cli, nome, this );
     }
     
     public int getQtdVacinas() {
-        return qtdVacinas;
+        return carteiraVacina.size();
     }
 
     public void setQtdVacinas(int qtd) {

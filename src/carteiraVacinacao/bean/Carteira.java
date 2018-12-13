@@ -54,6 +54,9 @@ public class Carteira {
         CtrVacinaBD = new CtrVacinaDAO();
     }
     
+    /** Importa vacinas de um modelo para serem
+     *  armazenadas em carteira
+     */
     public void importarModelo(List<String> Vacinas) {
         int i = 0;
 	while (i < Vacinas.size()) {
@@ -62,6 +65,8 @@ public class Carteira {
 	}
     }
     
+    /** Realiza cadastro de carteira
+     */
     public void cadastrarCart( long cpf, String nome_pet ) {
         Cliente cl = new Cliente();
         Paciente p = new Paciente();
@@ -76,6 +81,10 @@ public class Carteira {
         carteiraBD.create(ca);
     }
     
+    /** Adiciona nova vacina a carteira
+     *  retorna true se foi possível atualizar no banco de dados
+     *  retorna false caso contrário
+     */
     public boolean addVacina(String vacina, Date data) {
         CtrVacina va = new CtrVacina();
         va.setVacina(vacina);
@@ -86,10 +95,15 @@ public class Carteira {
         return this.CtrVacinaBD.update(va, clienteModExterno.getCpf(), pacienteModExterno.getNome());
     }
     
+    /** Exclui carteira do banco de dados
+     */
     public void excluirCart(long cpf, String nome) {
         this.carteiraBD.remove(cpf, nome);
     }
     
+    /** Gera Arquivo de extensão pdf contendo dados da carteira
+     *  e incluindo uma tabela de todas as vacinas marcadas na carteira
+     */
     public void imprimir() throws DocumentException, FileNotFoundException {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("Carteira_Vacinacao.pdf"));
@@ -216,6 +230,8 @@ public class Carteira {
         
     }
     
+    /** Define vacina de parâmetro como aplicada
+     */
     public boolean aplicarVacina(String vacina) {
         int index = carteiraVacina.indexOf(vacina);
         
@@ -229,6 +245,8 @@ public class Carteira {
         }
     }
 
+    /** Define data para agendamento da vacina
+     */
     public boolean agendarVacina(String vacina, Date data) {
         int index = carteiraVacina.indexOf(vacina);
         
@@ -242,6 +260,8 @@ public class Carteira {
         }
     }
      
+    /** Deleta vacina da carteira
+     */
     public boolean delVacina(String vacina) {
         int index = carteiraVacina.indexOf(vacina);
         
@@ -254,6 +274,9 @@ public class Carteira {
         }
     }
     
+    /** Busca carteira dado como parametro o cpf do cliente e o nome 
+     *  do pet.
+     */
     public boolean buscarCart(long id_cli, String nome) {
         return carteiraBD.read( id_cli, nome, this );
     }

@@ -53,13 +53,13 @@ public class Carteira {
      * @param nome_pet
      * @return 
      */
-    public boolean cadastrarCart( long cpf, String nome_pet ) {
+    public boolean cadastrarCart( long cpf, String nomePet ) {
         Cliente cl = new Cliente();
         Paciente p = new Paciente();
         Carteira ca = new Carteira();
         
         cl.setCpf(cpf);
-        p.setNome(nome_pet);
+        p.setNome(nomePet);
         
         ca.setClienteModExterno(cl);
         ca.setPacienteModExterno(p);
@@ -241,8 +241,8 @@ public class Carteira {
      * @param nome
      * @return 
      */
-    public boolean buscarCart(long id_cli, String nome) {
-        return carteiraBD.read( id_cli, nome, this );
+    public boolean buscarCart(long cpf, String nome) {
+        return carteiraBD.read( cpf, nome, this );
     }
     
     public int getQtdVacinas() {

@@ -86,8 +86,8 @@ public class Facade {
         return false;
     }
     
-   public void cadastrarCart( long cpf, String nome_pet ) {
-        carteira.cadastrarCart(cpf, nome_pet);
+   public void cadastrarCart( long cpf, String nome ) {
+        carteira.cadastrarCart(cpf, nome);
     }
     
     public boolean excluirCart(long cpf, String nome) {

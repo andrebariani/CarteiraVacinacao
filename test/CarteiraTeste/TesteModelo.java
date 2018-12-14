@@ -8,8 +8,6 @@ package CarteiraTeste;
 import carteiraVacinacao.bean.Modelo;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
-
 /**
  *
  * @author lucca
@@ -52,6 +50,7 @@ public class TesteModelo {
     @Test
     public void Teste5AddVacina(){     
         m = new Modelo();
+        m.delVacina("Cachorro", "Golden", "Panleucopenia");
         assertTrue(m.addVacina("Cachorro", "Golden", "Panleucopenia")); 
     }
     
@@ -59,9 +58,15 @@ public class TesteModelo {
     @Test
     public void Teste6AddVacina(){
         model = new Modelo();
+        model.delVacina("Cachorro", "Pincher", "Rinotraqueíte");
+        model.delVacina("Cachorro", "Pincher", "Calicivirose");
+        model.delVacina("Cachorro", "Pincher", "Clamidiose");
+        model.delVacina("Cachorro", "Pincher", "Raiva");
+        
         model.addVacina("Cachorro", "Pincher", "Rinotraqueíte");
         model.addVacina("Cachorro", "Pincher", "Calicivirose");
         model.addVacina("Cachorro", "Pincher", "Clamidiose");
+        model.addVacina("Cachorro", "Pincher", "Raiva");
         model.addVacina("Cachorro", "Pincher", "Raiva");
         
         model.importarMod("Cachorro", "Pincher");
@@ -74,6 +79,7 @@ public class TesteModelo {
     @Test
     public void Teste7AddVacina(){
         m = new Modelo();
+        m.addVacina("V4", "Gato", "Siames");
         assertFalse(m.addVacina("V4", "Gato", "Siames")); 
     }
     
@@ -90,8 +96,23 @@ public class TesteModelo {
     @Test
     public void Teste9DelVacina(){
         m = new Modelo();
+        m.delVacina("Gato", "Siames", "IssoNãoÉVacina");
         assertFalse(m.delVacina("Gato", "Siames", "IssoNãoÉVacina"));
     }
     
+    //Testa Excluir um modelo que existe
+    @Test
+    public void Teste10ExcluirMod(){
+        m = new Modelo();
+        m.cadastrarMod("Cachorro", "Poodle");
+        assertTrue(m.excluirMod("Cachorro", "Poodle"));
+    }
     
+     //Testa Excluir um modelo que não existe
+    @Test
+    public void Teste11ExcluirMod(){
+        m = new Modelo();
+        m.excluirMod("Cachorro", "Poodle");
+        assertTrue(m.excluirMod("Cachorro", "Poodle"));
+    }
 }
